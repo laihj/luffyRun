@@ -9,11 +9,17 @@ import UIKit
 import HealthKit
 
 class ActivityListVC: UIViewController {
+    
+    var workouts:[HKWorkout]?
+    @IBOutlet var tableView: UITableView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.buttonclick()
     }
     
     @IBAction func buttonclick() {
@@ -25,6 +31,10 @@ class ActivityListVC: UIViewController {
     func readWorkouts () {
         self.loadPrancerciseWorkouts { workouts, error in
             let workout = workouts?[1];
+            self.workouts = workouts
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
             print(workout?.totalDistance)
             
         }
@@ -67,12 +77,19 @@ extension ActivityListVC: UITableViewDelegate {
 extension ActivityListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10;
+        if let workouts = self.workouts {
+            return workouts.count;
+        }
+        return 0;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "LRRunningCell", for: indexPath) as! LRRunningRecordCell
-        cell.label?.text = "running"
+        if let workout = self.workouts?[indexPath.row] {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            cell.label?.text = dateFormatter.string(from: workout.startDate)
+        }
         return cell;
     }
 }
