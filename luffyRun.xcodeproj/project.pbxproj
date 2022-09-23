@@ -14,7 +14,45 @@
 		38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE928DC5C5B00C2BF8A /* luffyRun.xcdatamodeld */; };
 		38AECFED28DC5C5C00C2BF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AECFEC28DC5C5C00C2BF8A /* Assets.xcassets */; };
 		38AECFF028DC5C5C00C2BF8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AECFEE28DC5C5C00C2BF8A /* LaunchScreen.storyboard */; };
+		38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFF828DC5D8800C2BF8A /* ActivityListVC.swift */; };
+		38AED00128DC615E00C2BF8A /* luffyWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED00028DC615E00C2BF8A /* luffyWatchApp.swift */; };
+		38AED00528DC615F00C2BF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AED00428DC615F00C2BF8A /* Assets.xcassets */; };
+		38AED00828DC615F00C2BF8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AED00728DC615F00C2BF8A /* Preview Assets.xcassets */; };
+		38AED00B28DC615F00C2BF8A /* luffyWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 38AECFFE28DC615E00C2BF8A /* luffyWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		38AED01128DC625C00C2BF8A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01028DC625C00C2BF8A /* WorkoutManager.swift */; };
+		38AED01328DC628700C2BF8A /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01228DC628600C2BF8A /* StartView.swift */; };
+		38AED01528DC62A100C2BF8A /* SessionPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01428DC62A100C2BF8A /* SessionPagingView.swift */; };
+		38AED01828DC62BC00C2BF8A /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01628DC62BC00C2BF8A /* ControlsView.swift */; };
+		38AED01928DC62BC00C2BF8A /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01728DC62BC00C2BF8A /* MetricsView.swift */; };
+		38AED01C28DC62E200C2BF8A /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01A28DC62E200C2BF8A /* NotificationView.swift */; };
+		38AED01D28DC62E200C2BF8A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01B28DC62E200C2BF8A /* NotificationController.swift */; };
+		38AED01F28DC62F400C2BF8A /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01E28DC62F400C2BF8A /* ElapsedTimeView.swift */; };
+		38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		38AED00928DC615F00C2BF8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38AECFD528DC5C5B00C2BF8A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38AECFFD28DC615E00C2BF8A;
+			remoteInfo = "luffyWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		38AED00F28DC615F00C2BF8A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				38AED00B28DC615F00C2BF8A /* luffyWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +64,33 @@
 		38AECFEC28DC5C5C00C2BF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38AECFEF28DC5C5C00C2BF8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38AECFF128DC5C5C00C2BF8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38AECFF828DC5D8800C2BF8A /* ActivityListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListVC.swift; sourceTree = "<group>"; };
+		38AECFFE28DC615E00C2BF8A /* luffyWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "luffyWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38AED00028DC615E00C2BF8A /* luffyWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luffyWatchApp.swift; sourceTree = "<group>"; };
+		38AED00428DC615F00C2BF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38AED00728DC615F00C2BF8A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		38AED01028DC625C00C2BF8A /* WorkoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		38AED01228DC628600C2BF8A /* StartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		38AED01428DC62A100C2BF8A /* SessionPagingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionPagingView.swift; sourceTree = "<group>"; };
+		38AED01628DC62BC00C2BF8A /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		38AED01728DC62BC00C2BF8A /* MetricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
+		38AED01A28DC62E200C2BF8A /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		38AED01B28DC62E200C2BF8A /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		38AED01E28DC62F400C2BF8A /* ElapsedTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
+		38AED02228DC754E00C2BF8A /* luffyWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "luffyWatch Watch App.entitlements"; sourceTree = "<group>"; };
+		38AED02328DC79A600C2BF8A /* luffyRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = luffyRun.entitlements; sourceTree = "<group>"; };
+		38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRRunningRecordCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		38AECFDA28DC5C5B00C2BF8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38AECFFB28DC615E00C2BF8A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				38AECFDF28DC5C5B00C2BF8A /* luffyRun */,
+				38AECFFF28DC615E00C2BF8A /* luffyWatch Watch App */,
 				38AECFDE28DC5C5B00C2BF8A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */,
+				38AECFFE28DC615E00C2BF8A /* luffyWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,9 +121,10 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				38AED02328DC79A600C2BF8A /* luffyRun.entitlements */,
+				38AECFF728DC5D4300C2BF8A /* MainView */,
 				38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */,
 				38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */,
-				38AECFE428DC5C5B00C2BF8A /* ViewController.swift */,
 				38AECFE628DC5C5B00C2BF8A /* Main.storyboard */,
 				38AECFEC28DC5C5C00C2BF8A /* Assets.xcassets */,
 				38AECFEE28DC5C5C00C2BF8A /* LaunchScreen.storyboard */,
@@ -68,6 +132,43 @@
 				38AECFE928DC5C5B00C2BF8A /* luffyRun.xcdatamodeld */,
 			);
 			path = luffyRun;
+			sourceTree = "<group>";
+		};
+		38AECFF728DC5D4300C2BF8A /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				38AECFF828DC5D8800C2BF8A /* ActivityListVC.swift */,
+				38AECFE428DC5C5B00C2BF8A /* ViewController.swift */,
+				38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		38AECFFF28DC615E00C2BF8A /* luffyWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				38AED02228DC754E00C2BF8A /* luffyWatch Watch App.entitlements */,
+				38AED01228DC628600C2BF8A /* StartView.swift */,
+				38AED00028DC615E00C2BF8A /* luffyWatchApp.swift */,
+				38AED01428DC62A100C2BF8A /* SessionPagingView.swift */,
+				38AED01E28DC62F400C2BF8A /* ElapsedTimeView.swift */,
+				38AED01628DC62BC00C2BF8A /* ControlsView.swift */,
+				38AED01728DC62BC00C2BF8A /* MetricsView.swift */,
+				38AED01B28DC62E200C2BF8A /* NotificationController.swift */,
+				38AED01A28DC62E200C2BF8A /* NotificationView.swift */,
+				38AED01028DC625C00C2BF8A /* WorkoutManager.swift */,
+				38AED00428DC615F00C2BF8A /* Assets.xcassets */,
+				38AED00628DC615F00C2BF8A /* Preview Content */,
+			);
+			path = "luffyWatch Watch App";
+			sourceTree = "<group>";
+		};
+		38AED00628DC615F00C2BF8A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				38AED00728DC615F00C2BF8A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,14 +181,33 @@
 				38AECFD928DC5C5B00C2BF8A /* Sources */,
 				38AECFDA28DC5C5B00C2BF8A /* Frameworks */,
 				38AECFDB28DC5C5B00C2BF8A /* Resources */,
+				38AED00F28DC615F00C2BF8A /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38AED00A28DC615F00C2BF8A /* PBXTargetDependency */,
+			);
+			name = luffyRun;
+			productName = luffyRun;
+			productReference = 38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */;
+			productType = "com.apple.product-type.application";
+		};
+		38AECFFD28DC615E00C2BF8A /* luffyWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38AED00C28DC615F00C2BF8A /* Build configuration list for PBXNativeTarget "luffyWatch Watch App" */;
+			buildPhases = (
+				38AECFFA28DC615E00C2BF8A /* Sources */,
+				38AECFFB28DC615E00C2BF8A /* Frameworks */,
+				38AECFFC28DC615E00C2BF8A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = luffyRun;
-			productName = luffyRun;
-			productReference = 38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */;
+			name = "luffyWatch Watch App";
+			productName = "luffyWatch Watch App";
+			productReference = 38AECFFE28DC615E00C2BF8A /* luffyWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,6 +221,9 @@
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					38AECFDC28DC5C5B00C2BF8A = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					38AECFFD28DC615E00C2BF8A = {
 						CreatedOnToolsVersion = 14.0;
 					};
 				};
@@ -119,6 +242,7 @@
 			projectRoot = "";
 			targets = (
 				38AECFDC28DC5C5B00C2BF8A /* luffyRun */,
+				38AECFFD28DC615E00C2BF8A /* luffyWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -134,6 +258,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38AECFFC28DC615E00C2BF8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38AED00828DC615F00C2BF8A /* Preview Assets.xcassets in Resources */,
+				38AED00528DC615F00C2BF8A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -143,12 +276,38 @@
 			files = (
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
+				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,
+				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
 				38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38AECFFA28DC615E00C2BF8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38AED01928DC62BC00C2BF8A /* MetricsView.swift in Sources */,
+				38AED01F28DC62F400C2BF8A /* ElapsedTimeView.swift in Sources */,
+				38AED00128DC615E00C2BF8A /* luffyWatchApp.swift in Sources */,
+				38AED01C28DC62E200C2BF8A /* NotificationView.swift in Sources */,
+				38AED01528DC62A100C2BF8A /* SessionPagingView.swift in Sources */,
+				38AED01128DC625C00C2BF8A /* WorkoutManager.swift in Sources */,
+				38AED01D28DC62E200C2BF8A /* NotificationController.swift in Sources */,
+				38AED01828DC62BC00C2BF8A /* ControlsView.swift in Sources */,
+				38AED01328DC628700C2BF8A /* StartView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		38AED00A28DC615F00C2BF8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38AECFFD28DC615E00C2BF8A /* luffyWatch Watch App */;
+			targetProxy = 38AED00928DC615F00C2BF8A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		38AECFE628DC5C5B00C2BF8A /* Main.storyboard */ = {
@@ -220,6 +379,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = record;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = share;
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = updte;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -274,6 +436,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = record;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = share;
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = updte;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -287,13 +452,18 @@
 		38AECFF528DC5C5C00C2BF8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = luffyRun/luffyRun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -315,13 +485,18 @@
 		38AECFF628DC5C5C00C2BF8A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = luffyRun/luffyRun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -337,6 +512,74 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		38AED00D28DC615F00C2BF8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "luffyWatch Watch App/luffyWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"luffyWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 545KNG585P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = luffyWatch;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.laihjx.luffyRun;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laihjx.luffyRun.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		38AED00E28DC615F00C2BF8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "luffyWatch Watch App/luffyWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"luffyWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 545KNG585P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = luffyWatch;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.laihjx.luffyRun;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laihjx.luffyRun.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -357,6 +600,15 @@
 			buildConfigurations = (
 				38AECFF528DC5C5C00C2BF8A /* Debug */,
 				38AECFF628DC5C5C00C2BF8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38AED00C28DC615F00C2BF8A /* Build configuration list for PBXNativeTarget "luffyWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38AED00D28DC615F00C2BF8A /* Debug */,
+				38AED00E28DC615F00C2BF8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
