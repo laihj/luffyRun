@@ -45,7 +45,7 @@ class ActivityListVC: UIViewController {
         let workoutPredication = HKQuery.predicateForWorkouts(with: .running)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
         
-        let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,sourcePredicte])
+//        let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,sourcePredicte])
         
         let query = HKSampleQuery(sampleType: .workoutType(), predicate: workoutPredication, limit: 10, sortDescriptors: [sortDescriptor]) { query, samples, error in
             let samples = samples as? [HKWorkout]
@@ -128,7 +128,7 @@ extension ActivityListVC: UITableViewDataSource {
 //            print(workout.device)
             print(workout.sourceRevision.source.name)
             print("=======")
-            let query = HKStatisticsCollectionQuery
+
             
         }
         return cell;
