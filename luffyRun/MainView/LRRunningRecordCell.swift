@@ -10,6 +10,7 @@ import UIKit
 class LRRunningRecordCell: UITableViewCell {
     
     @IBOutlet var label:UILabel?
+    @IBOutlet var sourceName:UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()

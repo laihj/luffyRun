@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				38AECFF828DC5D8800C2BF8A /* ActivityListVC.swift */,
 				38AECFE428DC5C5B00C2BF8A /* ViewController.swift */,
 				38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */,
+				3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
 				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
