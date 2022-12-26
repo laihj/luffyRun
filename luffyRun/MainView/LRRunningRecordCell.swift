@@ -22,5 +22,21 @@ class LRRunningRecordCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+}
+
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .short
+    formatter.doesRelativeDateFormatting = true
+    formatter.formattingContext = .standalone
+    return formatter
+}()
+
+
+extension LRRunningRecordCell {
+    func configure(for record: Record) {
+        label!.text = dateFormatter.string(from: record.startDate)
+        sourceName?.text = record.source
+    }
 }

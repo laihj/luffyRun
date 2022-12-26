@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4B22E643-AF37-4BA7-9D32-8B5F56B3D0CA"
+            uuid = "6F5F3C02-466C-4CEC-97A9-F039373B0119"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "luffyRun/MainView/RunningDetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "myGetDetailedItems(sample:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

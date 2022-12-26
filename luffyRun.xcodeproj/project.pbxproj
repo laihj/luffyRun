@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
+		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
+		38A6508B2949D66000239603 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508A2949D66000239603 /* Record.swift */; };
+		38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508C294AC6D000239603 /* CoreDataStack.swift */; };
+		38A6508F294ACC0600239603 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508E294ACC0600239603 /* Managed.swift */; };
+		38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65090294AFE3500239603 /* TableViewDataSource.swift */; };
+		38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */; };
+		38A65095294B1D9700239603 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65094294B1D9700239603 /* Util.swift */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -29,6 +36,8 @@
 		38AED01D28DC62E200C2BF8A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01B28DC62E200C2BF8A /* NotificationController.swift */; };
 		38AED01F28DC62F400C2BF8A /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01E28DC62F400C2BF8A /* ElapsedTimeView.swift */; };
 		38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */; };
+		38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD662959795B00D11B09 /* HeartRate.swift */; };
+		38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD6829598E0200D11B09 /* PaceZone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +66,13 @@
 
 /* Begin PBXFileReference section */
 		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
+		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
+		38A6508A2949D66000239603 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		38A6508C294AC6D000239603 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		38A6508E294ACC0600239603 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		38A65090294AFE3500239603 /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
+		38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectObserver.swift; sourceTree = "<group>"; };
+		38A65094294B1D9700239603 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +98,8 @@
 		38AED02228DC754E00C2BF8A /* luffyWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "luffyWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		38AED02328DC79A600C2BF8A /* luffyRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = luffyRun.entitlements; sourceTree = "<group>"; };
 		38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRRunningRecordCell.swift; sourceTree = "<group>"; };
+		38D7CD662959795B00D11B09 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
+		38D7CD6829598E0200D11B09 /* PaceZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceZone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +120,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38A650872949D4D100239603 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				38A650882949D53400239603 /* NSManagedObjectContextExt.swift */,
+				38A6508A2949D66000239603 /* Record.swift */,
+				38A6508C294AC6D000239603 /* CoreDataStack.swift */,
+				38A6508E294ACC0600239603 /* Managed.swift */,
+				38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */,
+				38A65094294B1D9700239603 /* Util.swift */,
+				38D7CD662959795B00D11B09 /* HeartRate.swift */,
+				38D7CD6829598E0200D11B09 /* PaceZone.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		38AECFD428DC5C5B00C2BF8A = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +156,7 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				38A650872949D4D100239603 /* model */,
 				38AED02328DC79A600C2BF8A /* luffyRun.entitlements */,
 				38AECFF728DC5D4300C2BF8A /* MainView */,
 				38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */,
@@ -143,6 +177,7 @@
 				38AECFE428DC5C5B00C2BF8A /* ViewController.swift */,
 				38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */,
 				3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */,
+				38A65090294AFE3500239603 /* TableViewDataSource.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -277,12 +312,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38A6508F294ACC0600239603 /* Managed.swift in Sources */,
 				3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */,
+				38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */,
+				38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */,
+				38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */,
+				38A6508B2949D66000239603 /* Record.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
+				38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */,
+				38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */,
 				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,
+				38A65095294B1D9700239603 /* Util.swift in Sources */,
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
+				38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */,
 				38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

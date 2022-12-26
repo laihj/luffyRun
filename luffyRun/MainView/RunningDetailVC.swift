@@ -9,13 +9,35 @@ import UIKit
 import HealthKit
 
 class RunningDetailVC: UIViewController {
+    
     var workout:HKWorkout?
+    
+    fileprivate var observer: ManagedObjectObserver?
+    
+    var record:Record! {
+        didSet {
+            observer = ManagedObjectObserver(object: record, changeHandler: { [weak self] type in
+                guard type == .delete else { return }
+                _ = self?.navigationController?.popViewController(animated: true)
+            })
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
 
         // Do any additional setup after loading the view.
+    }
+    
+    @objc
+    func deleteRecord(sender: UIBarButtonItem) {
+        record.managedObjectContext?.performChanges(block: {
+            self.record.managedObjectContext?.delete(self.record)
+        })
+        print("delete mode")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,10 +49,8 @@ class RunningDetailVC: UIViewController {
         if let workout = self.workout {
             // Create the workout predicate.
             let forWorkout = HKQuery.predicateForObjects(from: workout)
-            print("sssssssssss");
             print(workout.startDate);
             print(workout.endDate);
-            print("aaaaaaaa");
             
             // Create the heart-rate descriptor.
             let heartRateDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier:.heartRate)! ,
@@ -73,52 +93,46 @@ class RunningDetailVC: UIViewController {
             HKHealthStore().execute(heartRateQuery)
         }
         
-//        if let workout = self.workout {
-//            let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
-//            let heartQuery = HKAnchoredObjectQuery(type: HKSeriesType.heartbeat(), predicate: nil, anchor: nil, limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, anchor, error in
-//                guard error == nil else {
-//                    // Handle any errors here.
-//                    fatalError("The initial query failed.")
-//                }
-//
-//                print("cc");
-//
-//            }
+        if let workout = self.workout {
+            let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+            let heartQuery = HKAnchoredObjectQuery(type: HKSeriesType.heartbeat(), predicate: nil, anchor: nil, limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, anchor, error in
+                guard error == nil else {
+                    // Handle any errors here.
+                    fatalError("The initial query failed.")
+                }
+            }
 
-//            let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
-//
-//                guard error == nil else {
-//                    // Handle any errors here.
-//                    fatalError("The initial query failed.")
-//                }
-//
-//                if let workoutroute = samples?.first {
-//
-//                    let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
-//                        print(locations);
-//                    }
-//                    HKHealthStore().execute(query)
-//                }
-//
-//                print("route");
-//
-//                // Process the initial route data here.
-//            }
-//
-//            routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
-//
-//                guard error == nil else {
-//                    // Handle any errors here.
-//                    fatalError("The update failed.")
-//                }
-//
-//                // Process updates or additions here.
-//            }
+            let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+                guard error == nil else {
+                    // Handle any errors here.
+                    fatalError("The initial query failed.")
+                }
+
+                if let workoutroute = samples?.first {
+
+                    let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
+                        print(locations);
+                    }
+                    HKHealthStore().execute(query)
+                }
+                // Process the initial route data here.
+            }
+
+            routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+
+                guard error == nil else {
+                    // Handle any errors here.
+                    fatalError("The update failed.")
+                }
+
+                // Process updates or additions here.
+            }
 
 
-//            HKHealthStore().execute(query)
+            HKHealthStore().execute(routeQuery)
             
-//        }
+        }
 //
     }
     

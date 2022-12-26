@@ -7,30 +7,63 @@
 
 import UIKit
 import HealthKit
+import CoreData
 
 class ActivityListVC: UIViewController {
-    
+    var context:NSManagedObjectContext?
     var workouts:[HKWorkout]?
     @IBOutlet var tableView: UITableView?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        context =  appDelegate.persistentContainer.viewContext
         // Do any additional setup after loading the view.
+
+//        let record:Record = context.insertObject()
+//        record.startDate = Date()
+//        record.endDate = Date()
+//        try! context.save()
+        self.refreshTable()
+    }
+    
+    fileprivate var dataSource: TableViewDataSource<ActivityListVC>!
+    
+    func refreshTable() {
+        let request = Record.sortedFetchRequest
+        request.fetchBatchSize = 20
+        request.returnsObjectsAsFaults = false
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: context!,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        self.tableView?.delegate = self
+        dataSource = TableViewDataSource(tableView: tableView!, cellIdentifier: "LRRunningCell", fetchedResultsController: frc, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.buttonclick()
     }
     
     @IBAction func buttonclick() {
-        self.authorizeHealthKit { (success, error) in
-            self.readWorkouts()
+//        self.authorizeHealthKit { (success, error) in
+//            self.readWorkouts()
+//        }
+        
+        context!.performChanges {
+            let record = Record.insert(into: self.context!)
         }
     }
     
     func readWorkouts () {
         self.loadPrancerciseWorkouts { workouts, error in
             self.workouts = workouts
+            
+            for workout in self.workouts! {
+                
+                
+            }
+
             let workout = self.workouts?.first;
             
             DispatchQueue.main.async {
@@ -51,12 +84,9 @@ class ActivityListVC: UIViewController {
             let samples = samples as? [HKWorkout]
             
             completion(samples, nil)
-            
         }
         
         HKHealthStore().execute(query)
-        
-
     }
     
     func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Void) {
@@ -86,22 +116,35 @@ class ActivityListVC: UIViewController {
 
 extension ActivityListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let workout = self.workouts?[indexPath.row] {
-            let runningDetail = RunningDetailVC.init()
-            runningDetail.workout = workout
-            let statistics = workout.statistics(for: HKQuantityType(.distanceWalkingRunning))
-            statistics?.averageQuantity()
-            
-            let speed = workout.statistics(for: HKQuantityType(.runningSpeed));
-//            speed?.sumQuantity()?.doubleValue(for:.)
-//            speed?.averageQuantity()
-            let heart = workout.statistics(for: HKQuantityType(.heartRate));
-            
-            self.navigationController?.pushViewController(runningDetail, animated: true)
-            HKUnit.minute()
-        }
+        guard let record = dataSource.objectAtIndexPath(indexPath) as? Record else { fatalError("no record")}
+        let runningDetail = RunningDetailVC.init()
+        runningDetail.record = record
+        self.navigationController?.pushViewController(runningDetail, animated: true)
+//        if let workout = self.workouts?[indexPath.row] {
+//            let runningDetail = RunningDetailVC.init()
+//            runningDetail.workout = workout
+//
+//
+//            let statistics = workout.statistics(for: HKQuantityType(.distanceWalkingRunning))
+//            statistics?.averageQuantity()
+//
+//            let speed = workout.statistics(for: HKQuantityType(.runningSpeed));
+////            speed?.sumQuantity()?.doubleValue(for:.)
+////            speed?.averageQuantity()
+//            let heart = workout.statistics(for: HKQuantityType(.heartRate));
+//
+//
+//            HKUnit.minute()
+//        }
     }
     
+}
+
+extension ActivityListVC: TableViewDataSourceDelegate {
+    
+    func configure(_ cell: LRRunningRecordCell, for object: Record) {
+        cell.configure(for: object)
+    }
 }
 
 extension ActivityListVC: UITableViewDataSource {
@@ -133,6 +176,4 @@ extension ActivityListVC: UITableViewDataSource {
         }
         return cell;
     }
-    
-
 }
