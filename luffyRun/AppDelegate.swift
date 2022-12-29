@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createLuffyContainer { containers in
             self.persistentContainer = containers
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            PAriSandbox.shared.enableSwipe()
+        }
 
         return true
     }

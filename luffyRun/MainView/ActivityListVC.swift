@@ -20,11 +20,6 @@ class ActivityListVC: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         context =  appDelegate.persistentContainer.viewContext
         // Do any additional setup after loading the view.
-
-//        let record:Record = context.insertObject()
-//        record.startDate = Date()
-//        record.endDate = Date()
-//        try! context.save()
         self.refreshTable()
     }
     
@@ -46,13 +41,13 @@ class ActivityListVC: UIViewController {
     }
     
     @IBAction func buttonclick() {
-//        self.authorizeHealthKit { (success, error) in
-//            self.readWorkouts()
-//        }
-        
-        context!.performChanges {
-            let record = Record.insert(into: self.context!)
+        self.authorizeHealthKit { (success, error) in
+            self.readWorkouts()
         }
+        
+//        context!.performChanges {
+//            let record = Record.insert(into: self.context!)
+//        }
     }
     
     func readWorkouts () {
@@ -60,16 +55,175 @@ class ActivityListVC: UIViewController {
             self.workouts = workouts
             
             for workout in self.workouts! {
+//                self.context!.performChanges {
+                    
+                    
+                    let group = DispatchGroup()
+                    
+                    var retHeartbeat = Array<HeartBeat>()
+                    var retRoutes = Array<RouteNode>()
+                    
+                    group.enter()
+                    self.bindRecordHeartRate(workout: workout) { heartbeat in
+                        group.leave()
+                        retHeartbeat = heartbeat
+                    }
                 
                 
-            }
+                group.enter()
+                self.bindRoute(workout: workout) { routes in
+                    group.leave()
+                    retRoutes = routes
+                }
+                    group.notify(queue: .main) {
+                        print("aaaa")
+                        self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
+                    }
+                }
+//            }
 
-            let workout = self.workouts?.first;
+//            if let workout = self.workouts?[2] {
+//                self.context!.performChanges {
+//                    let record = Record.insert(into: self.context!)
+//                    record.startDate = workout.startDate
+//                    record.endDate = workout.endDate
+//
+//                    self.bindRecordHeartRate(record: record, workout:workout)
+//                    self.bindRoute(record: record, workout: workout)
+//                }
+//            }
+
             
             DispatchQueue.main.async {
                 self.tableView?.reloadData()
             }
         }
+    }
+    
+    func saveRecord(workout:HKWorkout, heartbeat:[HeartBeat], routes:[RouteNode]) {
+        self.context!.performChanges {
+            let record = Record.insert(into: self.context!)
+            record.startDate = workout.startDate
+            record.endDate = workout.endDate
+            record.heartbeat = heartbeat
+            record.routes = routes
+        }
+    }
+    
+    func bindRoute(workout:HKWorkout, completion: @escaping ([RouteNode])->()) {
+        let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+        let heartQuery = HKAnchoredObjectQuery(type: HKSeriesType.heartbeat(), predicate: nil, anchor: nil, limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, anchor, error in
+            guard error == nil else {
+                fatalError("The initial query failed.")
+            }
+        }
+
+        let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The initial query failed.")
+            }
+            
+            var routes = Array<RouteNode>()
+
+            if let workoutroute = samples?.first {
+                let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
+                    if let locas = locations {
+                        for location in locas {
+                            let route = RouteNode(location: location, date: location.timestamp)
+                            routes.append(route)
+                        }
+                    }
+                    if(done) {
+                        completion(routes)
+                    }
+                }
+                HKHealthStore().execute(query)
+            }
+            // Process the initial route data here.
+        }
+
+        routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The update failed.")
+            }
+            // Process updates or additions here.
+        }
+        HKHealthStore().execute(routeQuery)
+    }
+    
+    func bindRecordHeartRate(workout:HKWorkout, completion: @escaping ([HeartBeat])->()) {
+        let heartRateUnit: HKUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+        let forWorkout = HKQuery.predicateForObjects(from: workout)
+        let heartRateDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier:.heartRate)! ,
+                                                    predicate: forWorkout)
+        
+        // Create the query.
+        let heartRateQuery = HKSampleQuery(queryDescriptors: [heartRateDescriptor],
+                                           limit: HKObjectQueryNoLimit)
+        { query, samples, error in
+            // Process the samples.
+            guard let samples = samples else {
+                // Handle the error.
+                completion([])
+                fatalError("*** An error occurred: \(error!.localizedDescription) ***")
+                
+            }
+            
+            var heartbeat = Array<HeartBeat>()
+            // Iterate over all the samples.
+            for sample in samples {
+                
+                guard let sample = sample as? HKDiscreteQuantitySample else {
+                    fatalError("*** Unexpected Sample Type ***")
+                }
+                
+                
+                // Check to see if the sample is a series.
+                if sample.count == 1 {
+                    // This is a single sample.
+                    // Use the sample.
+                    let heart = sample.mostRecentQuantity.doubleValue(for: heartRateUnit)
+                    let recordHeartRate:HeartBeat = HeartBeat(heart: Int16(heart), date: sample.startDate)
+                    heartbeat.append(recordHeartRate)
+                }
+                else {
+                    // This is a series.
+                    // Get the detailed items for the series.
+                    self.myGetDetailedItems(sample:sample)
+                }
+                
+               
+            }
+            print("bbbb")
+            completion(heartbeat)
+        }
+        
+        // Run  the query.
+        HKHealthStore().execute(heartRateQuery)
+        
+    }
+    
+    func myGetDetailedItems(sample:HKDiscreteQuantitySample) {
+        let inSeriesSample = HKQuery.predicateForObject(with: sample.uuid)
+
+        // Create the query.
+        let detailQuery = HKQuantitySeriesSampleQuery(quantityType: HKSampleType.quantityType(forIdentifier:.heartRate)!,
+                                                      predicate: inSeriesSample)
+        { query, quantity, dateInterval, HKSample, done, error in
+            
+            guard let quantity = quantity, let dateInterval = dateInterval else {
+                fatalError("*** An error occurred: \(error!.localizedDescription) ***")
+            }
+            
+            // Use the data.
+            print("\(quantity.doubleValue(for: HKUnit(from: "count/min"))): \(dateInterval)");
+        }
+
+        // Run the query.
+        HKHealthStore().execute(detailQuery)
     }
     
     func loadPrancerciseWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {

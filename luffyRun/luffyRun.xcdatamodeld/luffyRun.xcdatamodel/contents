@@ -11,6 +11,10 @@
         <attribute name="zone5" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="record" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="heartRate" inverseEntity="Record"/>
     </entity>
+    <entity name="Location" representedClassName=".Location" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="location" optional="YES" attributeType="Transformable"/>
+    </entity>
     <entity name="PaceZone" representedClassName=".PaceZone" syncable="YES">
         <attribute name="update" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="zone1" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -23,10 +27,16 @@
     </entity>
     <entity name="Record" representedClassName=".Record" syncable="YES">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="heartbeat" optional="YES" attributeType="Transformable" valueTransformerName="HeartBeat" customClassName=".HeartBeat"/>
+        <attribute name="routes" optional="YES" attributeType="Transformable" valueTransformerName="RouteNode" customClassName=".RouteNode"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="udid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="heartRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRate" inverseName="record" inverseEntity="HeartRate"/>
         <relationship name="paceZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaceZone" inverseName="record" inverseEntity="PaceZone"/>
+    </entity>
+    <entity name="RecordHeartRate" representedClassName=".RecordHeartRate" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="heart" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>
