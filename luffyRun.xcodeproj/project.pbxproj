@@ -36,8 +36,6 @@
 		38AED01D28DC62E200C2BF8A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01B28DC62E200C2BF8A /* NotificationController.swift */; };
 		38AED01F28DC62F400C2BF8A /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED01E28DC62F400C2BF8A /* ElapsedTimeView.swift */; };
 		38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */; };
-		38BC3E1D295ACA57008A5DFE /* RecordHeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC3E1C295ACA57008A5DFE /* RecordHeartRate.swift */; };
-		38BC3E1F295AD7DF008A5DFE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC3E1E295AD7DF008A5DFE /* Location.swift */; };
 		38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC3E20295B0243008A5DFE /* PAirSandbox.swift */; };
 		38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD662959795B00D11B09 /* HeartRate.swift */; };
 		38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD6829598E0200D11B09 /* PaceZone.swift */; };
@@ -103,8 +101,6 @@
 		38AED02228DC754E00C2BF8A /* luffyWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "luffyWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		38AED02328DC79A600C2BF8A /* luffyRun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = luffyRun.entitlements; sourceTree = "<group>"; };
 		38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRRunningRecordCell.swift; sourceTree = "<group>"; };
-		38BC3E1C295ACA57008A5DFE /* RecordHeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeartRate.swift; sourceTree = "<group>"; };
-		38BC3E1E295AD7DF008A5DFE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		38BC3E20295B0243008A5DFE /* PAirSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAirSandbox.swift; sourceTree = "<group>"; };
 		38D7CD662959795B00D11B09 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
 		38D7CD6829598E0200D11B09 /* PaceZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceZone.swift; sourceTree = "<group>"; };
@@ -141,8 +137,6 @@
 				38A65094294B1D9700239603 /* Util.swift */,
 				38D7CD662959795B00D11B09 /* HeartRate.swift */,
 				38D7CD6829598E0200D11B09 /* PaceZone.swift */,
-				38BC3E1C295ACA57008A5DFE /* RecordHeartRate.swift */,
-				38BC3E1E295AD7DF008A5DFE /* Location.swift */,
 				38E45A9F295D792100738F9B /* HeartBeat.swift */,
 				38E45AA1295D8C5100738F9B /* RouteNode.swift */,
 			);
@@ -331,7 +325,6 @@
 				3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */,
 				38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */,
 				38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */,
-				38BC3E1F295AD7DF008A5DFE /* Location.swift in Sources */,
 				38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */,
 				38A6508B2949D66000239603 /* Record.swift in Sources */,
 				38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */,
@@ -345,7 +338,6 @@
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,
 				38A65095294B1D9700239603 /* Util.swift in Sources */,
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
-				38BC3E1D295ACA57008A5DFE /* RecordHeartRate.swift in Sources */,
 				38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */,
 				38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */,
 			);

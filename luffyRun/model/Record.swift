@@ -15,7 +15,6 @@ final class Record:NSManagedObject {
     @NSManaged var paceZone:PaceZone
     @NSManaged var heartbeat:[HeartBeat]?
     @NSManaged var routes:[RouteNode]?
-    @NSManaged var locations:Set<Location>
     @NSManaged fileprivate(set) var source: String
     
     static func insert(into context:NSManagedObjectContext) -> Record {
