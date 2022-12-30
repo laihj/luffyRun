@@ -41,57 +41,46 @@ class ActivityListVC: UIViewController {
     }
     
     @IBAction func buttonclick() {
-        self.authorizeHealthKit { (success, error) in
+        authorizeHealthKit { (success, error) in
             self.readWorkouts()
         }
-        
-//        context!.performChanges {
-//            let record = Record.insert(into: self.context!)
-//        }
     }
     
     func readWorkouts () {
-        self.loadPrancerciseWorkouts { workouts, error in
+        var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
+        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
+        }
+        
+        loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
             
             for workout in self.workouts! {
-//                self.context!.performChanges {
-                    
-                    
-                    let group = DispatchGroup()
-                    
-                    var retHeartbeat = Array<HeartBeat>()
-                    var retRoutes = Array<RouteNode>()
-                    
-                    group.enter()
-                    self.bindRecordHeartRate(workout: workout) { heartbeat in
-                        group.leave()
-                        retHeartbeat = heartbeat
-                    }
                 
+                let sourceName = workout.sourceRevision.source.name
+                if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
+                    continue
+                }
+                let group = DispatchGroup()
+                
+                var retHeartbeat = Array<HeartBeat>()
+                var retRoutes = Array<RouteNode>()
+                
+                group.enter()
+                self.bindRecordHeartRate(workout: workout) { heartbeat in
+                    group.leave()
+                    retHeartbeat = heartbeat
+                }
                 
                 group.enter()
                 self.bindRoute(workout: workout) { routes in
                     group.leave()
                     retRoutes = routes
                 }
-                    group.notify(queue: .main) {
-                        print("aaaa")
-                        self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
-                    }
+                group.notify(queue: .main) {
+                    self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
                 }
-//            }
-
-//            if let workout = self.workouts?[2] {
-//                self.context!.performChanges {
-//                    let record = Record.insert(into: self.context!)
-//                    record.startDate = workout.startDate
-//                    record.endDate = workout.endDate
-//
-//                    self.bindRecordHeartRate(record: record, workout:workout)
-//                    self.bindRoute(record: record, workout: workout)
-//                }
-//            }
+            }
 
             
             DispatchQueue.main.async {
@@ -107,16 +96,13 @@ class ActivityListVC: UIViewController {
             record.endDate = workout.endDate
             record.heartbeat = heartbeat
             record.routes = routes
+            let sourceName = workout.sourceRevision.source.name
+            record.source = sourceName
         }
     }
     
     func bindRoute(workout:HKWorkout, completion: @escaping ([RouteNode])->()) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
-        let heartQuery = HKAnchoredObjectQuery(type: HKSeriesType.heartbeat(), predicate: nil, anchor: nil, limit: HKObjectQueryNoLimit) { query, samples, deletedObjects, anchor, error in
-            guard error == nil else {
-                fatalError("The initial query failed.")
-            }
-        }
 
         let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
 
@@ -197,7 +183,6 @@ class ActivityListVC: UIViewController {
                 
                
             }
-            print("bbbb")
             completion(heartbeat)
         }
         
@@ -225,47 +210,6 @@ class ActivityListVC: UIViewController {
         // Run the query.
         HKHealthStore().execute(detailQuery)
     }
-    
-    func loadPrancerciseWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-        
-        
-        let workoutPredication = HKQuery.predicateForWorkouts(with: .running)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-        
-//        let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,sourcePredicte])
-        
-        let query = HKSampleQuery(sampleType: .workoutType(), predicate: workoutPredication, limit: 10, sortDescriptors: [sortDescriptor]) { query, samples, error in
-            let samples = samples as? [HKWorkout]
-            
-            completion(samples, nil)
-        }
-        
-        HKHealthStore().execute(query)
-    }
-    
-    func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Void) {
-        guard HKHealthStore.isHealthDataAvailable() else {
-            completion(false, nil)
-            return;
-        }
-        let healthKitTypesToWrite: Set<HKSampleType> = [HKObjectType.workoutType(),
-                                                        HKSeriesType.workoutRoute(),
-                                                        HKSeriesType.heartbeat(),
-                                                        HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                                                        HKSeriesType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-                                                        HKQuantityType.quantityType(forIdentifier: .heartRate)!]
-        
-        let healthKitTypesToRead: Set<HKSampleType> = [HKObjectType.workoutType(),
-                                                       HKSeriesType.workoutRoute(),
-                                                       HKSeriesType.heartbeat(),
-                                                       HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                                                       HKSeriesType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
-                                                       HKQuantityType.quantityType(forIdentifier: .heartRate)!]
-        
-        HKHealthStore().requestAuthorization(toShare: healthKitTypesToRead, read: healthKitTypesToWrite) { (success, error) in
-            completion(success, error)
-        }
-    }
 }
 
 extension ActivityListVC: UITableViewDelegate {
@@ -274,22 +218,6 @@ extension ActivityListVC: UITableViewDelegate {
         let runningDetail = RunningDetailVC.init()
         runningDetail.record = record
         self.navigationController?.pushViewController(runningDetail, animated: true)
-//        if let workout = self.workouts?[indexPath.row] {
-//            let runningDetail = RunningDetailVC.init()
-//            runningDetail.workout = workout
-//
-//
-//            let statistics = workout.statistics(for: HKQuantityType(.distanceWalkingRunning))
-//            statistics?.averageQuantity()
-//
-//            let speed = workout.statistics(for: HKQuantityType(.runningSpeed));
-////            speed?.sumQuantity()?.doubleValue(for:.)
-////            speed?.averageQuantity()
-//            let heart = workout.statistics(for: HKQuantityType(.heartRate));
-//
-//
-//            HKUnit.minute()
-//        }
     }
     
 }

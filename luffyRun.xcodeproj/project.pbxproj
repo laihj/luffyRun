@@ -41,6 +41,7 @@
 		38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD6829598E0200D11B09 /* PaceZone.swift */; };
 		38E45AA0295D792100738F9B /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45A9F295D792100738F9B /* HeartBeat.swift */; };
 		38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA1295D8C5100738F9B /* RouteNode.swift */; };
+		38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		38D7CD6829598E0200D11B09 /* PaceZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceZone.swift; sourceTree = "<group>"; };
 		38E45A9F295D792100738F9B /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		38E45AA1295D8C5100738F9B /* RouteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNode.swift; sourceTree = "<group>"; };
+		38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				38AECFF128DC5C5C00C2BF8A /* Info.plist */,
 				38AECFE928DC5C5B00C2BF8A /* luffyRun.xcdatamodeld */,
 				38BC3E20295B0243008A5DFE /* PAirSandbox.swift */,
+				38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */,
 			);
 			path = luffyRun;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
 				38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */,
+				38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */,
 				38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */,
 				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,

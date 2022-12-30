@@ -15,12 +15,11 @@ final class Record:NSManagedObject {
     @NSManaged var paceZone:PaceZone
     @NSManaged var heartbeat:[HeartBeat]?
     @NSManaged var routes:[RouteNode]?
-    @NSManaged fileprivate(set) var source: String
+    @NSManaged var source: String
     
     static func insert(into context:NSManagedObjectContext) -> Record {
         let record:Record = context.insertObject()
         record.startDate = Date()
-        record.source = "the source"
         record.heartRate = HeartRate.lastedHeadRate(in: context)!
         record.paceZone = PaceZone.lastedPaceZone(in: context)!
         return record
