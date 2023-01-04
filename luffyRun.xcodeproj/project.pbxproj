@@ -131,11 +131,7 @@
 		38A650872949D4D100239603 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				38A650882949D53400239603 /* NSManagedObjectContextExt.swift */,
 				38A6508A2949D66000239603 /* Record.swift */,
-				38A6508C294AC6D000239603 /* CoreDataStack.swift */,
-				38A6508E294ACC0600239603 /* Managed.swift */,
-				38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */,
 				38A65094294B1D9700239603 /* Util.swift */,
 				38D7CD662959795B00D11B09 /* HeartRate.swift */,
 				38D7CD6829598E0200D11B09 /* PaceZone.swift */,
@@ -166,6 +162,7 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				38E45AA5296590E900738F9B /* CoreData */,
 				38A650872949D4D100239603 /* model */,
 				38AED02328DC79A600C2BF8A /* luffyRun.entitlements */,
 				38AECFF728DC5D4300C2BF8A /* MainView */,
@@ -219,6 +216,17 @@
 				38AED00728DC615F00C2BF8A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		38E45AA5296590E900738F9B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				38A650882949D53400239603 /* NSManagedObjectContextExt.swift */,
+				38A6508C294AC6D000239603 /* CoreDataStack.swift */,
+				38A6508E294ACC0600239603 /* Managed.swift */,
+				38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

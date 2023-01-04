@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import HealthKit
 
-final class HeartBeat:NSObject,NSCoding {
+final class HeartBeat:NSObject,NSCoding,DiscreateHKQuanty {
 
     var heart: Int16
     var date: Date
@@ -15,6 +16,12 @@ final class HeartBeat:NSObject,NSCoding {
     init(heart: Int16, date: Date) {
         self.heart = heart
         self.date = date
+    }
+    
+    convenience init(sample:HKDiscreteQuantitySample, unit:HKUnit) {
+        let heart = sample.quantity.doubleValue(for: unit)
+        let date = sample.startDate
+        self.init(heart: Int16(heart), date: date)
     }
     
     required convenience init?(coder: NSCoder) {

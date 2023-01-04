@@ -72,7 +72,7 @@ class ActivityListVC: UIViewController {
                 }
                 
                 group.enter()
-                self.bindRoute(workout: workout) { routes in
+                workout.route() { routes in
                     group.leave()
                     retRoutes = routes
                 }
@@ -121,67 +121,25 @@ class ActivityListVC: UIViewController {
         }
     }
     
-    func bindRoute(workout:HKWorkout, completion: @escaping ([RouteNode])->()) {
-        let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
-
-        let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
-
-            guard error == nil else {
-                // Handle any errors here.
-                fatalError("The initial query failed.")
-            }
-            
-            var routes = Array<RouteNode>()
-
-            if let workoutroute = samples?.first {
-                let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
-                    if let locas = locations {
-                        for location in locas {
-                            let route = RouteNode(location: location, date: location.timestamp)
-                            routes.append(route)
-                        }
-                    }
-                    if(done) {
-                        completion(routes)
-                    }
-                }
-                HKHealthStore().execute(query)
-            }
-            // Process the initial route data here.
-        }
-
-        routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
-            guard error == nil else {
-                // Handle any errors here.
-                fatalError("The update failed.")
-            }
-            // Process updates or additions here.
-        }
-        HKHealthStore().execute(routeQuery)
-    }
-    
     func getStepCount(workout:HKWorkout,completion: @escaping ([RouteNode])->()) {
-        let stepUnit: HKUnit = HKUnit.count()
+        let stepUnit: HKUnit = HKUnit.watt()
         let forWorkout = HKQuery.predicateForObjects(from: workout)
-        let stepDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier: .stepCount)!, predicate: forWorkout)
+        let stepDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier: .runningPower)!, predicate: forWorkout)
         let stepQuery = HKSampleQuery(queryDescriptors: [stepDescriptor], limit: HKObjectQueryNoLimit) { query, samples, error in
             guard let samples = samples else {
-                // Handle the error.
+
                 completion([])
                 fatalError("*** An error occurred: \(error!.localizedDescription) ***")
             }
             
             for sample in samples {
                 
-                guard let sample = sample as? HKCumulativeQuantitySample  else {
+                guard let sample = sample as? HKDiscreteQuantitySample  else {
                     fatalError("*** Unexpected Sample Type ***")
                 }
                 
-                // Check to see if the sample is a series.
                 if sample.count == 1 {
-                    // This is a single sample.
-                    // Use the sample.
-                    let step = sample.sumQuantity.doubleValue(for: stepUnit)
+                    let step = sample.quantity.doubleValue(for: stepUnit)
                     print(step)
 
                 }
@@ -218,13 +176,8 @@ class ActivityListVC: UIViewController {
                     fatalError("*** Unexpected Sample Type ***")
                 }
                 
-                
-                // Check to see if the sample is a series.
                 if sample.count == 1 {
-                    // This is a single sample.
-                    // Use the sample.
-                    let heart = sample.mostRecentQuantity.doubleValue(for: heartRateUnit)
-                    let recordHeartRate:HeartBeat = HeartBeat(heart: Int16(heart), date: sample.startDate)
+                    let recordHeartRate:HeartBeat = HeartBeat(sample: sample, unit: heartRateUnit)
                     heartbeat.append(recordHeartRate)
                 }
             }
@@ -298,5 +251,40 @@ extension HKWorkout {
         let quantity =  statistics?.averageQuantity()
         let value = quantity?.doubleValue(for: unit)
         return value
+    }
+    
+    func route(completion: @escaping ([RouteNode])->()) {
+        let runningObjectQuery = HKQuery.predicateForObjects(from: self)
+
+        let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+            guard error == nil else {
+                fatalError("The initial query failed.")
+            }
+            
+            var routes = Array<RouteNode>()
+
+            if let workoutroute = samples?.first {
+                let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
+                    if let locas = locations {
+                        for location in locas {
+                            let route = RouteNode(location: location, date: location.timestamp)
+                            routes.append(route)
+                        }
+                    }
+                    if(done) {
+                        completion(routes)
+                    }
+                }
+                HKHealthStore().execute(query)
+            }
+        }
+
+        routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+            guard error == nil else {
+                fatalError("The update failed.")
+            }
+        }
+        HKHealthStore().execute(routeQuery)
     }
 }
