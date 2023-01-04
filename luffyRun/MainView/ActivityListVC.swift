@@ -48,15 +48,14 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
-            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
-        }
+//        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
+//        }
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
             
             for workout in self.workouts! {
-                
                 let sourceName = workout.sourceRevision.source.name
                 if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
                     continue
@@ -77,6 +76,9 @@ class ActivityListVC: UIViewController {
                     group.leave()
                     retRoutes = routes
                 }
+                self.getStepCount(workout: workout) {steps in
+                    
+                }
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
                 }
@@ -89,11 +91,29 @@ class ActivityListVC: UIViewController {
         }
     }
     
+    
     func saveRecord(workout:HKWorkout, heartbeat:[HeartBeat], routes:[RouteNode]) {
         self.context!.performChanges {
             let record = Record.insert(into: self.context!)
             record.startDate = workout.startDate
             record.endDate = workout.endDate
+
+            let distance = workout.sumQuantityFor(HKQuantityTypeIdentifier.distanceWalkingRunning, unit: HKUnit.meter())
+            
+            let step = workout.sumQuantityFor(HKQuantityTypeIdentifier.stepCount, unit: HKUnit.count())
+            
+            let kCal = workout.sumQuantityFor(HKQuantityTypeIdentifier.activeEnergyBurned, unit: HKUnit.kilocalorie())
+            
+            let averageSLength = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningStrideLength, unit: HKUnit.meter())
+            
+            let averageRunningSpeed = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute()))
+            
+            let avaragePace = 1.0/(averageRunningSpeed!/1000.0)
+            
+            let avarageHeart = workout.averageQuantityFor(HKQuantityTypeIdentifier.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute()))
+            
+            let avarageWatt = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningPower, unit: HKUnit.watt())
+            
             record.heartbeat = heartbeat
             record.routes = routes
             let sourceName = workout.sourceRevision.source.name
@@ -140,6 +160,38 @@ class ActivityListVC: UIViewController {
         HKHealthStore().execute(routeQuery)
     }
     
+    func getStepCount(workout:HKWorkout,completion: @escaping ([RouteNode])->()) {
+        let stepUnit: HKUnit = HKUnit.count()
+        let forWorkout = HKQuery.predicateForObjects(from: workout)
+        let stepDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier: .stepCount)!, predicate: forWorkout)
+        let stepQuery = HKSampleQuery(queryDescriptors: [stepDescriptor], limit: HKObjectQueryNoLimit) { query, samples, error in
+            guard let samples = samples else {
+                // Handle the error.
+                completion([])
+                fatalError("*** An error occurred: \(error!.localizedDescription) ***")
+            }
+            
+            for sample in samples {
+                
+                guard let sample = sample as? HKCumulativeQuantitySample  else {
+                    fatalError("*** Unexpected Sample Type ***")
+                }
+                
+                // Check to see if the sample is a series.
+                if sample.count == 1 {
+                    // This is a single sample.
+                    // Use the sample.
+                    let step = sample.sumQuantity.doubleValue(for: stepUnit)
+                    print(step)
+
+                }
+            }
+            
+        }
+        HKHealthStore().execute(stepQuery)
+        
+    }
+    
     func bindRecordHeartRate(workout:HKWorkout, completion: @escaping ([HeartBeat])->()) {
         let heartRateUnit: HKUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
         let forWorkout = HKQuery.predicateForObjects(from: workout)
@@ -175,13 +227,6 @@ class ActivityListVC: UIViewController {
                     let recordHeartRate:HeartBeat = HeartBeat(heart: Int16(heart), date: sample.startDate)
                     heartbeat.append(recordHeartRate)
                 }
-                else {
-                    // This is a series.
-                    // Get the detailed items for the series.
-                    self.myGetDetailedItems(sample:sample)
-                }
-                
-               
             }
             completion(heartbeat)
         }
@@ -189,26 +234,6 @@ class ActivityListVC: UIViewController {
         // Run  the query.
         HKHealthStore().execute(heartRateQuery)
         
-    }
-    
-    func myGetDetailedItems(sample:HKDiscreteQuantitySample) {
-        let inSeriesSample = HKQuery.predicateForObject(with: sample.uuid)
-
-        // Create the query.
-        let detailQuery = HKQuantitySeriesSampleQuery(quantityType: HKSampleType.quantityType(forIdentifier:.heartRate)!,
-                                                      predicate: inSeriesSample)
-        { query, quantity, dateInterval, HKSample, done, error in
-            
-            guard let quantity = quantity, let dateInterval = dateInterval else {
-                fatalError("*** An error occurred: \(error!.localizedDescription) ***")
-            }
-            
-            // Use the data.
-            print("\(quantity.doubleValue(for: HKUnit(from: "count/min"))): \(dateInterval)");
-        }
-
-        // Run the query.
-        HKHealthStore().execute(detailQuery)
     }
 }
 
@@ -257,5 +282,21 @@ extension ActivityListVC: UITableViewDataSource {
             
         }
         return cell;
+    }
+}
+
+extension HKWorkout {
+    func sumQuantityFor(_ identifier:HKQuantityTypeIdentifier, unit:HKUnit) -> Double? {
+        let statistics = self.statistics(for: HKQuantityType(identifier))
+        let quantity =  statistics?.sumQuantity()
+        let value = quantity?.doubleValue(for: unit)
+        return value
+    }
+    
+    func averageQuantityFor(_ identifier:HKQuantityTypeIdentifier, unit:HKUnit) -> Double? {
+        let statistics = self.statistics(for: HKQuantityType(identifier))
+        let quantity =  statistics?.averageQuantity()
+        let value = quantity?.doubleValue(for: unit)
+        return value
     }
 }
