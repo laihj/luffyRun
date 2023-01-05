@@ -42,6 +42,7 @@
 		38E45AA0295D792100738F9B /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45A9F295D792100738F9B /* HeartBeat.swift */; };
 		38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA1295D8C5100738F9B /* RouteNode.swift */; };
 		38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */; };
+		38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA729666E0D00738F9B /* WorkoutExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		38E45A9F295D792100738F9B /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
 		38E45AA1295D8C5100738F9B /* RouteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNode.swift; sourceTree = "<group>"; };
 		38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
+		38E45AA729666E0D00738F9B /* WorkoutExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				38E45AA629666DF300738F9B /* HealthKit */,
 				38E45AA5296590E900738F9B /* CoreData */,
 				38A650872949D4D100239603 /* model */,
 				38AED02328DC79A600C2BF8A /* luffyRun.entitlements */,
@@ -174,7 +177,6 @@
 				38AECFF128DC5C5C00C2BF8A /* Info.plist */,
 				38AECFE928DC5C5B00C2BF8A /* luffyRun.xcdatamodeld */,
 				38BC3E20295B0243008A5DFE /* PAirSandbox.swift */,
-				38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */,
 			);
 			path = luffyRun;
 			sourceTree = "<group>";
@@ -227,6 +229,15 @@
 				38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		38E45AA629666DF300738F9B /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */,
+				38E45AA729666E0D00738F9B /* WorkoutExt.swift */,
+			);
+			path = HealthKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +358,7 @@
 				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,
 				38E45AA0295D792100738F9B /* HeartBeat.swift in Sources */,
+				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,
 				38A65095294B1D9700239603 /* Util.swift in Sources */,
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
