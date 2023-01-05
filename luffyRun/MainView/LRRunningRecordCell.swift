@@ -13,6 +13,8 @@ class LRRunningRecordCell: UITableViewCell {
     @IBOutlet var heart:UILabel?
     @IBOutlet var pace:UILabel?
     @IBOutlet var power:UILabel?
+    @IBOutlet var kcal:UILabel?
+    @IBOutlet var time:UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,10 +30,8 @@ class LRRunningRecordCell: UITableViewCell {
 
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .short
-    formatter.doesRelativeDateFormatting = true
-    formatter.formattingContext = .standalone
+    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+    formatter.timeZone = .current
     return formatter
 }()
 
@@ -50,9 +50,16 @@ extension LRRunningRecordCell {
             power?.text = String(format: "%.0f", apower.doubleValue)
         }
         
+        if let akCal = record.kCal {
+            kcal?.text = String(format: "%.0f", akCal.doubleValue)
+        }
+        
         if let aPace = record.avaragePace {
             pace?.text = formatPace(minite: aPace.doubleValue)
         }
         
+        let formatTime = formatTime(seconds: record.endDate.timeIntervalSince1970 - record.startDate.timeIntervalSince1970)
+        
+        time?.text = "\(dateFormatter.string(from: record.startDate)) - \(formatTime)"
     }
 }
