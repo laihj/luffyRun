@@ -12,6 +12,7 @@ import CoreData
 class ActivityListVC: UIViewController {
     var context:NSManagedObjectContext?
     var workouts:[HKWorkout]?
+    @IBOutlet var headerView: HeaderView?
     @IBOutlet var tableView: UITableView?
     
 
@@ -21,6 +22,7 @@ class ActivityListVC: UIViewController {
         context =  appDelegate.persistentContainer.viewContext
         // Do any additional setup after loading the view.
         self.refreshTable()
+        self.refreshHeaderView()
     }
     
     fileprivate var dataSource: TableViewDataSource<ActivityListVC>!
@@ -48,9 +50,9 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-//        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
-//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
-//        }
+        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
+        }
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
@@ -95,7 +97,31 @@ class ActivityListVC: UIViewController {
             
             DispatchQueue.main.async {
                 self.tableView?.reloadData()
+                self.refreshHeaderView()
             }
+        }
+    }
+    
+    func refreshHeaderView() {
+        
+        let endDate = Date()
+        let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
+        let startDate = middleDate.addingTimeInterval(-60 * 24 * 3600)
+        let request = Record.sortedFetchRequest
+        let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
+        request.predicate = predicate
+        request.returnsObjectsAsFaults = false
+        if let records = try? self.context!.fetch(request) {
+            let currentData = records.filter { record in
+                return record.startDate >= middleDate
+            }
+            
+            self.headerView?.stats = headerViewData(records: currentData);
+            
+            let lastData = records.filter { record in
+                return record.startDate < middleDate
+            }
+            self.headerView?.lastStats = headerViewData(records: lastData);
         }
     }
     

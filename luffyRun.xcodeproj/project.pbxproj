@@ -43,6 +43,7 @@
 		38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA1295D8C5100738F9B /* RouteNode.swift */; };
 		38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */; };
 		38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA729666E0D00738F9B /* WorkoutExt.swift */; };
+		38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA92966C2AE00738F9B /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		38E45AA1295D8C5100738F9B /* RouteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNode.swift; sourceTree = "<group>"; };
 		38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
 		38E45AA729666E0D00738F9B /* WorkoutExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExt.swift; sourceTree = "<group>"; };
+		38E45AA92966C2AE00738F9B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				38AED02428DDA97D00C2BF8A /* LRRunningRecordCell.swift */,
 				3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */,
 				38A65090294AFE3500239603 /* TableViewDataSource.swift */,
+				38E45AA92966C2AE00738F9B /* HeaderView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */,
 				38A6508B2949D66000239603 /* Record.swift in Sources */,
 				38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */,
+				38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
 				38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */,
