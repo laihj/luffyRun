@@ -77,16 +77,15 @@ class ActivityListVC: UIViewController {
                     retRoutes = routes
                 }
                 
-                group.enter()
-                workout.stepCount { steps in
-                    group.leave()
-                }
-                
-                group.enter()
-                
-                workout.power { power in
-                    group.leave()
-                }
+//                group.enter()
+//                workout.stepCount { steps in
+//                    group.leave()
+//                }
+//
+//                group.enter()
+//                workout.power { power in
+//                    group.leave()
+//                }
                 
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
@@ -107,21 +106,34 @@ class ActivityListVC: UIViewController {
             record.startDate = workout.startDate
             record.endDate = workout.endDate
 
-            let distance = workout.sumQuantityFor(HKQuantityTypeIdentifier.distanceWalkingRunning, unit: HKUnit.meter())
+            if let distance = workout.sumQuantityFor(HKQuantityTypeIdentifier.distanceWalkingRunning, unit: HKUnit.meter()) {
+                record.distance = NSNumber(value:distance)
+            }
             
-            let step = workout.sumQuantityFor(HKQuantityTypeIdentifier.stepCount, unit: HKUnit.count())
+            if let step = workout.sumQuantityFor(HKQuantityTypeIdentifier.stepCount, unit: HKUnit.count()) {
+                record.step = NSNumber(value: step)
+            }
             
-            let kCal = workout.sumQuantityFor(HKQuantityTypeIdentifier.activeEnergyBurned, unit: HKUnit.kilocalorie())
+            if let kCal = workout.sumQuantityFor(HKQuantityTypeIdentifier.activeEnergyBurned, unit: HKUnit.kilocalorie()) {
+                record.kCal = NSNumber(value: kCal)
+            }
             
-            let averageSLength = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningStrideLength, unit: HKUnit.meter())
+            if let averageSLength = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningStrideLength, unit: HKUnit.meter()) {
+                record.averageSLength = NSNumber(value: averageSLength)
+            }
             
-            let averageRunningSpeed = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute()))
+            if let averageRunningSpeed = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute())) {
+                let avaragePace = 1.0/(averageRunningSpeed/1000.0)
+                record.avaragePace = NSNumber(value: avaragePace)
+            }
             
-            let avaragePace = 1.0/(averageRunningSpeed!/1000.0)
+            if let avarageHeart = workout.averageQuantityFor(HKQuantityTypeIdentifier.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute())) {
+                record.avarageHeart = NSNumber(value: avarageHeart)
+            }
             
-            let avarageHeart = workout.averageQuantityFor(HKQuantityTypeIdentifier.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute()))
-            
-            let avarageWatt = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningPower, unit: HKUnit.watt())
+            if let avarageWatt = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningPower, unit: HKUnit.watt()) {
+                record.avarageWatt = NSNumber(value: avarageWatt)
+            }
             
             record.heartbeat = heartbeat
             record.routes = routes
@@ -145,36 +157,5 @@ extension ActivityListVC: TableViewDataSourceDelegate {
     
     func configure(_ cell: LRRunningRecordCell, for object: Record) {
         cell.configure(for: object)
-    }
-}
-
-extension ActivityListVC: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let workouts = self.workouts {
-            return workouts.count;
-        }
-        return 0;
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LRRunningCell", for: indexPath) as! LRRunningRecordCell
-        if let workout = self.workouts?[indexPath.row] {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            cell.label?.text = dateFormatter.string(from: workout.startDate)
-            cell.sourceName?.text = workout.sourceRevision.source.name
-            
-            print(workout.totalDistance)
-            print(workout.allStatistics)
-//            print(workout.metadata)
-//            print(workout.allStatistics)
-//            print(workout.device)
-            print(workout.sourceRevision.source.name)
-            print("=======")
-
-            
-        }
-        return cell;
     }
 }

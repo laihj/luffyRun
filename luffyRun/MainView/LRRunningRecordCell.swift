@@ -9,8 +9,10 @@ import UIKit
 
 class LRRunningRecordCell: UITableViewCell {
     
-    @IBOutlet var label:UILabel?
-    @IBOutlet var sourceName:UILabel?
+    @IBOutlet var distance:UILabel?
+    @IBOutlet var heart:UILabel?
+    @IBOutlet var pace:UILabel?
+    @IBOutlet var power:UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +38,21 @@ private let dateFormatter: DateFormatter = {
 
 extension LRRunningRecordCell {
     func configure(for record: Record) {
-        label!.text = dateFormatter.string(from: record.startDate)
-        sourceName?.text = record.source
+        if let totalDisatnce = record.distance {
+            distance!.text = String(format: "%.2f", totalDisatnce.doubleValue/1000)
+        }
+
+        if let avarageHeart = record.avarageHeart {
+            heart?.text = String(format: "%.0f", avarageHeart.doubleValue)
+        }
+        
+        if let apower = record.avarageWatt {
+            power?.text = String(format: "%.0f", apower.doubleValue)
+        }
+        
+        if let aPace = record.avaragePace {
+            pace?.text = formatPace(minite: aPace.doubleValue)
+        }
+        
     }
 }

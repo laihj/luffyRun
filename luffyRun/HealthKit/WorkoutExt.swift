@@ -137,7 +137,6 @@ extension HKWorkout {
             }
             
             for sample in samples {
-                
                 guard let sample = sample as? HKCumulativeQuantitySample  else {
                     fatalError("*** Unexpected Sample Type ***")
                 }

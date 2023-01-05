@@ -16,6 +16,13 @@ final class Record:NSManagedObject {
     @NSManaged var heartbeat:[HeartBeat]?
     @NSManaged var routes:[RouteNode]?
     @NSManaged var source: String
+    @NSManaged var distance:NSNumber?
+    @NSManaged var step:NSNumber?
+    @NSManaged var kCal:NSNumber?
+    @NSManaged var averageSLength:NSNumber?
+    @NSManaged var avaragePace:NSNumber?
+    @NSManaged var avarageHeart:NSNumber?
+    @NSManaged var avarageWatt:NSNumber?
     
     static func insert(into context:NSManagedObjectContext) -> Record {
         let record:Record = context.insertObject()

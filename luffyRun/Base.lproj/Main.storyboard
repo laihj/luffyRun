@@ -53,37 +53,65 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LRRunningCell" id="yO4-Lr-Y2Y" customClass="LRRunningRecordCell" customModule="luffyRun" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="390" height="43"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="65.333335876464844"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yO4-Lr-Y2Y" id="p2c-Yr-xIw">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="65.333335876464844"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avq-z5-rYZ">
-                                                    <rect key="frame" x="20" y="11" width="350" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avq-z5-rYZ">
+                                                    <rect key="frame" x="20" y="11.000000000000004" width="92" height="43.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-2j-a1F">
-                                                    <rect key="frame" x="336" y="11" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="AgG-aD-aiq">
+                                                    <rect key="frame" x="347.66666666666669" y="8.0000000000000036" width="26.333333333333314" height="49.333333333333343"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="5:36" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-2j-a1F" userLabel="pace">
+                                                            <rect key="frame" x="0.0" y="0.0" width="26.333333333333332" height="14.333333333333334"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8s-as-CYc" userLabel="heart">
+                                                            <rect key="frame" x="0.0" y="17.333333333333332" width="21" height="14.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="198" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veE-Dd-AsK" userLabel="power">
+                                                            <rect key="frame" x="0.0" y="34.666666666666664" width="21" height="14.666666666666664"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公里" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFl-ws-BF6">
+                                                    <rect key="frame" x="114.00000000000001" y="27.666666666666671" width="28.666666666666671" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="avq-z5-rYZ" firstAttribute="top" secondItem="p2c-Yr-xIw" secondAttribute="topMargin" id="1Ao-px-P61"/>
+                                                <constraint firstAttribute="trailing" secondItem="AgG-aD-aiq" secondAttribute="trailing" constant="16" id="52z-qP-nKq"/>
                                                 <constraint firstItem="avq-z5-rYZ" firstAttribute="leading" secondItem="p2c-Yr-xIw" secondAttribute="leadingMargin" id="Ad8-Ix-UWe"/>
-                                                <constraint firstAttribute="trailing" secondItem="E7i-2j-a1F" secondAttribute="trailing" constant="12" id="FjR-7O-9sk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="avq-z5-rYZ" secondAttribute="trailing" id="UX7-7b-39B"/>
+                                                <constraint firstItem="HFl-ws-BF6" firstAttribute="leading" secondItem="avq-z5-rYZ" secondAttribute="trailing" constant="2" id="FBn-Y5-w62"/>
+                                                <constraint firstItem="AgG-aD-aiq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HFl-ws-BF6" secondAttribute="trailing" constant="8" symbolic="YES" id="Q5P-ra-7Mt"/>
+                                                <constraint firstItem="HFl-ws-BF6" firstAttribute="bottom" secondItem="avq-z5-rYZ" secondAttribute="baseline" constant="-4" id="W1o-L9-JPf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="avq-z5-rYZ" secondAttribute="bottom" id="XIG-sm-lfq"/>
-                                                <constraint firstItem="E7i-2j-a1F" firstAttribute="centerY" secondItem="p2c-Yr-xIw" secondAttribute="centerY" id="evi-9N-GL8"/>
+                                                <constraint firstItem="E7i-2j-a1F" firstAttribute="top" secondItem="p2c-Yr-xIw" secondAttribute="top" constant="8" id="YT7-6K-HcG"/>
+                                                <constraint firstAttribute="bottom" secondItem="AgG-aD-aiq" secondAttribute="bottom" constant="8" id="lJ6-Py-sMk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="label" destination="avq-z5-rYZ" id="KzI-ZH-C2o"/>
-                                            <outlet property="sourceName" destination="E7i-2j-a1F" id="vcE-x3-Th1"/>
+                                            <outlet property="distance" destination="avq-z5-rYZ" id="dTR-ll-N9i"/>
+                                            <outlet property="heart" destination="R8s-as-CYc" id="Btw-xd-4Yi"/>
+                                            <outlet property="pace" destination="E7i-2j-a1F" id="Snv-Lr-6CW"/>
+                                            <outlet property="power" destination="veE-Dd-AsK" id="1to-OY-IbC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
