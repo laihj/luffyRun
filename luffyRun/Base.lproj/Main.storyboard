@@ -310,10 +310,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="xfa-SQ-BxG" id="zKM-T4-DAB"/>
-                                    <outlet property="delegate" destination="xfa-SQ-BxG" id="usz-3P-kcr"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cvc-Y9-0jc"/>
@@ -352,8 +348,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="pOD-59-cnZ"/>
                         <segue destination="4yH-jl-zhB" kind="relationship" relationship="viewControllers" id="IjY-mj-q8h"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="pOD-59-cnZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISd-nv-poC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

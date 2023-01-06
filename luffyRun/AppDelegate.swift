@@ -10,7 +10,7 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var persistentContainer: NSPersistentContainer!
+
     let appCele = "appCele"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -25,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //            self.window?.rootViewController = vc
 //        }
-        createLuffyContainer { containers in
-            self.persistentContainer = containers
-        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             PAriSandbox.shared.enableSwipe()
         }

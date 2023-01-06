@@ -10,19 +10,26 @@ import HealthKit
 import CoreData
 
 class ActivityListVC: UIViewController {
-    var context:NSManagedObjectContext?
+    var context:NSManagedObjectContext? {
+        didSet {
+            self.refreshTable()
+            self.refreshHeaderView()
+        }
+        
+
+    }
     var workouts:[HKWorkout]?
     @IBOutlet var headerView: HeaderView?
     @IBOutlet var tableView: UITableView?
     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        context =  appDelegate.persistentContainer.viewContext
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        context =  appDelegate.persistentContainer.viewContext
         // Do any additional setup after loading the view.
-        self.refreshTable()
-        self.refreshHeaderView()
+
     }
     
     fileprivate var dataSource: TableViewDataSource<ActivityListVC>!
