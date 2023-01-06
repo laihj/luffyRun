@@ -14,10 +14,6 @@ extension Sequence where Iterator.Element: AnyObject {
     }
 }
 
-protocol DiscreateHKQuanty {
-    init(sample:HKDiscreteQuantitySample, unit:HKUnit)
-}
-
 func formatPace(minite:Double) -> String {
     let second = Int(minite * 60)
     return "\(second/60)'\(String(format: "%02d", second % 60))"

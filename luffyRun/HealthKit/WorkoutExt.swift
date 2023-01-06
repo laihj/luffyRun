@@ -58,15 +58,15 @@ extension HKWorkout {
         }
         HKHealthStore().execute(routeQuery)
     }
-    
-    func heartRate(completion: @escaping ([HeartBeat])->()) {
-        let heartRateUnit: HKUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+
+    func discreateQuanty(identifier:HKQuantityTypeIdentifier, unit:HKUnit, completion: @escaping ([DiscreateHKQuanty])->()) {
+        let quantityType =  HKSampleType.quantityType(forIdentifier:identifier)!
         let forWorkout = HKQuery.predicateForObjects(from: self)
-        let heartRateDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier:.heartRate)! ,
+        let quantityDescriptor = HKQueryDescriptor(sampleType: quantityType,
                                                     predicate: forWorkout)
         
         // Create the query.
-        let heartRateQuery = HKSampleQuery(queryDescriptors: [heartRateDescriptor],
+        let quantityQuery = HKSampleQuery(queryDescriptors: [quantityDescriptor],
                                            limit: HKObjectQueryNoLimit)
         { query, samples, error in
             // Process the samples.
@@ -77,7 +77,7 @@ extension HKWorkout {
                 
             }
             
-            var heartbeat = Array<HeartBeat>()
+            var quantyArray = Array<DiscreateHKQuanty>()
             // Iterate over all the samples.
             for sample in samples {
                 
@@ -86,72 +86,42 @@ extension HKWorkout {
                 }
                 
                 if sample.count == 1 {
-                    let recordHeartRate:HeartBeat = HeartBeat(sample: sample, unit: heartRateUnit)
-                    heartbeat.append(recordHeartRate)
+                    let quantity:DiscreateHKQuanty = DiscreateHKQuanty(sample: sample, unit: unit)
+                    quantyArray.append(quantity)
                 }
             }
-            completion(heartbeat)
+            completion(quantyArray)
         }
         
         // Run  the query.
-        HKHealthStore().execute(heartRateQuery)
+        HKHealthStore().execute(quantityQuery)
     }
-    
-    func power(completion: @escaping ([RouteNode])->()) {
-        let stepUnit: HKUnit = HKUnit.watt()
+//    CumulativeQuantity
+    func cumulativeQuantity(identifier:HKQuantityTypeIdentifier, unit:HKUnit, completion: @escaping ([CumulativeQuantity])->()) {
+        let quantityType =  HKSampleType.quantityType(forIdentifier:identifier)!
         let forWorkout = HKQuery.predicateForObjects(from: self)
-        let stepDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier: .runningPower)!, predicate: forWorkout)
+        let stepDescriptor = HKQueryDescriptor(sampleType: quantityType, predicate: forWorkout)
         let stepQuery = HKSampleQuery(queryDescriptors: [stepDescriptor], limit: HKObjectQueryNoLimit) { query, samples, error in
+            
             guard let samples = samples else {
-
                 completion([])
                 fatalError("*** An error occurred: \(error!.localizedDescription) ***")
             }
             
-            for sample in samples {
-                
-                guard let sample = sample as? HKDiscreteQuantitySample  else {
-                    fatalError("*** Unexpected Sample Type ***")
-                }
-                
-                if sample.count == 1 {
-                    let step = sample.quantity.doubleValue(for: stepUnit)
-                    print(step)
-
-                }
-            }
-            
-        }
-        HKHealthStore().execute(stepQuery)
-    }
-    
-    func stepCount(completion: @escaping ([RouteNode])->()) {
-        let stepUnit: HKUnit = HKUnit.count()
-        let forWorkout = HKQuery.predicateForObjects(from: self)
-        let stepDescriptor = HKQueryDescriptor(sampleType: HKSampleType.quantityType(forIdentifier: .stepCount)!, predicate: forWorkout)
-        let stepQuery = HKSampleQuery(queryDescriptors: [stepDescriptor], limit: HKObjectQueryNoLimit) { query, samples, error in
-            guard let samples = samples else {
-                // Handle the error.
-                completion([])
-                fatalError("*** An error occurred: \(error!.localizedDescription) ***")
-            }
+            var quantyArray = Array<CumulativeQuantity>()
             
             for sample in samples {
                 guard let sample = sample as? HKCumulativeQuantitySample  else {
                     fatalError("*** Unexpected Sample Type ***")
                 }
-                
-                // Check to see if the sample is a series.
-                if sample.count == 1 {
-                    // This is a single sample.
-                    // Use the sample.
-                    let step = sample.sumQuantity.doubleValue(for: stepUnit)
-                    print(step)
 
+                if sample.count == 1 {
+                    let quantity:CumulativeQuantity = CumulativeQuantity(sample: sample, unit: unit)
+                    quantyArray.append(quantity)
                 }
             }
+            completion(quantyArray)
         }
         HKHealthStore().execute(stepQuery)
-        
     }
 }

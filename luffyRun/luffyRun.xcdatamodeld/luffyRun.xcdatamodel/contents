@@ -29,12 +29,14 @@
         <attribute name="averageSLength" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="heartbeat" optional="YES" attributeType="Transformable" valueTransformerName="HeartBeat" customClassName=".HeartBeat"/>
+        <attribute name="heartbeat" optional="YES" attributeType="Transformable" valueTransformerName="DiscreateHKQuanty" customClassName=".DiscreateHKQuanty"/>
         <attribute name="kCal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="power" optional="YES" attributeType="Transformable" valueTransformerName="DiscreateHKQuanty" customClassName="DiscreateHKQuanty"/>
         <attribute name="routes" optional="YES" attributeType="Transformable" valueTransformerName="RouteNode" customClassName=".RouteNode"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="step" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="steps" optional="YES" attributeType="Transformable" valueTransformerName="CumulativeQuantity" customClassName=".CumulativeQuantity"/>
         <attribute name="udid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="heartRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRate" inverseName="record" inverseEntity="HeartRate"/>
         <relationship name="paceZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaceZone" inverseName="record" inverseEntity="PaceZone"/>

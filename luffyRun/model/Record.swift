@@ -10,10 +10,12 @@ import CoreData
 
 final class Record:NSManagedObject {
     @NSManaged var startDate: Date
-    @NSManaged var endDate: Date
+    @NSManaged var endDate: Date?
     @NSManaged var heartRate:HeartRate
     @NSManaged var paceZone:PaceZone
-    @NSManaged var heartbeat:[HeartBeat]?
+    @NSManaged var heartbeat:[DiscreateHKQuanty]?
+    @NSManaged var power:[DiscreateHKQuanty]?
+    @NSManaged var steps:[CumulativeQuantity]?
     @NSManaged var routes:[RouteNode]?
     @NSManaged var source: String
     @NSManaged var distance:NSNumber?

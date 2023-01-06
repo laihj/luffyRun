@@ -8,31 +8,31 @@
 import Foundation
 import HealthKit
 
-final class HeartBeat:NSObject,NSCoding,DiscreateHKQuanty {
+final class DiscreateHKQuanty:NSObject,NSCoding {
 
-    var heart: Int16
+    var value: Double
     var date: Date
     
-    init(heart: Int16, date: Date) {
-        self.heart = heart
+    init(value: Double, date: Date) {
+        self.value = value
         self.date = date
     }
     
     convenience init(sample:HKDiscreteQuantitySample, unit:HKUnit) {
-        let heart = sample.quantity.doubleValue(for: unit)
+        let value = sample.quantity.doubleValue(for: unit)
         let date = sample.startDate
-        self.init(heart: Int16(heart), date: date)
+        self.init(value: value, date: date)
     }
     
     required convenience init?(coder: NSCoder) {
-        let heart = coder.decodeObject(forKey: "heart") as! Int16
+        let value = coder.decodeObject(forKey: "value") as! Double
         let date = coder.decodeObject(forKey: "date") as! Date
-        self.init(heart: heart, date: date)
+        self.init(value: value, date: date)
     }
     
     
     func encode(with coder: NSCoder) {
-        coder.encode(heart,forKey: "heart")
+        coder.encode(value,forKey: "value")
         coder.encode(date,forKey: "date")
     }
 }

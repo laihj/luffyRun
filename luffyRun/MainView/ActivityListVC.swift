@@ -57,9 +57,9 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
-            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
-        }
+//        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
+//        }
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
@@ -69,48 +69,96 @@ class ActivityListVC: UIViewController {
                 if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
                     continue
                 }
+                
                 let group = DispatchGroup()
                 
-                var retHeartbeat = Array<HeartBeat>()
-                var retRoutes = Array<RouteNode>()
-                
+                var retHeartbeat = Array<DiscreateHKQuanty>()
                 group.enter()
-                workout.heartRate() { heartbeat in
+                let heartUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+                workout.discreateQuanty(identifier: .heartRate, unit: heartUnit) { heartbeat in
                     group.leave()
                     retHeartbeat = heartbeat
                 }
                 
+                var retRoutes = Array<RouteNode>()
                 group.enter()
                 workout.route() { routes in
                     group.leave()
                     retRoutes = routes
                 }
                 
+                var retSteps = Array<CumulativeQuantity>()
 //                group.enter()
-//                workout.stepCount { steps in
+//                workout.cumulativeQuantity(identifier: .stepCount, unit: HKUnit.count()) { steps in
 //                    group.leave()
+//                    retSteps = steps
 //                }
 //
+                var retPower = Array<DiscreateHKQuanty>()
 //                group.enter()
-//                workout.power { power in
+//                workout.discreateQuanty(identifier: .runningPower, unit: HKUnit.watt()) { power in
 //                    group.leave()
+//                    retPower = power
 //                }
                 
                 group.notify(queue: .main) {
-                    self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes)
+                    self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes,power: retPower, steps: retSteps)
                 }
             }
 
             
-            DispatchQueue.main.async {
-                self.tableView?.reloadData()
-                self.refreshHeaderView()
+//            DispatchQueue.main.async {
+//                self.tableView?.reloadData()
+//                self.refreshHeaderView()
+//            }
+        }
+    }
+    
+    func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
+        self.context!.performChanges {
+            let record = Record.insert(into: self.context!)
+            record.startDate = workout.startDate
+            record.endDate = workout.endDate
+
+            if let distance = workout.sumQuantityFor(.distanceWalkingRunning, unit: HKUnit.meter()) {
+                record.distance = NSNumber(value:distance)
             }
+            
+            if let step = workout.sumQuantityFor(.stepCount, unit: HKUnit.count()) {
+                record.step = NSNumber(value: step)
+            }
+            
+            if let kCal = workout.sumQuantityFor(.activeEnergyBurned, unit: HKUnit.kilocalorie()) {
+                record.kCal = NSNumber(value: kCal)
+            }
+            
+            if let averageSLength = workout.averageQuantityFor(.runningStrideLength, unit: HKUnit.meter()) {
+                record.averageSLength = NSNumber(value: averageSLength)
+            }
+            
+            if let averageRunningSpeed = workout.averageQuantityFor(.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute())) {
+                let avaragePace = 1.0/(averageRunningSpeed/1000.0)
+                record.avaragePace = NSNumber(value: avaragePace)
+            }
+            
+            if let avarageHeart = workout.averageQuantityFor(.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute())) {
+                record.avarageHeart = NSNumber(value: avarageHeart)
+            }
+            
+            if let avarageWatt = workout.averageQuantityFor(.runningPower, unit: HKUnit.watt()) {
+                record.avarageWatt = NSNumber(value: avarageWatt)
+            }
+            
+            record.heartbeat = heartbeat
+            record.routes = routes
+            record.power = power
+            record.steps = steps
+            let sourceName = workout.sourceRevision.source.name
+            record.source = sourceName
         }
     }
     
     func refreshHeaderView() {
-        
         let endDate = Date()
         let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
         let startDate = middleDate.addingTimeInterval(-60 * 24 * 3600)
@@ -129,49 +177,6 @@ class ActivityListVC: UIViewController {
                 return record.startDate < middleDate
             }
             self.headerView?.lastStats = headerViewData(records: lastData);
-        }
-    }
-    
-    
-    func saveRecord(workout:HKWorkout, heartbeat:[HeartBeat], routes:[RouteNode]) {
-        self.context!.performChanges {
-            let record = Record.insert(into: self.context!)
-            record.startDate = workout.startDate
-            record.endDate = workout.endDate
-
-            if let distance = workout.sumQuantityFor(HKQuantityTypeIdentifier.distanceWalkingRunning, unit: HKUnit.meter()) {
-                record.distance = NSNumber(value:distance)
-            }
-            
-            if let step = workout.sumQuantityFor(HKQuantityTypeIdentifier.stepCount, unit: HKUnit.count()) {
-                record.step = NSNumber(value: step)
-            }
-            
-            if let kCal = workout.sumQuantityFor(HKQuantityTypeIdentifier.activeEnergyBurned, unit: HKUnit.kilocalorie()) {
-                record.kCal = NSNumber(value: kCal)
-            }
-            
-            if let averageSLength = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningStrideLength, unit: HKUnit.meter()) {
-                record.averageSLength = NSNumber(value: averageSLength)
-            }
-            
-            if let averageRunningSpeed = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute())) {
-                let avaragePace = 1.0/(averageRunningSpeed/1000.0)
-                record.avaragePace = NSNumber(value: avaragePace)
-            }
-            
-            if let avarageHeart = workout.averageQuantityFor(HKQuantityTypeIdentifier.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute())) {
-                record.avarageHeart = NSNumber(value: avarageHeart)
-            }
-            
-            if let avarageWatt = workout.averageQuantityFor(HKQuantityTypeIdentifier.runningPower, unit: HKUnit.watt()) {
-                record.avarageWatt = NSNumber(value: avarageWatt)
-            }
-            
-            record.heartbeat = heartbeat
-            record.routes = routes
-            let sourceName = workout.sourceRevision.source.name
-            record.source = sourceName
         }
     }
 }

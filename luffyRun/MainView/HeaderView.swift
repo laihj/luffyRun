@@ -29,12 +29,22 @@ struct headerViewData {
         self.distance = String(format: "%.2fkm", distance/1000.0)
         
         let duration = records.reduce(0.0) { result, record in
-            return result + (record.endDate.timeIntervalSince1970 - record.startDate.timeIntervalSince1970)
+            if let endDate = record.endDate {
+                return result + (endDate.timeIntervalSince1970 - record.startDate.timeIntervalSince1970)
+            } else {
+                return result + 0.0
+            }
+            
         }
     
         self.duration = formatTime(seconds: duration)
-        let averagePace = (duration/60.0) / (distance/1000.0)
-        self.pace = formatPace(minite: averagePace)
+        if(distance > 0) {
+            let averagePace = (duration/60.0) / (distance/1000.0)
+            self.pace = formatPace(minite: averagePace)
+        } else {
+            self.pace = formatPace(minite: 0)
+        }
+
     }
 }
 

@@ -39,11 +39,12 @@
 		38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BC3E20295B0243008A5DFE /* PAirSandbox.swift */; };
 		38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD662959795B00D11B09 /* HeartRate.swift */; };
 		38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7CD6829598E0200D11B09 /* PaceZone.swift */; };
-		38E45AA0295D792100738F9B /* HeartBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45A9F295D792100738F9B /* HeartBeat.swift */; };
+		38E45AA0295D792100738F9B /* DiscreateHKQuanty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45A9F295D792100738F9B /* DiscreateHKQuanty.swift */; };
 		38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA1295D8C5100738F9B /* RouteNode.swift */; };
 		38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */; };
 		38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA729666E0D00738F9B /* WorkoutExt.swift */; };
 		38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA92966C2AE00738F9B /* HeaderView.swift */; };
+		38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,11 +108,12 @@
 		38BC3E20295B0243008A5DFE /* PAirSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAirSandbox.swift; sourceTree = "<group>"; };
 		38D7CD662959795B00D11B09 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
 		38D7CD6829598E0200D11B09 /* PaceZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceZone.swift; sourceTree = "<group>"; };
-		38E45A9F295D792100738F9B /* HeartBeat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBeat.swift; sourceTree = "<group>"; };
+		38E45A9F295D792100738F9B /* DiscreateHKQuanty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscreateHKQuanty.swift; sourceTree = "<group>"; };
 		38E45AA1295D8C5100738F9B /* RouteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNode.swift; sourceTree = "<group>"; };
 		38E45AA3295ECBE800738F9B /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
 		38E45AA729666E0D00738F9B /* WorkoutExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExt.swift; sourceTree = "<group>"; };
 		38E45AA92966C2AE00738F9B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeQuantity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +141,9 @@
 				38A65094294B1D9700239603 /* Util.swift */,
 				38D7CD662959795B00D11B09 /* HeartRate.swift */,
 				38D7CD6829598E0200D11B09 /* PaceZone.swift */,
-				38E45A9F295D792100738F9B /* HeartBeat.swift */,
+				38E45A9F295D792100738F9B /* DiscreateHKQuanty.swift */,
 				38E45AA1295D8C5100738F9B /* RouteNode.swift */,
+				38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -361,7 +364,8 @@
 				38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */,
 				38AECFF928DC5D8800C2BF8A /* ActivityListVC.swift in Sources */,
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,
-				38E45AA0295D792100738F9B /* HeartBeat.swift in Sources */,
+				38E45AA0295D792100738F9B /* DiscreateHKQuanty.swift in Sources */,
+				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,
 				38A65095294B1D9700239603 /* Util.swift in Sources */,

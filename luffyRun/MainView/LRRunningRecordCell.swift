@@ -58,8 +58,10 @@ extension LRRunningRecordCell {
             pace?.text = formatPace(minite: aPace.doubleValue)
         }
         
-        let formatTime = formatTime(seconds: record.endDate.timeIntervalSince1970 - record.startDate.timeIntervalSince1970)
+        if let endDate = record.endDate {
+            let formatTime = formatTime(seconds: endDate.timeIntervalSince1970 - record.startDate.timeIntervalSince1970)
+            time?.text = "\(dateFormatter.string(from: record.startDate)) - \(formatTime)"
+        }
         
-        time?.text = "\(dateFormatter.string(from: record.startDate)) - \(formatTime)"
     }
 }
