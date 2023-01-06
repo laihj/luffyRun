@@ -26,10 +26,6 @@ class ActivityListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        context =  appDelegate.persistentContainer.viewContext
-        // Do any additional setup after loading the view.
-
     }
     
     fileprivate var dataSource: TableViewDataSource<ActivityListVC>!
@@ -57,9 +53,9 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-//        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
-//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate.timeIntervalSince1970 + 1)
-//        }
+        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+        }
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
@@ -88,18 +84,18 @@ class ActivityListVC: UIViewController {
                 }
                 
                 var retSteps = Array<CumulativeQuantity>()
-//                group.enter()
-//                workout.cumulativeQuantity(identifier: .stepCount, unit: HKUnit.count()) { steps in
-//                    group.leave()
-//                    retSteps = steps
-//                }
-//
+                group.enter()
+                workout.cumulativeQuantity(identifier: .stepCount, unit: HKUnit.count()) { steps in
+                    group.leave()
+                    retSteps = steps
+                }
+
                 var retPower = Array<DiscreateHKQuanty>()
-//                group.enter()
-//                workout.discreateQuanty(identifier: .runningPower, unit: HKUnit.watt()) { power in
-//                    group.leave()
-//                    retPower = power
-//                }
+                group.enter()
+                workout.discreateQuanty(identifier: .runningPower, unit: HKUnit.watt()) { power in
+                    group.leave()
+                    retPower = power
+                }
                 
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes,power: retPower, steps: retSteps)
@@ -107,10 +103,10 @@ class ActivityListVC: UIViewController {
             }
 
             
-//            DispatchQueue.main.async {
-//                self.tableView?.reloadData()
-//                self.refreshHeaderView()
-//            }
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+                
+            }
         }
     }
     

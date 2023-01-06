@@ -43,7 +43,7 @@ func loadPrancerciseWorkouts(startDate:Date,completion: @escaping ([HKWorkout]?,
     
     let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,datePredication])
 //    HKObjectQueryNoLimit
-    let query = HKSampleQuery(sampleType: .workoutType(), predicate: compond, limit: 1, sortDescriptors: [sortDescriptor]) { query, samples, error in
+    let query = HKSampleQuery(sampleType: .workoutType(), predicate: compond, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { query, samples, error in
         let samples = samples as? [HKWorkout]
         
         completion(samples, nil)

@@ -25,7 +25,7 @@ final class DiscreateHKQuanty:NSObject,NSCoding {
     }
     
     required convenience init?(coder: NSCoder) {
-        let value = coder.decodeObject(forKey: "value") as! Double
+        let value = coder.decodeDouble(forKey: "value")
         let date = coder.decodeObject(forKey: "date") as! Date
         self.init(value: value, date: date)
     }

@@ -36,7 +36,10 @@ class TableViewDataSource<Delegate:TableViewDataSourceDelegate>:NSObject,UITable
         tableView.reloadData()
     }
     
-    func objectAtIndexPath(_ indexPath: IndexPath) -> Object {
+    func objectAtIndexPath(_ indexPath: IndexPath) -> Object? {
+        if fetchedResultsController.fetchedObjects?.count == 0 {
+            return nil
+        }
         return fetchedResultsController.object(at: indexPath)
     }
     
@@ -70,9 +73,11 @@ class TableViewDataSource<Delegate:TableViewDataSourceDelegate>:NSObject,UITable
             tableView.insertRows(at: [indexPath], with: .fade)
         case .update:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
-            let object = objectAtIndexPath(indexPath)
-            guard let cell = tableView.cellForRow(at: indexPath) as? Cell else { break }
-            delegate.configure(cell, for: object)
+            if let object = objectAtIndexPath(indexPath) {
+                guard let cell = tableView.cellForRow(at: indexPath) as? Cell else { break }
+                delegate.configure(cell, for: object)
+            }
+
         case .move:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
             guard let newIndexPath = newIndexPath else { fatalError("New index path should be not nil") }

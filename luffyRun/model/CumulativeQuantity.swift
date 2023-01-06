@@ -28,7 +28,7 @@ final class CumulativeQuantity:NSObject,NSCoding {
     }
     
     required convenience init?(coder: NSCoder) {
-        let value = coder.decodeObject(forKey: "value") as! Double
+        let value = coder.decodeDouble(forKey: "value")
         let startDate = coder.decodeObject(forKey: "startDate") as! Date
         let endDate = coder.decodeObject(forKey: "endDate") as! Date
         self.init(value: value, startDate: startDate, endDate: endDate)
