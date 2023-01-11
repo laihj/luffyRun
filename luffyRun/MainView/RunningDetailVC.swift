@@ -7,12 +7,14 @@
 
 import UIKit
 import HealthKit
+import Charts
+import SnapKit
 
 class RunningDetailVC: UIViewController {
     
-    var workout:HKWorkout?
-    
     fileprivate var observer: ManagedObjectObserver?
+    
+    lazy var label = UILabel()
     
     var record:Record! {
         didSet {
@@ -27,8 +29,21 @@ class RunningDetailVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
-
+        self.setupViews()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupViews() {
+        label = UILabel()
+        self.view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.center.equalTo(self.view)
+        }
+        self.updateViews()
+    }
+    
+    func updateViews () {
+        label.text = record.source
     }
     
     @objc

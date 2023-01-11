@@ -60,6 +60,20 @@ class HeaderView: UIView {
     @IBOutlet var lastDuration:UILabel?
     @IBOutlet var lastPace:UILabel?
     
+    lazy var runningView = RunningView(frame:CGRect.zero)
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.addSubview(runningView)
+        runningView.snp.makeConstraints { make in
+            make.top.equalTo(20)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+            make.bottom.equalTo(-8)
+        }
+    }
+
+    
     var stats:headerViewData? {
         willSet(newStats) {
             if let stats = newStats {
@@ -78,6 +92,14 @@ class HeaderView: UIView {
                 lastDistance?.text = "/\(lastStats.distance)"
                 lastDuration?.text = "/\(lastStats.duration)"
                 lastPace?.text = "/\(lastStats.pace)"
+            }
+        }
+    }
+    
+    var dayRunningDatas:[DayRunningData]? {
+        willSet(newDatas) {
+            if let datas = newDatas {
+                runningView.dayRunningDatas = datas
             }
         }
     }

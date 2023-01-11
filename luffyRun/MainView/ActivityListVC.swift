@@ -53,7 +53,7 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) as? Record {
+        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
             startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
         }
         
@@ -155,9 +155,10 @@ class ActivityListVC: UIViewController {
     }
     
     func refreshHeaderView() {
-        let endDate = Date()
+        let endDate = Date().endOfWeek.addOneDay
+        
         let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
-        let startDate = middleDate.addingTimeInterval(-60 * 24 * 3600)
+        let startDate = endDate.addingTimeInterval(-84 * 24 * 3600)
         let request = Record.sortedFetchRequest
         let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
         request.predicate = predicate
@@ -167,19 +168,34 @@ class ActivityListVC: UIViewController {
                 return record.startDate >= middleDate
             }
             
+            let dayDurationInSeconds: TimeInterval = 60*60*24
+            var dayRunningDatas = [DayRunningData]()
+            for date in stride(from: startDate, to: endDate, by: dayDurationInSeconds) {
+                let dayEndDate = date.addOneDay
+                let dayData = records.filter { record in
+                    return record.startDate > date && record.startDate <= dayEndDate
+                }
+                
+                let dayRunningData = DayRunningData(records: dayData, date: dayEndDate)
+                dayRunningDatas.append(dayRunningData)
+            }
+            
+            self.headerView?.dayRunningDatas = dayRunningDatas
+            
+            
             self.headerView?.stats = headerViewData(records: currentData);
             
-            let lastData = records.filter { record in
-                return record.startDate < middleDate
-            }
-            self.headerView?.lastStats = headerViewData(records: lastData);
+//            let lastData = records.filter { record in
+//                return record.startDate < middleDate
+//            }
+//            self.headerView?.lastStats = headerViewData(records: lastData);
         }
     }
 }
 
 extension ActivityListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let record = dataSource.objectAtIndexPath(indexPath) as? Record else { fatalError("no record")}
+        guard let record = dataSource.objectAtIndexPath(indexPath) else { fatalError("no record")}
         let runningDetail = RunningDetailVC.init()
         runningDetail.record = record
         self.navigationController?.pushViewController(runningDetail, animated: true)
@@ -193,3 +209,56 @@ extension ActivityListVC: TableViewDataSourceDelegate {
         cell.configure(for: object)
     }
 }
+
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+
+    var endOfDay: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)!
+    }
+    
+    var startOfWeek: Date {
+        Calendar.current.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
+    }
+    
+    var endOfWeek: Date {
+        var components = DateComponents()
+        components.weekOfYear = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfWeek)!
+    }
+    
+    var addOneDay:Date {
+        let date = self.addingTimeInterval(24 * 3600)
+        return date
+    }
+    
+    var startOfMonth: Date {
+        let components = Calendar.current.dateComponents([.year, .month], from: startOfDay)
+        return Calendar.current.date(from: components)!
+    }
+
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)!
+    }
+    
+}
+
+//extension Date: Strideable {
+//    public func distance(to other: Date) -> TimeInterval {
+//        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
+//    }
+//
+//    public func advanced(by n: TimeInterval) -> Date {
+//        return self + n
+//    }
+//}
