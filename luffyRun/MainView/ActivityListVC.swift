@@ -251,6 +251,18 @@ extension Date {
         return Calendar.current.date(byAdding: components, to: startOfMonth)!
     }
     
+    func isSameDay(date: Date) -> Bool {
+        let comp1 = Calendar.current.dateComponents([.year,.month,.day], from: self)
+        let comp2 = Calendar.current.dateComponents([.year,.month,.day], from: date)
+        if comp1.day == comp2.day &&
+            comp1.month == comp2.month &&
+            comp1.year == comp2.year {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 //extension Date: Strideable {

@@ -29,10 +29,11 @@ class RunningView: UIView {
     var dayRunningDatas:[DayRunningData]? {
         willSet(newDatas) {
             if let datas = newDatas {
-                for (index, data) in datas.enumerated() {
-                    if data.distance > 0 {
-                        self.viewList[index].backgroundColor = .purple
+                for(data,view) in zip(datas, viewList) {
+                    if(data.distance > 0) {
+                        view.backgroundColor = .purple
                     }
+                    view.layer.borderWidth = data.date.isSameDay(date: Date()) ? 1 : 0.0
                 }
             }
         }
@@ -46,6 +47,8 @@ class RunningView: UIView {
             let littleView = UIView()
             littleView.backgroundColor = .lightGray.withAlphaComponent(0.4)
             littleView.layer.cornerRadius = 2.4
+            littleView.layer.borderWidth = 0.5
+            littleView.layer.borderColor = UIColor.red.cgColor
             littleView.layer.masksToBounds = true
             littleView.snp.makeConstraints { make in
                 make.width.equalTo(littleView.snp.height)
