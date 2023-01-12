@@ -158,7 +158,7 @@ class ActivityListVC: UIViewController {
         let endDate = Date().endOfWeek.addOneDay
         
         let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
-        let startDate = endDate.addingTimeInterval(-84 * 24 * 3600)
+        let startDate = endDate.addingTimeInterval(-18 * 7 * 24 * 3600)
         let request = Record.sortedFetchRequest
         let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
         request.predicate = predicate
@@ -252,15 +252,16 @@ extension Date {
     }
     
     func isSameDay(date: Date) -> Bool {
-        let comp1 = Calendar.current.dateComponents([.year,.month,.day], from: self)
-        let comp2 = Calendar.current.dateComponents([.year,.month,.day], from: date)
-        if comp1.day == comp2.day &&
-            comp1.month == comp2.month &&
-            comp1.year == comp2.year {
-            return true
-        } else {
-            return false
-        }
+        return Calendar.current.isDate(self, inSameDayAs: date)
+//        let comp1 = Calendar.current.dateComponents([.year,.month,.day], from: self)
+//        let comp2 = Calendar.current.dateComponents([.year,.month,.day], from: date)
+//        if comp1.day == comp2.day &&
+//            comp1.month == comp2.month &&
+//            comp1.year == comp2.year {
+//            return true
+//        } else {
+//            return false
+//        }
     }
     
 }

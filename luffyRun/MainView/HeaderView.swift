@@ -64,6 +64,7 @@ class HeaderView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .white
         self.addSubview(runningView)
         runningView.snp.makeConstraints { make in
             make.top.equalTo(20)

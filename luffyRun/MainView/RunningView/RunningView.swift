@@ -31,15 +31,16 @@ class RunningView: UIView {
             if let datas = newDatas {
                 for(data,view) in zip(datas, viewList) {
                     if(data.distance > 0) {
-                        view.backgroundColor = .purple
+                        view.backgroundColor = UIColor.mePurple.withAlphaComponent(0.5 + data.distance/20000.0)
                     }
+                    
                     view.layer.borderWidth = data.date.isSameDay(date: Date()) ? 1 : 0.0
                 }
             }
         }
     }
     
-    let column = 11
+    let column = 17
     
     lazy var viewList:[UIView] = {
         var list = [UIView]()
@@ -47,8 +48,7 @@ class RunningView: UIView {
             let littleView = UIView()
             littleView.backgroundColor = .lightGray.withAlphaComponent(0.4)
             littleView.layer.cornerRadius = 2.4
-            littleView.layer.borderWidth = 0.5
-            littleView.layer.borderColor = UIColor.red.cgColor
+            littleView.layer.borderColor = UIColor.mePurple.cgColor
             littleView.layer.masksToBounds = true
             littleView.snp.makeConstraints { make in
                 make.width.equalTo(littleView.snp.height)
@@ -74,7 +74,7 @@ class RunningView: UIView {
         outterStack.distribution = .equalSpacing
         self.addSubview(outterStack)
         outterStack.snp.makeConstraints { make in
-            make.right.top.bottom.equalTo(0)
+            make.left.right.top.bottom.equalTo(0)
         }
         
         for i in 0...column {
@@ -93,4 +93,28 @@ class RunningView: UIView {
     }
     
 
+}
+
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+    
+    class var mePurple: UIColor {
+        return UIColor(hexString: "#9460ee")
+    }
 }
