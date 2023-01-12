@@ -46,6 +46,7 @@
 		38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AA92966C2AE00738F9B /* HeaderView.swift */; };
 		38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */; };
 		38E45AAF296D65FF00738F9B /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AAE296D65FF00738F9B /* RunningView.swift */; };
+		38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E45AB0296FF83800738F9B /* SwiftChart.swift */; };
 		6C61350EA0DDEB4522706AFA /* Pods_luffyRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E46D8C7248442B1D56B73A /* Pods_luffyRun.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,7 @@
 		38E45AA92966C2AE00738F9B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeQuantity.swift; sourceTree = "<group>"; };
 		38E45AAE296D65FF00738F9B /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
+		38E45AB0296FF83800738F9B /* SwiftChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftChart.swift; sourceTree = "<group>"; };
 		DD4A6B81967E004F1AA3C7C6 /* Pods-luffyRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luffyRun.release.xcconfig"; path = "Target Support Files/Pods-luffyRun/Pods-luffyRun.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				38E45AAE296D65FF00738F9B /* RunningView.swift */,
+				38E45AB0296FF83800738F9B /* SwiftChart.swift */,
 			);
 			path = RunningView;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				38E45AAF296D65FF00738F9B /* RunningView.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
+				38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */,
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,
 				38A65095294B1D9700239603 /* Util.swift in Sources */,
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,

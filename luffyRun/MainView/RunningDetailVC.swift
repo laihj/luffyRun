@@ -9,10 +9,12 @@ import UIKit
 import HealthKit
 import Charts
 import SnapKit
+import SwiftUI
 
 class RunningDetailVC: UIViewController {
     
     fileprivate var observer: ManagedObjectObserver?
+    var barDatas:[BarData]?
     
     lazy var label = UILabel()
     
@@ -29,8 +31,42 @@ class RunningDetailVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
+        self.calHeartRate()
         self.setupViews()
+        
+        
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func calHeartRate() {
+        if let heartBeat = record.heartbeat {
+            var (zone5,zone4,zone3,zone2,zone1) = (0.0,0.0,0.0,0.0,0.0)
+            var allSecond = 0.0
+            for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
+                let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
+                let value = Int(current.value)
+                if value > record.heartRate.zone5 {
+                    zone5 += second
+                } else if value > record.heartRate.zone4 {
+                    zone4 += second
+                } else if value > record.heartRate.zone3 {
+                    zone3 += second
+                } else if value > record.heartRate.zone2 {
+                    zone2 += second
+                } else {
+                    zone1 += second
+                }
+                allSecond += second
+            }
+            barDatas = [
+                BarData(name: "zone5", time: zone5/allSecond * 100, color: .purple),
+                BarData(name: "zone4", time: zone4/allSecond * 100, color: .red),
+                BarData(name: "zone3", time: zone3/allSecond * 100, color: .blue),
+                BarData(name: "zone2", time: zone2/allSecond * 100, color: .yellow),
+                BarData(name: "zone1", time: zone1/allSecond * 100, color: .green)
+            ]
+        }
     }
     
     func setupViews() {
@@ -39,7 +75,21 @@ class RunningDetailVC: UIViewController {
         label.snp.makeConstraints { make in
             make.center.equalTo(self.view)
         }
+        
+        let chart = SwiftChart(barDatas:barDatas)
+        let hostingContrller = UIHostingController(rootView:chart)
+        self.addChild(hostingContrller)
+        self.view.addSubview(hostingContrller.view)
+        hostingContrller.view.snp.makeConstraints { make in
+            make.center.equalTo(self.view)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
+        
+        chart.barDatas = barDatas
+        
         self.updateViews()
+        
     }
     
     func updateViews () {
