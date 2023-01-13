@@ -124,8 +124,9 @@ class ActivityListVC: UIViewController {
                 record.step = NSNumber(value: step)
             }
             
-            if let kCal = workout.sumQuantityFor(.activeEnergyBurned, unit: HKUnit.kilocalorie()) {
-                record.kCal = NSNumber(value: kCal)
+            if let kCal = workout.sumQuantityFor(.activeEnergyBurned, unit: HKUnit.kilocalorie()),
+                                                 let nkCal = workout.sumQuantityFor(.basalEnergyBurned, unit: HKUnit.kilocalorie()) {
+                record.kCal = NSNumber(value: kCal + nkCal)
             }
             
             if let averageSLength = workout.averageQuantityFor(.runningStrideLength, unit: HKUnit.meter()) {

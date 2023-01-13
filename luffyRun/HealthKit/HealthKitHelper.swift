@@ -20,7 +20,8 @@ func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Void) {
                                                     HKSeriesType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
                                                     HKQuantityType.quantityType(forIdentifier: .heartRate)!,
                                                     HKQuantityType.quantityType(forIdentifier: .stepCount)!,
-                                                    HKQuantityType.quantityType(forIdentifier: .runningPower)!]
+                                                    HKQuantityType.quantityType(forIdentifier: .runningPower)!,
+                                                    HKQuantityType.quantityType(forIdentifier: .runningSpeed)!]
     
     let healthKitTypesToRead: Set<HKSampleType> = [HKObjectType.workoutType(),
                                                    HKSeriesType.workoutRoute(),
@@ -29,7 +30,8 @@ func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Void) {
                                                    HKSeriesType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
                                                    HKQuantityType.quantityType(forIdentifier: .heartRate)!,
                                                    HKQuantityType.quantityType(forIdentifier: .stepCount)!,
-                                                   HKQuantityType.quantityType(forIdentifier: .runningPower)!]
+                                                   HKQuantityType.quantityType(forIdentifier: .runningPower)!,
+                                                   HKQuantityType.quantityType(forIdentifier: .runningSpeed)!]
     
     HKHealthStore().requestAuthorization(toShare: healthKitTypesToRead, read: healthKitTypesToWrite) { (success, error) in
         completion(success, error)

@@ -16,8 +16,6 @@ class RunningDetailVC: UIViewController {
     fileprivate var observer: ManagedObjectObserver?
     var barDatas:[BarData]?
     
-    lazy var label = UILabel()
-    
     var record:Record! {
         didSet {
             observer = ManagedObjectObserver(object: record, changeHandler: { [weak self] type in
@@ -33,9 +31,7 @@ class RunningDetailVC: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
         self.calHeartRate()
         self.setupViews()
-        
-        
-        
+        self.calPace()
         // Do any additional setup after loading the view.
     }
     
@@ -46,13 +42,13 @@ class RunningDetailVC: UIViewController {
             for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
                 let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
                 let value = Int(current.value)
-                if value > record.heartRate.zone5 {
+                if value >= record.heartRate.zone5 {
                     zone5 += second
-                } else if value > record.heartRate.zone4 {
+                } else if value >= record.heartRate.zone4 {
                     zone4 += second
-                } else if value > record.heartRate.zone3 {
+                } else if value >= record.heartRate.zone3 {
                     zone3 += second
-                } else if value > record.heartRate.zone2 {
+                } else if value >= record.heartRate.zone2 {
                     zone2 += second
                 } else {
                     zone1 += second
@@ -60,28 +56,62 @@ class RunningDetailVC: UIViewController {
                 allSecond += second
             }
             barDatas = [
-                BarData(name: "zone5", time: zone5/allSecond * 100, color: .purple),
-                BarData(name: "zone4", time: zone4/allSecond * 100, color: .red),
-                BarData(name: "zone3", time: zone3/allSecond * 100, color: .blue),
-                BarData(name: "zone2", time: zone2/allSecond * 100, color: .yellow),
-                BarData(name: "zone1", time: zone1/allSecond * 100, color: .green)
+                BarData(name: ">\(record.heartRate.zone5)", time: zone5/allSecond * 100, color: .purple),
+                BarData(name: "\(record.heartRate.zone4)~\(record.heartRate.zone5)", time: zone4/allSecond * 100, color: .red),
+                BarData(name: "\(record.heartRate.zone3)~\(record.heartRate.zone4)", time: zone3/allSecond * 100, color: .blue),
+                BarData(name: "\(record.heartRate.zone2)~\(record.heartRate.zone3)", time: zone2/allSecond * 100, color: .yellow),
+                BarData(name: "<\(record.heartRate.zone2)", time: zone1/allSecond * 100, color: .green)
             ]
         }
     }
     
-    func setupViews() {
-        label = UILabel()
-        self.view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalTo(self.view)
+    func calPace() {
+        if let routes = record.routes {
+            var (zone5,zone4,zone3,zone2,zone1) = (0.0,0.0,0.0,0.0,0.0)
+            var allSecond = 0.0
+            
+            var route5s = [RouteNode]()
+            for (index,route) in routes.enumerated() {
+                if(index % 10 == 0) {
+                    route5s.append(route)
+                }
+            }
+
+            for (current,next) in zip(route5s,route5s.dropFirst()) {
+                let second = (next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970) / 60.0
+                let distance = current.location.distance(from: next.location) / 1000.0
+                let pace = second/distance
+                print(formatPace(minite: pace))
+//s                print(current.date)
+                
+                let value = 1.0/(current.location.speed * 60 / 1000)
+                print(current.location.speedAccuracy)
+                
+                
+                
+//                if value > record.heartRate.zone5 {
+//                    zone5 += second
+//                } else if value > record.heartRate.zone4 {
+//                    zone4 += second
+//                } else if value > record.heartRate.zone3 {
+//                    zone3 += second
+//                } else if value > record.heartRate.zone2 {
+//                    zone2 += second
+//                } else {
+//                    zone1 += second
+//                }
+                allSecond += second
+            }
         }
-        
-        let chart = SwiftChart(barDatas:barDatas)
+    }
+    
+    func setupViews() {
+        let chart = SwiftChart(record: record, barDatas:barDatas)
         let hostingContrller = UIHostingController(rootView:chart)
         self.addChild(hostingContrller)
         self.view.addSubview(hostingContrller.view)
         hostingContrller.view.snp.makeConstraints { make in
-            make.center.equalTo(self.view)
+            make.top.bottom.equalTo(0)
             make.left.equalTo(16)
             make.right.equalTo(-16)
         }
@@ -89,11 +119,9 @@ class RunningDetailVC: UIViewController {
         chart.barDatas = barDatas
         
         self.updateViews()
-        
     }
     
     func updateViews () {
-        label.text = record.source
     }
     
     @objc

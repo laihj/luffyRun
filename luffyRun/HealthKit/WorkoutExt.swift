@@ -17,7 +17,7 @@ extension HKWorkout {
         return value
     }
     
-    func averageQuantityFor(_ identifier:HKQuantityTypeIdentifier, unit:HKUnit) -> Double? {
+    func averageQuantityFor(_ identifier:HKQuantityTypeIdentifier, unit:HKUnit) -> Double?{
         let statistics = self.statistics(for: HKQuantityType(identifier))
         let quantity =  statistics?.averageQuantity()
         let value = quantity?.doubleValue(for: unit)
