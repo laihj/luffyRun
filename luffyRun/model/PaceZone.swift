@@ -26,12 +26,12 @@ final class PaceZone:NSManagedObject {
     static func lastedPaceZone(in context:NSManagedObjectContext) -> PaceZone? {
         guard let paceZone = fetch(in: context) else {
             let paceZone = PaceZone.insert(into: context)
-            paceZone.zone1 = 127
-            paceZone.zone2 = 148
-            paceZone.zone3 = 162
-            paceZone.zone4 = 167
-            paceZone.zone5 = 177
-            paceZone.zone6 = 255
+            paceZone.zone1 = 373
+            paceZone.zone2 = 345
+            paceZone.zone3 = 322
+            paceZone.zone4 = 300
+            paceZone.zone5 = 300
+            paceZone.zone6 = 120
             try! context.save()
             return paceZone
         }
@@ -43,6 +43,23 @@ final class PaceZone:NSManagedObject {
         request.fetchBatchSize = 1
         request.returnsObjectsAsFaults = false
         return try! context.fetch(request).first
+    }
+    
+    func formatZone(zone:Int) -> String {
+        switch(zone) {
+        case 5:
+            return "< \(formatPace(minite: Double(zone5)/60.0))"
+        case 4:
+            return "\(formatPace(minite: Double(zone3)/60.0))~\(formatPace(minite: Double(zone4)/60.0))"
+        case 3:
+            return "\(formatPace(minite: Double(zone2)/60.0))~\(formatPace(minite: Double(zone3)/60.0))"
+        case 2:
+            return "\(formatPace(minite: Double(zone1)/60.0))~\(formatPace(minite: Double(zone2)/60.0))"
+        case 1:
+            return "> \(formatPace(minite: Double(zone1)/60.0))"
+        default:
+            return ""
+        }
     }
 }
 

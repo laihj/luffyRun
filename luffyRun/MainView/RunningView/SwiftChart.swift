@@ -17,7 +17,6 @@ struct BarData:Identifiable {
 
 struct SwiftChart: View {
     var record:Record?
-    @State var barDatas:[BarData]?
     var body: some View {
         ScrollView {
             Spacer(minLength: 30)
@@ -127,15 +126,26 @@ struct SwiftChart: View {
                     Spacer()
                 }
                 Spacer(minLength: 10)
-                
-                Text("心率区间")
-                Chart() {
-                    ForEach(barDatas ?? [], id:\.id) { data in
-                        BarMark(x: .value("time", data.time),
-                                y: .value("name", data.name))
-                        .foregroundStyle(data.color)
-                    }
-                }.frame(height: 240)
+                Group{
+                    Text("心率区间")
+                    Chart() {
+                        ForEach(record?.heartRateChartData() ?? [], id:\.id) { data in
+                            BarMark(x: .value("time", data.time),
+                                    y: .value("name", data.name))
+                            .foregroundStyle(data.color)
+                        }
+                    }.frame(height: 240)
+                }
+                Group{
+                    Text("配速区间")
+                    Chart() {
+                        ForEach(record?.paceChartData() ?? [], id:\.id) { data in
+                            BarMark(x: .value("time", data.time),
+                                    y: .value("name", data.name))
+                            .foregroundStyle(data.color)
+                        }
+                    }.frame(height: 240)
+                }
             }
         }
     }
