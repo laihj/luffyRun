@@ -53,9 +53,9 @@ class ActivityListVC: UIViewController {
     
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -60 * 60 * 24 * 60)
-        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
-            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
-        }
+    //        if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
+    //            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+    //        }
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
@@ -115,7 +115,10 @@ class ActivityListVC: UIViewController {
             let record = Record.insert(into: self.context!)
             record.startDate = workout.startDate
             record.endDate = workout.endDate
-
+            let workoutEvent = workout.workoutEvents
+            for event in workoutEvent! {
+                print(event)
+            }
             if let distance = workout.sumQuantityFor(.distanceWalkingRunning, unit: HKUnit.meter()) {
                 record.distance = NSNumber(value:distance)
             }
@@ -133,17 +136,27 @@ class ActivityListVC: UIViewController {
                 record.averageSLength = NSNumber(value: averageSLength)
             }
             
-            if let averageRunningSpeed = workout.averageQuantityFor(.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute())) {
-                let avaragePace = 1.0/(averageRunningSpeed/1000.0)
+            if let (minSpeed,averageSpeed,maxSpeed) = workout.quantityFor(.runningSpeed, unit: HKUnit.meter().unitDivided(by:HKUnit.minute())) {
+                let minPace = 1.0/(minSpeed/1000.0)
+                record.minPace = NSNumber(value: minPace)
+                
+                let avaragePace = 1.0/(averageSpeed/1000.0)
                 record.avaragePace = NSNumber(value: avaragePace)
+                
+                let maxPace = 1.0/(maxSpeed/1000.0)
+                record.maxPace = NSNumber(value: maxPace)
             }
             
-            if let avarageHeart = workout.averageQuantityFor(.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute())) {
-                record.avarageHeart = NSNumber(value: avarageHeart)
+            if let (minHeart,averageHeart,maxHeart) = workout.quantityFor(.heartRate, unit: HKUnit.count().unitDivided(by: HKUnit.minute())) {
+                record.minHeart = NSNumber(value: minHeart)
+                record.avarageHeart = NSNumber(value: averageHeart)
+                record.maxHeart = NSNumber(value: maxHeart)
             }
             
-            if let avarageWatt = workout.averageQuantityFor(.runningPower, unit: HKUnit.watt()) {
-                record.avarageWatt = NSNumber(value: avarageWatt)
+            if let (minWatt,averageWatt,maxWatt) = workout.quantityFor(.runningPower, unit: HKUnit.watt()) {
+                record.minWatt = NSNumber(value: minWatt)
+                record.avarageWatt = NSNumber(value: averageWatt)
+                record.maxWatt = NSNumber(value: maxWatt)
             }
             
             record.heartbeat = heartbeat
@@ -254,25 +267,6 @@ extension Date {
     
     func isSameDay(date: Date) -> Bool {
         return Calendar.current.isDate(self, inSameDayAs: date)
-//        let comp1 = Calendar.current.dateComponents([.year,.month,.day], from: self)
-//        let comp2 = Calendar.current.dateComponents([.year,.month,.day], from: date)
-//        if comp1.day == comp2.day &&
-//            comp1.month == comp2.month &&
-//            comp1.year == comp2.year {
-//            return true
-//        } else {
-//            return false
-//        }
     }
     
 }
-
-//extension Date: Strideable {
-//    public func distance(to other: Date) -> TimeInterval {
-//        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
-//    }
-//
-//    public func advanced(by n: TimeInterval) -> Date {
-//        return self + n
-//    }
-//}

@@ -22,9 +22,18 @@ final class Record:NSManagedObject {
     @NSManaged var step:NSNumber?
     @NSManaged var kCal:NSNumber?
     @NSManaged var averageSLength:NSNumber?
+    
+    @NSManaged var minPace:NSNumber?
+    @NSManaged var minHeart:NSNumber?
+    @NSManaged var minWatt:NSNumber?
+    
     @NSManaged var avaragePace:NSNumber?
     @NSManaged var avarageHeart:NSNumber?
     @NSManaged var avarageWatt:NSNumber?
+    
+    @NSManaged var maxPace:NSNumber?
+    @NSManaged var maxHeart:NSNumber?
+    @NSManaged var maxWatt:NSNumber?
     
     static func insert(into context:NSManagedObjectContext) -> Record {
         let record:Record = context.insertObject()

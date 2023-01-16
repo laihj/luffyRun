@@ -24,6 +24,20 @@ extension HKWorkout {
         return value
     }
     
+    func quantityFor(_ identifier:HKQuantityTypeIdentifier, unit:HKUnit) -> (Double,Double,Double)? {
+        let statistics = self.statistics(for: HKQuantityType(identifier))
+        let minQuantity = statistics?.minimumQuantity()
+        let minValue = minQuantity?.doubleValue(for: unit)
+        
+        let quantity =  statistics?.averageQuantity()
+        let avgValue = quantity?.doubleValue(for: unit)
+        
+        let maxQuantity = statistics?.maximumQuantity()
+        let maxValue = maxQuantity?.doubleValue(for: unit)
+        
+        return (minValue ?? 0.0, avgValue ?? 0.0,maxValue ?? 0.0)
+    }
+    
     func route(completion: @escaping ([RouteNode])->()) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: self)
 
