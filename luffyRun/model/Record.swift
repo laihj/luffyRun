@@ -54,26 +54,31 @@ extension Record: Managed {
 
 //for chart
 extension Record {
+    
+    func heartZoneSecond(heartBeat:[DiscreateHKQuanty]) -> (Double,Double,Double,Double,Double,Double) {
+        var (zone5,zone4,zone3,zone2,zone1,allSecond) = (0.0,0.0,0.0,0.0,0.0,0.0)
+        for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
+            let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
+            let value = Int(current.value)
+            if value >= heartRate.zone5 {
+                zone5 += second
+            } else if value >= heartRate.zone4 {
+                zone4 += second
+            } else if value >= heartRate.zone3 {
+                zone3 += second
+            } else if value >= heartRate.zone2 {
+                zone2 += second
+            } else {
+                zone1 += second
+            }
+            allSecond += second
+        }
+        return (zone5,zone4,zone3,zone2,zone1,allSecond)
+    }
+    
     func heartRateChartData() -> [BarData] {
         if let heartBeat = heartbeat {
-            var (zone5,zone4,zone3,zone2,zone1) = (0.0,0.0,0.0,0.0,0.0)
-            var allSecond = 0.0
-            for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
-                let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
-                let value = Int(current.value)
-                if value >= heartRate.zone5 {
-                    zone5 += second
-                } else if value >= heartRate.zone4 {
-                    zone4 += second
-                } else if value >= heartRate.zone3 {
-                    zone3 += second
-                } else if value >= heartRate.zone2 {
-                    zone2 += second
-                } else {
-                    zone1 += second
-                }
-                allSecond += second
-            }
+            let (zone5,zone4,zone3,zone2,zone1,allSecond) = heartZoneSecond(heartBeat:heartBeat)
             return [
                 BarData(name: ">\(heartRate.zone5)", time: zone5/allSecond * 100, color: .purple),
                 BarData(name: "\(heartRate.zone4)~\(heartRate.zone5)", time: zone4/allSecond * 100, color: .red),
@@ -85,33 +90,36 @@ extension Record {
         return []
     }
     
+    func paceZoneSecond(routes:[RouteNode]) -> (Double,Double,Double,Double,Double,Double) {
+        var (zone5,zone4,zone3,zone2,zone1,allSecond) = (0.0,0.0,0.0,0.0,0.0,0.0)
+        let filterdRoute = routes.filter { route in
+            let value = 1.0/(route.location.speed * 60 / 1000)
+            return value < (minPace?.doubleValue ?? 0.0) && value > (maxPace?.doubleValue ?? 0.0)
+        }
+
+        for (current,next) in zip(filterdRoute,filterdRoute.dropFirst()) {
+            let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
+            let value:Int16 = Int16(1.0/(current.location.speed / 1000))
+            
+            if value > paceZone.zone1 {
+                zone1 += second
+            } else if value > paceZone.zone2 {
+                zone2 += second
+            } else if value > paceZone.zone3 {
+                zone3 += second
+            } else if value > paceZone.zone4 {
+                zone4 += second
+            } else {
+                zone5 += second
+            }
+            allSecond += second
+        }
+        return (zone5,zone4,zone3,zone2,zone1,allSecond)
+    }
+    
     func paceChartData() -> [BarData] {
         if let routes = routes {
-            var (zone5,zone4,zone3,zone2,zone1) = (0.0,0.0,0.0,0.0,0.0)
-            var allSecond = 0.0
-            let filterdRoute = routes.filter { route in
-                let value = 1.0/(route.location.speed * 60 / 1000)
-                return value < (minPace?.doubleValue ?? 0.0) && value > (maxPace?.doubleValue ?? 0.0)
-            }
-
-            for (current,next) in zip(filterdRoute,filterdRoute.dropFirst()) {
-                let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
-                let value:Int16 = Int16(1.0/(current.location.speed / 1000))
-                
-                if value > paceZone.zone1 {
-                    zone1 += second
-                } else if value > paceZone.zone2 {
-                    zone2 += second
-                } else if value > paceZone.zone3 {
-                    zone3 += second
-                } else if value > paceZone.zone4 {
-                    zone4 += second
-                } else {
-                    zone5 += second
-                }
-                allSecond += second
-            }
-            
+            let (zone5,zone4,zone3,zone2,zone1,allSecond) = paceZoneSecond(routes:routes)
             return [
                 BarData(name: paceZone.formatZone(zone: 5), time: zone5/allSecond * 100, color: .purple),
                 BarData(name: paceZone.formatZone(zone: 4), time: zone4/allSecond * 100, color: .red),
