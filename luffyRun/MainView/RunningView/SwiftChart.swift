@@ -21,7 +21,7 @@ struct SwiftChart: View {
         ScrollView {
             Spacer(minLength: 30)
             VStack (spacing: 10){
-                HStack(spacing: 16) {
+                HStack(alignment: .center) {
                     let distanceKM = String(format: "%.2f", (record?.distance?.doubleValue ?? 0.00)/1000.0)
                     VStack(alignment: .trailing) {
                         Text("\(distanceKM)")
@@ -49,11 +49,16 @@ struct SwiftChart: View {
                             .font(.system(size:14))
                             .foregroundColor(.gray)
                     }
-                    Spacer()
                 }
-                Spacer(minLength: 10)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                )
                 //配速
-                Group {
+                VStack {
                     Text("配速")
                     HStack(spacing: 16) {
                         let minPace = formatPace(minite: (record?.minPace?.doubleValue ?? 0.00))
@@ -84,7 +89,6 @@ struct SwiftChart: View {
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
                         }
-                        Spacer()
                     }
                     Group{
                         Chart() {
@@ -96,9 +100,15 @@ struct SwiftChart: View {
                         }.frame(height: 240)
                     }
                     Spacer(minLength: 10)
-                }
+                }.padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                    )
                 //心率
-                Group {
+                VStack {
                     Text("心率")
                     HStack(spacing: 16) {
                         let minHeart = String(format: "%.0f", (record?.minHeart?.doubleValue ?? 0.00))
@@ -129,7 +139,6 @@ struct SwiftChart: View {
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
                         }
-                        Spacer()
                     }
                     Chart() {
                         ForEach(record?.heartRateChartData() ?? [], id:\.id) { data in
@@ -137,47 +146,64 @@ struct SwiftChart: View {
                                     y: .value("name", data.name))
                             .foregroundStyle(data.color)
                         }
-                    }.frame(height: 240)
+                    }
+                    .frame(height: 240)
                     Spacer(minLength: 10)
                 }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                )
                 
                 //功率
                 Group {
-                    Text("功率")
-                    HStack(spacing: 16) {
-                        let minWatt = String(format: "%.0f", (record?.minWatt?.doubleValue ?? 0.00))
-                        VStack(alignment: .trailing) {
-                            Text("\(minWatt)")
-                                .font(.system(size: 25,weight: .semibold))
-                            Text("最低")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
+                    VStack {
+                        Text("功率")
+                        Spacer(minLength: 8)
+                        HStack(spacing: 16) {
+                            let minWatt = String(format: "%.0f", (record?.minWatt?.doubleValue ?? 0.00))
+                            VStack(alignment: .trailing) {
+                                Text("\(minWatt)")
+                                    .font(.system(size: 25,weight: .semibold))
+                                Text("最低")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            
+                            let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
+                            VStack(alignment: .trailing) {
+                                Text("\(watt)")
+                                    .font(.system(size: 25,weight: .semibold))
+                                Text("平均")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            
+                            let maxWatt = String(format: "%.0f", (record?.maxWatt?.doubleValue ?? 0.00))
+                            VStack(alignment: .trailing) {
+                                Text("\(maxWatt)")
+                                    .font(.system(size: 25,weight: .semibold))
+                                Text("最高")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
                         }
-                        Spacer()
-                        
-                        let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
-                        VStack(alignment: .trailing) {
-                            Text("\(watt)")
-                                .font(.system(size: 25,weight: .semibold))
-                            Text("平均")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                        
-                        let maxWatt = String(format: "%.0f", (record?.maxWatt?.doubleValue ?? 0.00))
-                        VStack(alignment: .trailing) {
-                            Text("\(maxWatt)")
-                                .font(.system(size: 25,weight: .semibold))
-                            Text("最高")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
                     }
                 }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                )
                 Spacer(minLength: 10)
-            }
+            }.padding()
         }
     }
     

@@ -12,7 +12,6 @@ import SnapKit
 import SwiftUI
 
 class RunningDetailVC: UIViewController {
-    
     fileprivate var observer: ManagedObjectObserver?
     var barDatas:[BarData]?
     
@@ -41,9 +40,7 @@ class RunningDetailVC: UIViewController {
         self.addChild(hostingContrller)
         self.view.addSubview(hostingContrller.view)
         hostingContrller.view.snp.makeConstraints { make in
-            make.top.bottom.equalTo(0)
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
+            make.edges.equalTo(0)
         }
         
         self.updateViews()

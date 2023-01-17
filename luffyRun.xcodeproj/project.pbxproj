@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
+		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
+		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
 		38A6508B2949D66000239603 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508A2949D66000239603 /* Record.swift */; };
 		38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508C294AC6D000239603 /* CoreDataStack.swift */; };
@@ -78,6 +80,8 @@
 		01E46D8C7248442B1D56B73A /* Pods_luffyRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luffyRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBA97ECA8EFA25BDDE98D52 /* Pods-luffyRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luffyRun.debug.xcconfig"; path = "Target Support Files/Pods-luffyRun/Pods-luffyRun.debug.xcconfig"; sourceTree = "<group>"; };
 		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
+		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
 		38A6508A2949D66000239603 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		38A6508C294AC6D000239603 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -151,6 +155,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		383C38422976751F009EF315 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				383C38432976753A009EF315 /* MapView.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
 		38A650872949D4D100239603 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +173,7 @@
 				38E45A9F295D792100738F9B /* DiscreateHKQuanty.swift */,
 				38E45AA1295D8C5100738F9B /* RouteNode.swift */,
 				38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */,
+				383C38452976902F009EF315 /* Card.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -188,6 +201,7 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				383C38422976751F009EF315 /* MapView */,
 				38E45AA629666DF300738F9B /* HealthKit */,
 				38E45AA5296590E900738F9B /* CoreData */,
 				38A650872949D4D100239603 /* model */,
@@ -441,6 +455,7 @@
 				38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
 				38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */,
+				383C38462976902F009EF315 /* Card.swift in Sources */,
 				38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */,
 				38E45AA4295ECBE800738F9B /* HealthKitHelper.swift in Sources */,
 				38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */,
@@ -448,6 +463,7 @@
 				38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */,
 				38E45AA0295D792100738F9B /* DiscreateHKQuanty.swift in Sources */,
 				38E45AAF296D65FF00738F9B /* RunningView.swift in Sources */,
+				383C38442976753A009EF315 /* MapView.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */,
