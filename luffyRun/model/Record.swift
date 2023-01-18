@@ -55,6 +55,26 @@ extension Record: Managed {
 //for chart
 extension Record {
     
+    func cadence() -> (highest:Int, lowest:Int, average:Int) {
+        guard let steps = steps else {return (0,0,0)}
+        
+        let cadence:[Int] = steps.map { step in
+            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
+            print(second)
+            let count = Int(step.value / ((second) / 60.0) )
+            return count
+        }
+        
+        let allStep = steps.reduce(0.0) { result, step in
+            return result + step.value
+        }
+        let second = endDate!.timeIntervalSince1970 - startDate.timeIntervalSince1970
+        let count = Int(allStep / ((second) / 60.0) )
+        print(cadence)
+        return (0,0,0)
+        
+    }
+    
     func heartZoneSecond(heartBeat:[DiscreateHKQuanty]) -> (Double,Double,Double,Double,Double,Double) {
         var (zone5,zone4,zone3,zone2,zone1,allSecond) = (0.0,0.0,0.0,0.0,0.0,0.0)
         for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
@@ -80,11 +100,11 @@ extension Record {
         if let heartBeat = heartbeat {
             let (zone5,zone4,zone3,zone2,zone1,allSecond) = heartZoneSecond(heartBeat:heartBeat)
             return [
-                BarData(name: ">\(heartRate.zone5)", time: zone5/allSecond * 100, color: .purple),
-                BarData(name: "\(heartRate.zone4)~\(heartRate.zone5)", time: zone4/allSecond * 100, color: .red),
-                BarData(name: "\(heartRate.zone3)~\(heartRate.zone4)", time: zone3/allSecond * 100, color: .blue),
-                BarData(name: "\(heartRate.zone2)~\(heartRate.zone3)", time: zone2/allSecond * 100, color: .yellow),
-                BarData(name: "<\(heartRate.zone2)", time: zone1/allSecond * 100, color: .green)
+                BarData(name: "\(heartRate.zone5)", time: zone5/allSecond * 100, color: .purple),
+                BarData(name: "\(heartRate.zone4)", time: zone4/allSecond * 100, color: .red),
+                BarData(name: "\(heartRate.zone3)", time: zone3/allSecond * 100, color: .blue),
+                BarData(name: "\(heartRate.zone2)", time: zone2/allSecond * 100, color: .yellow),
+                BarData(name: "\(heartRate.zone1)", time: zone1/allSecond * 100, color: .green)
             ]
         }
         return []

@@ -51,6 +51,9 @@ extension HKWorkout {
 
             if let workoutroute = samples?.first {
                 let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
+                    if(locations?.count == 0) {
+                        fatalError("The initial query failed.")
+                    }
                     if let locas = locations {
                         for location in locas {
                             let route = RouteNode(location: location, date: location.timestamp)
@@ -62,6 +65,8 @@ extension HKWorkout {
                     }
                 }
                 HKHealthStore().execute(query)
+            } else {
+                print("not")
             }
         }
 
