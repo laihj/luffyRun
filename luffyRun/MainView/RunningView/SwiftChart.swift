@@ -60,6 +60,7 @@ struct SwiftChart: View {
                 //配速
                 VStack {
                     Text("配速")
+                        .font(.system(size:16))
                     HStack(spacing: 16) {
                         let minPace = formatPace(minite: (record?.minPace?.doubleValue ?? 0.00))
                         VStack(alignment: .trailing) {
@@ -128,6 +129,7 @@ struct SwiftChart: View {
                 //心率
                 VStack {
                     Text("心率")
+                        .font(.system(size:16))
                     HStack(spacing: 16) {
                         let minHeart = String(format: "%.0f", (record?.minHeart?.doubleValue ?? 0.00))
                         VStack(alignment: .trailing) {

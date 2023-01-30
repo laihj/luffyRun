@@ -49,7 +49,6 @@ extension Record: Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: #keyPath(startDate), ascending: false)]
     }
-    
 }
 
 //for chart
@@ -60,18 +59,46 @@ extension Record {
         
         let cadence:[Int] = steps.map { step in
             let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
+            let count = Int(step.value / ((second) / 60.0) )
+            return count
+        }
+        
+        var sumSteps = [CumulativeQuantity]()
+        for (index,_) in steps.enumerated() {
+            if index % 24 == 0 {
+                let slice = steps[index..<min((index+24),steps.count)]
+                if(slice.count < 10) {
+                    continue
+                }
+                let stepCount = slice.reduce(0.0) { result, step in
+                    return result + step.value
+                }
+
+                let step = CumulativeQuantity(value: stepCount, startDate: slice.first!.startDate, endDate: slice.last!.endDate)
+                sumSteps.append(step)
+            }
+        }
+        
+        let cadenceSum:[Int] = sumSteps.map { step in
+            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
             print(second)
             let count = Int(step.value / ((second) / 60.0) )
             return count
         }
+        print(cadenceSum)
         
         let allStep = steps.reduce(0.0) { result, step in
             return result + step.value
         }
         let second = endDate!.timeIntervalSince1970 - startDate.timeIntervalSince1970
         let count = Int(allStep / ((second) / 60.0) )
-        print(cadence)
-        return (0,0,0)
+        var highestCan = 50
+        var lowestCan = 500
+        _ = cadence.map { can in
+            highestCan = can > highestCan ? can : highestCan
+            lowestCan = can < lowestCan ? can : lowestCan
+        }
+                return (highestCan,lowestCan,count)
         
     }
     
@@ -149,5 +176,53 @@ extension Record {
             ]
         }
         return []
+    }
+    
+    func distance(from:Date, to:Date) -> Double {
+        guard let routeNodes = routes else { return 0.0 }
+        guard routeNodes.count > 0 else { return 0.0 }
+        
+        var firstNode:RouteNode?
+        var lastNode:RouteNode?
+        
+        for (current,next) in zip(routeNodes,routeNodes.dropFirst()) {
+            if(current.date < from && next.date >= from) {
+                firstNode = current
+            } else if(current.date < to && next.date >= to) {
+                lastNode = next
+            }
+        }
+        guard let first = firstNode, let last = lastNode else { return 0.0 }
+        guard first != lastNode else  { return 0.0}
+        
+        let firstIndex = routeNodes.firstIndex(of: first)!
+        let lastIndex = routeNodes.firstIndex(of: last)!
+        
+        
+        let slice = routeNodes[firstIndex...lastIndex]
+        
+        guard slice.count > 2 else { return 0.0 }
+        
+        var distance = 0.0
+
+        let firstTwo = slice.prefix(2)
+        let distanceSeg = firstTwo.last!.location.distance(from: firstTwo.first!.location)
+        let fullSecond = firstTwo.last!.date.timeIntervalSince(firstTwo.first!.date)
+        let startSecond = firstTwo.last!.date.timeIntervalSince(from)
+        let startSeg = distanceSeg * (startSecond/fullSecond)
+        distance += startSeg
+
+        for (current,next) in zip(slice.dropFirst().dropLast(2),slice.dropFirst(2)) {
+            distance += next.location.distance(from: current.location)
+        }
+        
+        let lastTwo = slice.suffix(2)
+        let distanceSegLast = lastTwo.last!.location.distance(from: lastTwo.first!.location)
+        let fullSecondLast = lastTwo.last!.date.timeIntervalSince(lastTwo.first!.date)
+        let lastSecond = to.timeIntervalSince(lastTwo.first!.date)
+        let endSeg = distanceSegLast * (lastSecond/fullSecondLast)
+        distance += endSeg
+        
+        return distance
     }
 }

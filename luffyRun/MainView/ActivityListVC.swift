@@ -104,10 +104,15 @@ class ActivityListVC: UIViewController {
 
             
             DispatchQueue.main.async {
-                self.tableView?.reloadData()
+                self.reloadData()
                 
             }
         }
+    }
+    
+    func reloadData() {
+        self.refreshHeaderView()
+        self.tableView?.reloadData()
     }
     
     func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
@@ -195,14 +200,7 @@ class ActivityListVC: UIViewController {
             }
             
             self.headerView?.dayRunningDatas = dayRunningDatas
-            
-            
             self.headerView?.stats = headerViewData(records: currentData);
-            
-//            let lastData = records.filter { record in
-//                return record.startDate < middleDate
-//            }
-//            self.headerView?.lastStats = headerViewData(records: lastData);
         }
     }
 }
