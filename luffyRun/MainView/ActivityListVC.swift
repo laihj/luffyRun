@@ -99,6 +99,7 @@ class ActivityListVC: UIViewController {
                 
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes,power: retPower, steps: retSteps)
+                    
                 }
             }
 
@@ -202,6 +203,13 @@ class ActivityListVC: UIViewController {
             self.headerView?.dayRunningDatas = dayRunningDatas
             self.headerView?.stats = headerViewData(records: currentData);
         }
+        let requestLastRecords = Record.sortedFetchRequest
+        requestLastRecords.returnsObjectsAsFaults = false
+        requestLastRecords.fetchLimit = 20
+        if let records = try? self.context!.fetch(request) {
+            self.headerView?.lastRecords = records
+        }
+
     }
 }
 

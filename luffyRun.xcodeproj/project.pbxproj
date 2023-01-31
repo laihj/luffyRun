@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
+		383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AA29890970005344AC /* HeartZonePaceStats.swift */; };
 		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
 		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
@@ -80,6 +81,7 @@
 		01E46D8C7248442B1D56B73A /* Pods_luffyRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luffyRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBA97ECA8EFA25BDDE98D52 /* Pods-luffyRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luffyRun.debug.xcconfig"; path = "Target Support Files/Pods-luffyRun/Pods-luffyRun.debug.xcconfig"; sourceTree = "<group>"; };
 		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
+		383941AA29890970005344AC /* HeartZonePaceStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartZonePaceStats.swift; sourceTree = "<group>"; };
 		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				38E45AAE296D65FF00738F9B /* RunningView.swift */,
 				38E45AB0296FF83800738F9B /* SwiftChart.swift */,
+				383941AA29890970005344AC /* HeartZonePaceStats.swift */,
 			);
 			path = RunningView;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				38E45AA0295D792100738F9B /* DiscreateHKQuanty.swift in Sources */,
 				38E45AAF296D65FF00738F9B /* RunningView.swift in Sources */,
 				383C38442976753A009EF315 /* MapView.swift in Sources */,
+				383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */,

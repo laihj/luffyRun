@@ -242,9 +242,7 @@ extension Record {
         return distance
     }
     
-    func zonePace() {
-        guard let heartBeat = heartbeat else { return }
-        var flag = heartBeat.first!
+    func zonePace() -> [Zone:ZonePace] {
         var zoneDict:[Zone:ZonePace] = [
             Zone.zone1:ZonePace(second:0.0, distance:0.0),
             Zone.zone2:ZonePace(second:0.0, distance:0.0),
@@ -252,14 +250,17 @@ extension Record {
             Zone.zone4:ZonePace(second:0.0, distance:0.0),
             Zone.zone5:ZonePace(second:0.0, distance:0.0)
         ]
+        guard let heartBeat = heartbeat else { return zoneDict }
+        
+        var flag = heartBeat.first!
         
         for (_,heart) in heartBeat.dropFirst().enumerated() {
-            print("\(heart.value) -- \(heartBeatZone(beat: heart))")
+//            print("\(heart.value) -- \(heartBeatZone(beat: heart))")
             if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
                 let zoneSecond = heart.date.timeIntervalSince(flag.date)
                 let distacne = distance(from: flag.date, to: heart.date)
                 let zone = heartBeatZone(beat: flag)
-                print("\(zone) -- \(zoneSecond) --\(distacne) --")
+//                print("\(zone) -- \(zoneSecond) --\(distacne) --")
                 zoneDict[zone]!.second += zoneSecond
                 zoneDict[zone]!.distance += distacne
                 flag = heart
@@ -270,14 +271,13 @@ extension Record {
             let zoneSecond = last.date.timeIntervalSince(flag.date)
             let distacne = distance(from: flag.date, to: last.date)
             let zone = heartBeatZone(beat: flag)
-            print("\(zone) -- \(zoneSecond) --\(distacne) --")
             zoneDict[zone]!.second += zoneSecond
             zoneDict[zone]!.distance += distacne
         }
-        print(zoneDict)
         zoneDict.forEach { zone,paceZone in
             print("\(zone) --- \(formatPace(minite: paceZone.paceMinite()))")
         }
+        return zoneDict
     }
     
     func heartBeatZone(beat:DiscreateHKQuanty) -> Zone {
