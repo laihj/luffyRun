@@ -254,18 +254,29 @@ extension Record {
         ]
         
         for (_,heart) in heartBeat.dropFirst().enumerated() {
+            print("\(heart.value) -- \(heartBeatZone(beat: heart))")
             if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
-                let zoneSecone = heart.date.timeIntervalSince(flag.date)
+                let zoneSecond = heart.date.timeIntervalSince(flag.date)
                 let distacne = distance(from: flag.date, to: heart.date)
                 let zone = heartBeatZone(beat: flag)
-                zoneDict[zone]!.second += zoneSecone
+                print("\(zone) -- \(zoneSecond) --\(distacne) --")
+                zoneDict[zone]!.second += zoneSecond
                 zoneDict[zone]!.distance += distacne
                 flag = heart
             }
         }
+        let last = heartBeat.last!
+        if(last != flag) {
+            let zoneSecond = last.date.timeIntervalSince(flag.date)
+            let distacne = distance(from: flag.date, to: last.date)
+            let zone = heartBeatZone(beat: flag)
+            print("\(zone) -- \(zoneSecond) --\(distacne) --")
+            zoneDict[zone]!.second += zoneSecond
+            zoneDict[zone]!.distance += distacne
+        }
         print(zoneDict)
         zoneDict.forEach { zone,paceZone in
-            print("\(zone) --- \(formatPace(minite: pace(second: paceZone.second, distance: paceZone.distance)))")
+            print("\(zone) --- \(formatPace(minite: paceZone.paceMinite()))")
         }
     }
     
@@ -292,5 +303,9 @@ struct ZonePace {
     init(second: Double, distance: Double) {
         self.second = second
         self.distance = distance
+    }
+
+    func paceMinite()-> Double {
+        return pace(second: second, distance: distance)
     }
 }
