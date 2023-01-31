@@ -8,6 +8,14 @@
 import Foundation
 import CoreData
 
+enum Zone {
+    case zone1,
+    zone2,
+    zone3,
+    zone4,
+    zone5
+}
+
 final class Record:NSManagedObject {
     @NSManaged var startDate: Date
     @NSManaged var endDate: Date?
@@ -106,7 +114,8 @@ extension Record {
         var (zone5,zone4,zone3,zone2,zone1,allSecond) = (0.0,0.0,0.0,0.0,0.0,0.0)
         for (current,next) in zip(heartBeat,heartBeat.dropFirst()) {
             let second = next.date.timeIntervalSince1970 -  current.date.timeIntervalSince1970
-            let value = Int(current.value)
+            let value = Int16(current.value)
+            
             if value >= heartRate.zone5 {
                 zone5 += second
             } else if value >= heartRate.zone4 {
@@ -192,8 +201,15 @@ extension Record {
                 lastNode = next
             }
         }
-        guard let first = firstNode, let last = lastNode else { return 0.0 }
-        guard first != lastNode else  { return 0.0}
+        
+        if firstNode == nil && lastNode == nil {
+            return 0.0
+        }
+        
+        let first = firstNode ?? routeNodes.first!
+        let last = lastNode ?? routeNodes.last!
+        
+        guard first != last else { return 0.0 }
         
         let firstIndex = routeNodes.firstIndex(of: first)!
         let lastIndex = routeNodes.firstIndex(of: last)!
@@ -224,5 +240,57 @@ extension Record {
         distance += endSeg
         
         return distance
+    }
+    
+    func zonePace() {
+        guard let heartBeat = heartbeat else { return }
+        var flag = heartBeat.first!
+        var zoneDict:[Zone:ZonePace] = [
+            Zone.zone1:ZonePace(second:0.0, distance:0.0),
+            Zone.zone2:ZonePace(second:0.0, distance:0.0),
+            Zone.zone3:ZonePace(second:0.0, distance:0.0),
+            Zone.zone4:ZonePace(second:0.0, distance:0.0),
+            Zone.zone5:ZonePace(second:0.0, distance:0.0)
+        ]
+        
+        for (_,heart) in heartBeat.dropFirst().enumerated() {
+            if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
+                let zoneSecone = heart.date.timeIntervalSince(flag.date)
+                let distacne = distance(from: flag.date, to: heart.date)
+                let zone = heartBeatZone(beat: flag)
+                zoneDict[zone]!.second += zoneSecone
+                zoneDict[zone]!.distance += distacne
+                flag = heart
+            }
+        }
+        print(zoneDict)
+        zoneDict.forEach { zone,paceZone in
+            print("\(zone) --- \(formatPace(minite: pace(second: paceZone.second, distance: paceZone.distance)))")
+        }
+    }
+    
+    func heartBeatZone(beat:DiscreateHKQuanty) -> Zone {
+        let value = Int16(beat.value)
+        if value >= heartRate.zone5 {
+            return .zone5
+        } else if value >= heartRate.zone4 {
+            return .zone4
+        } else if value >= heartRate.zone3 {
+            return .zone3
+        } else if value >= heartRate.zone2 {
+            return .zone2
+        } else {
+            return .zone1
+        }
+    }
+}
+
+struct ZonePace {
+    var second:Double
+    var distance:Double
+    
+    init(second: Double, distance: Double) {
+        self.second = second
+        self.distance = distance
     }
 }

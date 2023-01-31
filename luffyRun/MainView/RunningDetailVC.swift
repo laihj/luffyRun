@@ -29,6 +29,7 @@ class RunningDetailVC: UIViewController {
         self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
         self.setupViews()
+        record.zonePace()
         // Do any additional setup after loading the view.
     }
     
