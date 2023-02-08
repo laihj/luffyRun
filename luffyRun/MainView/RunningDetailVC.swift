@@ -23,20 +23,21 @@ class RunningDetailVC: UIViewController {
             })
         }
     }
+    
+    var lastRecord:Record?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action:#selector(deleteRecord(sender:)))
         self.setupViews()
-        record.zonePace()
         // Do any additional setup after loading the view.
     }
     
 
     
     func setupViews() {
-        let chart = SwiftChart(record: record)
+        let chart = SwiftChart(record: record, lastRecord: lastRecord)
         let hostingContrller = UIHostingController(rootView:chart)
         self.addChild(hostingContrller)
         self.view.addSubview(hostingContrller.view)

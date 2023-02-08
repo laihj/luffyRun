@@ -17,6 +17,7 @@ enum Zone {
 }
 
 final class Record:NSManagedObject {
+    @NSManaged var udid:UUID
     @NSManaged var startDate: Date
     @NSManaged var endDate: Date?
     @NSManaged var heartRate:HeartRate
@@ -255,7 +256,6 @@ extension Record {
         var flag = heartBeat.first!
         
         for (_,heart) in heartBeat.dropFirst().enumerated() {
-//            print("\(heart.value) -- \(heartBeatZone(beat: heart))")
             if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
                 let zoneSecond = heart.date.timeIntervalSince(flag.date)
                 let distacne = distance(from: flag.date, to: heart.date)
@@ -277,6 +277,7 @@ extension Record {
         zoneDict.forEach { zone,paceZone in
             print("\(zone) --- \(formatPace(minite: paceZone.paceMinite()))")
         }
+        print(zoneDict)
         return zoneDict
     }
     

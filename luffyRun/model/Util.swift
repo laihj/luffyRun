@@ -15,6 +15,9 @@ extension Sequence where Iterator.Element: AnyObject {
 }
 
 func formatPace(minite:Double) -> String {
+    if(minite == 0) {
+        return "--"
+    }
     let second = Int(minite * 60)
     return "\(second/60)'\(String(format: "%02d", second % 60))''"
 }

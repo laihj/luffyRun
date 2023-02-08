@@ -43,6 +43,7 @@ class ActivityListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     @IBAction func buttonclick() {
@@ -59,8 +60,9 @@ class ActivityListVC: UIViewController {
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
-            
+            let listgroup = DispatchGroup()
             for workout in self.workouts! {
+                listgroup.enter()
                 let sourceName = workout.sourceRevision.source.name
                 if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
                     continue
@@ -99,14 +101,12 @@ class ActivityListVC: UIViewController {
                 
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes,power: retPower, steps: retSteps)
-                    
+                    listgroup.leave()
                 }
             }
-
             
-            DispatchQueue.main.async {
-                self.reloadData()
-                
+            listgroup.notify(queue: .main) {
+                self.refreshHeaderView()
             }
         }
     }
@@ -121,6 +121,7 @@ class ActivityListVC: UIViewController {
             let record = Record.insert(into: self.context!)
             record.startDate = workout.startDate
             record.endDate = workout.endDate
+            record.udid = workout.uuid
             let workoutEvent = workout.workoutEvents
             for event in workoutEvent! {
                 print(event)
@@ -175,6 +176,7 @@ class ActivityListVC: UIViewController {
     }
     
     func refreshHeaderView() {
+        guard self.context != nil else { return }
         let endDate = Date().endOfWeek.addOneDay
         
         let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
@@ -218,6 +220,11 @@ extension ActivityListVC: UITableViewDelegate {
         guard let record = dataSource.objectAtIndexPath(indexPath) else { fatalError("no record")}
         let runningDetail = RunningDetailVC.init()
         runningDetail.record = record
+        let lastIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+        if let lastRecord = dataSource.objectAtIndexPath(lastIndexPath) {
+            runningDetail.lastRecord = lastRecord
+        }
+    
         self.navigationController?.pushViewController(runningDetail, animated: true)
     }
     

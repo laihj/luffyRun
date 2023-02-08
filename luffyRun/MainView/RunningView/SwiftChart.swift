@@ -17,6 +17,7 @@ struct BarData:Identifiable {
 
 struct SwiftChart: View {
     var record:Record?
+    var lastRecord:Record?
     var body: some View {
         ScrollView {
             Spacer(minLength: 30)
@@ -186,6 +187,51 @@ struct SwiftChart: View {
                                 }
                             }
                         }
+                    }
+                    Divider()
+                    HStack {
+                        Text("心率区间对应配速").font(.system(size:14))
+                        Spacer()
+                    }
+                    HStack(spacing:10) {
+                        VStack(alignment: .trailing) {
+                            Text("<\(record!.heartRate.zone2) :").font(.system(size:14)).foregroundColor(.gray)
+                            Text("\(record!.heartRate.zone2)-\(record!.heartRate.zone3) :").font(.system(size:14)).foregroundColor(.gray)
+                            Text("\(record!.heartRate.zone3)-\(record!.heartRate.zone4) :").font(.system(size:14)).foregroundColor(.gray)
+                            Text("\(record!.heartRate.zone4)-\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(.gray)
+                            Text(">\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(.gray)
+                        }
+                        VStack(alignment: .leading) {
+                            let zonePace = record?.zonePace()
+                            let zone1pace = zonePace?[Zone.zone1]?.paceMinite() ?? 0.0
+                            Text("\(formatPace(minite:zone1pace))").font(.system(size:14)).foregroundColor(.black)
+                            let zone2pace = zonePace?[Zone.zone2]?.paceMinite() ?? 0.0
+                            Text("\(formatPace(minite:zone2pace))").font(.system(size:14)).foregroundColor(.black)
+                            let zone3pace = zonePace?[Zone.zone3]?.paceMinite() ?? 0.0
+                            Text("\(formatPace(minite:zone3pace))").font(.system(size:14)).foregroundColor(.black)
+                            let zone4pace = zonePace?[Zone.zone4]?.paceMinite() ?? 0.0
+                            Text("\(formatPace(minite:zone4pace))").font(.system(size:14)).foregroundColor(.black)
+                            let zone5pace = zonePace?[Zone.zone5]?.paceMinite() ?? 0.0
+                            Text("\(formatPace(minite:zone5pace))").font(.system(size:14)).foregroundColor(.black)
+                        }
+                        
+                        if let last = lastRecord,
+                            let lastZonePace = last.zonePace() {
+                            VStack(alignment: .leading) {
+
+                                let zone1pace = lastZonePace[Zone.zone1]?.paceMinite() ?? 0.0
+                                Text("\(formatPace(minite:zone1pace))").font(.system(size:14)).foregroundColor(.gray)
+                                let zone2pace = lastZonePace[Zone.zone2]?.paceMinite() ?? 0.0
+                                Text("\(formatPace(minite:zone2pace))").font(.system(size:14)).foregroundColor(.gray)
+                                let zone3pace = lastZonePace[Zone.zone3]?.paceMinite() ?? 0.0
+                                Text("\(formatPace(minite:zone3pace))").font(.system(size:14)).foregroundColor(.gray)
+                                let zone4pace = lastZonePace[Zone.zone4]?.paceMinite() ?? 0.0
+                                Text("\(formatPace(minite:zone4pace))").font(.system(size:14)).foregroundColor(.gray)
+                                let zone5pace = lastZonePace[Zone.zone5]?.paceMinite() ?? 0.0
+                                Text("\(formatPace(minite:zone5pace))").font(.system(size:14)).foregroundColor(.gray)
+                            }
+                        }
+                        Spacer()
                     }
 
                     Spacer(minLength: 10)
