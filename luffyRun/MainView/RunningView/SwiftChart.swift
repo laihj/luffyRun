@@ -202,34 +202,25 @@ struct SwiftChart: View {
                             Text(">\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(.gray)
                         }
                         VStack(alignment: .leading) {
-                            let zonePace = record?.zonePace()
-                            let zone1pace = zonePace?[Zone.zone1]?.paceMinite() ?? 0.0
-                            Text("\(formatPace(minite:zone1pace))").font(.system(size:14)).foregroundColor(.black)
-                            let zone2pace = zonePace?[Zone.zone2]?.paceMinite() ?? 0.0
-                            Text("\(formatPace(minite:zone2pace))").font(.system(size:14)).foregroundColor(.black)
-                            let zone3pace = zonePace?[Zone.zone3]?.paceMinite() ?? 0.0
-                            Text("\(formatPace(minite:zone3pace))").font(.system(size:14)).foregroundColor(.black)
-                            let zone4pace = zonePace?[Zone.zone4]?.paceMinite() ?? 0.0
-                            Text("\(formatPace(minite:zone4pace))").font(.system(size:14)).foregroundColor(.black)
-                            let zone5pace = zonePace?[Zone.zone5]?.paceMinite() ?? 0.0
-                            Text("\(formatPace(minite:zone5pace))").font(.system(size:14)).foregroundColor(.black)
+                            if let zonePace = record?.zonePace() {
+                                ForEach(zonePace, id:\.id) { pace in
+                                    let paceMinite =  pace.paceMinite()
+                                    Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(.black)
+                                }
+                            }
                         }
                         
                         if let last = lastRecord,
                             let lastZonePace = last.zonePace() {
-                            VStack(alignment: .leading) {
-
-                                let zone1pace = lastZonePace[Zone.zone1]?.paceMinite() ?? 0.0
-                                Text("\(formatPace(minite:zone1pace))").font(.system(size:14)).foregroundColor(.gray)
-                                let zone2pace = lastZonePace[Zone.zone2]?.paceMinite() ?? 0.0
-                                Text("\(formatPace(minite:zone2pace))").font(.system(size:14)).foregroundColor(.gray)
-                                let zone3pace = lastZonePace[Zone.zone3]?.paceMinite() ?? 0.0
-                                Text("\(formatPace(minite:zone3pace))").font(.system(size:14)).foregroundColor(.gray)
-                                let zone4pace = lastZonePace[Zone.zone4]?.paceMinite() ?? 0.0
-                                Text("\(formatPace(minite:zone4pace))").font(.system(size:14)).foregroundColor(.gray)
-                                let zone5pace = lastZonePace[Zone.zone5]?.paceMinite() ?? 0.0
-                                Text("\(formatPace(minite:zone5pace))").font(.system(size:14)).foregroundColor(.gray)
+                            if lastZonePace.count > 0 {
+                                VStack(alignment: .leading) {
+                                    ForEach(lastZonePace, id:\.id) { pace in
+                                        let paceMinite =  pace.paceMinite()
+                                        Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(.gray)
+                                    }
+                                }
                             }
+
                         }
                         Spacer()
                     }

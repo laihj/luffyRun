@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 
-enum Zone {
-    case zone1,
+enum Zone:Int {
+    case zone1 = 0,
     zone2,
     zone3,
     zone4,
@@ -31,6 +31,8 @@ final class Record:NSManagedObject {
     @NSManaged var step:NSNumber?
     @NSManaged var kCal:NSNumber?
     @NSManaged var averageSLength:NSNumber?
+    
+    @NSManaged var heartPace:[ZonePace]?
     
     @NSManaged var minPace:NSNumber?
     @NSManaged var minHeart:NSNumber?
@@ -243,13 +245,16 @@ extension Record {
         return distance
     }
     
-    func zonePace() -> [Zone:ZonePace] {
-        var zoneDict:[Zone:ZonePace] = [
-            Zone.zone1:ZonePace(second:0.0, distance:0.0),
-            Zone.zone2:ZonePace(second:0.0, distance:0.0),
-            Zone.zone3:ZonePace(second:0.0, distance:0.0),
-            Zone.zone4:ZonePace(second:0.0, distance:0.0),
-            Zone.zone5:ZonePace(second:0.0, distance:0.0)
+    func zonePace() -> [ZonePace] {
+        if let heartPace = heartPace {
+            return heartPace
+        }
+        let  zoneDict:[ZonePace] = [
+            ZonePace(second:0.0, distance:0.0),
+            ZonePace(second:0.0, distance:0.0),
+            ZonePace(second:0.0, distance:0.0),
+            ZonePace(second:0.0, distance:0.0),
+            ZonePace(second:0.0, distance:0.0)
         ]
         guard let heartBeat = heartbeat else { return zoneDict }
         
@@ -260,9 +265,8 @@ extension Record {
                 let zoneSecond = heart.date.timeIntervalSince(flag.date)
                 let distacne = distance(from: flag.date, to: heart.date)
                 let zone = heartBeatZone(beat: flag)
-//                print("\(zone) -- \(zoneSecond) --\(distacne) --")
-                zoneDict[zone]!.second += zoneSecond
-                zoneDict[zone]!.distance += distacne
+                zoneDict[zone.rawValue].second += zoneSecond
+                zoneDict[zone.rawValue].distance += distacne
                 flag = heart
             }
         }
@@ -271,13 +275,14 @@ extension Record {
             let zoneSecond = last.date.timeIntervalSince(flag.date)
             let distacne = distance(from: flag.date, to: last.date)
             let zone = heartBeatZone(beat: flag)
-            zoneDict[zone]!.second += zoneSecond
-            zoneDict[zone]!.distance += distacne
+            zoneDict[zone.rawValue].second += zoneSecond
+            zoneDict[zone.rawValue].distance += distacne
         }
-        zoneDict.forEach { zone,paceZone in
-            print("\(zone) --- \(formatPace(minite: paceZone.paceMinite()))")
+        zoneDict.forEach { paceZone in
+            print("\(formatPace(minite: paceZone.paceMinite()))")
         }
-        print(zoneDict)
+        heartPace = zoneDict
+        try? self.managedObjectContext?.save()
         return zoneDict
     }
     
@@ -297,16 +302,3 @@ extension Record {
     }
 }
 
-struct ZonePace {
-    var second:Double
-    var distance:Double
-    
-    init(second: Double, distance: Double) {
-        self.second = second
-        self.distance = distance
-    }
-
-    func paceMinite()-> Double {
-        return pace(second: second, distance: distance)
-    }
-}
