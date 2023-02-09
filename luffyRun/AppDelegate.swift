@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let appCele = "appCele"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        LuffyValueTransformer.register()
         // Override point for customization after application launch.
 //        createLuffyContainer { container in
 //            self.persistentContainer = container

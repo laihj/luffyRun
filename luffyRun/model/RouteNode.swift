@@ -8,7 +8,8 @@
 import Foundation
 import CoreLocation
 
-final class RouteNode:NSObject,NSCoding {
+final class RouteNode:NSObject,NSSecureCoding {
+    static var supportsSecureCoding = true
 
     var location: CLLocation
     var date: Date

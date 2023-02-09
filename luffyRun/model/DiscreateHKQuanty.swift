@@ -8,7 +8,8 @@
 import Foundation
 import HealthKit
 
-final class DiscreateHKQuanty:NSObject,NSCoding {
+final class DiscreateHKQuanty:NSObject,NSSecureCoding {
+    static var supportsSecureCoding = true
 
     var value: Double
     var date: Date
@@ -25,9 +26,11 @@ final class DiscreateHKQuanty:NSObject,NSCoding {
     }
     
     required convenience init?(coder: NSCoder) {
-        let value = coder.decodeDouble(forKey: "value")
-        let date = coder.decodeObject(forKey: "date") as! Date
-        self.init(value: value, date: date)
+        if let date = coder.decodeObject(forKey: "date") {
+            let value = coder.decodeDouble(forKey: "value")
+            self.init(value: value, date: date as! Date)
+        }
+        
     }
     
     

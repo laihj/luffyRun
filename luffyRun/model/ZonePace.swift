@@ -8,7 +8,9 @@
 import Foundation
 
 
-final class ZonePace:NSObject,NSCoding {
+final class ZonePace:NSObject,NSSecureCoding {
+    static var supportsSecureCoding = true
+    
     var id:UUID
     var second:Double
     var distance:Double
@@ -29,7 +31,11 @@ final class ZonePace:NSObject,NSCoding {
     
     
     required convenience init?(coder: NSCoder) {
-        let id = coder.decodeObject (forKey: "id") as! UUID
+        var id = UUID()
+        if let uidi = coder.decodeObject (forKey: "id") {
+            id = uidi as! UUID
+        }
+
         let second = coder.decodeDouble(forKey: "second")
         let distance = coder.decodeDouble(forKey: "distance") 
         self.init(id:id, second: second, distance: distance)
