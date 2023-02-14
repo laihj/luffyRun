@@ -26,11 +26,9 @@ final class DiscreateHKQuanty:NSObject,NSSecureCoding {
     }
     
     required convenience init?(coder: NSCoder) {
-        if let date = coder.decodeObject(forKey: "date") {
-            let value = coder.decodeDouble(forKey: "value")
-            self.init(value: value, date: date as! Date)
-        }
-        
+        let value = coder.decodeDouble(forKey: "value")
+        let date = coder.decodeObject(forKey: "date")
+        self.init(value: value, date: date as! Date)
     }
     
     

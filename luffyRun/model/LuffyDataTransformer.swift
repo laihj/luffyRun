@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreLocation
+
 
 
 @objc(LuffyValueTransformer)
@@ -16,7 +18,7 @@ final class LuffyValueTransformer: NSSecureUnarchiveFromDataTransformer {
     
     // 重写allowedTopLevelClasses，确保UIColor在允许的类列表中
     override static var allowedTopLevelClasses: [AnyClass] {
-        return [NSArray.self, ZonePace.self, CumulativeQuantity.self,DiscreateHKQuanty.self,RouteNode.self,NSUUID.self] // NSArray.self 也要加上，不然不能在数组中使用！
+        return [NSArray.self, ZonePace.self, CumulativeQuantity.self,DiscreateHKQuanty.self,RouteNode.self,NSUUID.self,NSDate.self,CLLocation.self] // NSArray.self 也要加上，不然不能在数组中使用！
     }
     
     // 定义Transformer转换器注册方法

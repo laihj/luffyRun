@@ -666,9 +666,9 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -700,9 +700,9 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
