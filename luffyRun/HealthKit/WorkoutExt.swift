@@ -45,6 +45,7 @@ extension HKWorkout {
 
             guard error == nil else {
                 fatalError("The initial query failed.")
+
             }
             
             var routes = Array<RouteNode>()

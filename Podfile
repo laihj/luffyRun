@@ -4,5 +4,6 @@ target 'luffyRun' do
   use_frameworks!
 
   pod 'SnapKit'
+  pod 'Toast-Swift'
 end
 

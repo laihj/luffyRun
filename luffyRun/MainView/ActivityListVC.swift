@@ -8,6 +8,7 @@
 import UIKit
 import HealthKit
 import CoreData
+import Toast_Swift
 
 class ActivityListVC: UIViewController {
     var context:NSManagedObjectContext? {
@@ -117,6 +118,11 @@ class ActivityListVC: UIViewController {
     }
     
     func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
+        guard routes.count > 0 else {
+            self.view.makeToast("retry a minute", duration: 1, position: .top)
+            return
+        }
+        
         self.context!.performChanges {
             let record = Record.insert(into: self.context!)
             record.startDate = workout.startDate

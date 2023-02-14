@@ -1,6 +1,0 @@
-framework module Pods_luffyRun {
-  umbrella header "Pods-luffyRun-umbrella.h"
-
-  export *
-  module * { export * }
-}
