@@ -10,6 +10,7 @@
 		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
 		383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AA29890970005344AC /* HeartZonePaceStats.swift */; };
 		383941AD299391E5005344AC /* ZonePace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AC299391E5005344AC /* ZonePace.swift */; };
+		383941AF2994EA33005344AC /* LuffyDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AE2994EA33005344AC /* LuffyDataTransformer.swift */; };
 		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
 		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
@@ -84,6 +85,7 @@
 		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
 		383941AA29890970005344AC /* HeartZonePaceStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartZonePaceStats.swift; sourceTree = "<group>"; };
 		383941AC299391E5005344AC /* ZonePace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZonePace.swift; sourceTree = "<group>"; };
+		383941AE2994EA33005344AC /* LuffyDataTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuffyDataTransformer.swift; sourceTree = "<group>"; };
 		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				38E45AAB2967C37C00738F9B /* CumulativeQuantity.swift */,
 				383C38452976902F009EF315 /* Card.swift */,
 				383941AC299391E5005344AC /* ZonePace.swift */,
+				383941AE2994EA33005344AC /* LuffyDataTransformer.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */,
 				38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */,
 				38A6508B2949D66000239603 /* Record.swift in Sources */,
+				383941AF2994EA33005344AC /* LuffyDataTransformer.swift in Sources */,
 				38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */,
 				38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
@@ -662,9 +666,9 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -696,9 +700,9 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Luffy run need update permission to update record";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Luffy run need update permission to update record";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

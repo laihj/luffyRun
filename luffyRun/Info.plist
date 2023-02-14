@@ -25,11 +25,5 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Health update</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Health share</string>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Health record</string>
 </dict>
 </plist>

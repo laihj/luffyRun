@@ -8,7 +8,8 @@
 import Foundation
 import HealthKit
 
-final class CumulativeQuantity:NSObject,NSCoding {
+final class CumulativeQuantity:NSObject,NSSecureCoding {
+    static var supportsSecureCoding = true
 
     var value: Double
     var startDate: Date
