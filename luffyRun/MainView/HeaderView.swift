@@ -112,17 +112,6 @@ class HeaderView: UIView {
         }
     }
     
-    var lastStats:headerViewData? {
-        willSet(newStats) {
-            if let lastStats = newStats {
-                lastTimes?.text = ""
-                lastDistance?.text = ""
-                lastDuration?.text = ""
-                lastPace?.text = ""
-            }
-        }
-    }
-    
     var lastRecords:[Record]? {
         willSet(newDatas) {
             if let records = newDatas {
