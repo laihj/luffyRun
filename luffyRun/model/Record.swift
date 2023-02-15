@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 enum Zone:Int {
     case zone1 = 0,
@@ -139,11 +140,11 @@ extension Record {
         if let heartBeat = heartbeat {
             let (zone5,zone4,zone3,zone2,zone1,allSecond) = heartZoneSecond(heartBeat:heartBeat)
             return [
-                BarData(name: "\(heartRate.zone5)", time: zone5/allSecond * 100, color: .purple),
-                BarData(name: "\(heartRate.zone4)", time: zone4/allSecond * 100, color: .red),
-                BarData(name: "\(heartRate.zone3)", time: zone3/allSecond * 100, color: .blue),
-                BarData(name: "\(heartRate.zone2)", time: zone2/allSecond * 100, color: .yellow),
-                BarData(name: "\(heartRate.zone1)", time: zone1/allSecond * 100, color: .green)
+                BarData(name: "\(heartRate.zone5)", time: zone5/allSecond * 100, color: Color(.zone5Color)),
+                BarData(name: "\(heartRate.zone4)", time: zone4/allSecond * 100, color: Color(.zone4Color)),
+                BarData(name: "\(heartRate.zone3)", time: zone3/allSecond * 100, color: Color(.zone3Color)),
+                BarData(name: "\(heartRate.zone2)", time: zone2/allSecond * 100, color: Color(.zone2Color)),
+                BarData(name: "\(heartRate.zone1)", time: zone1/allSecond * 100, color: Color(.zone1Color))
             ]
         }
         return []
@@ -180,11 +181,11 @@ extension Record {
         if let routes = routes {
             let (zone5,zone4,zone3,zone2,zone1,allSecond) = paceZoneSecond(routes:routes)
             return [
-                BarData(name: paceZone.formatZone(zone: 5), time: zone5/allSecond * 100, color: .purple),
-                BarData(name: paceZone.formatZone(zone: 4), time: zone4/allSecond * 100, color: .red),
-                BarData(name: paceZone.formatZone(zone: 3), time: zone3/allSecond * 100, color: .blue),
-                BarData(name: paceZone.formatZone(zone: 2), time: zone2/allSecond * 100, color: .yellow),
-                BarData(name: paceZone.formatZone(zone: 1), time: zone1/allSecond * 100, color: .green)
+                BarData(name: paceZone.formatZone(zone: 5), time: zone5/allSecond * 100, color: Color(.zone5Color)),
+                BarData(name: paceZone.formatZone(zone: 4), time: zone4/allSecond * 100, color: Color(.zone4Color)),
+                BarData(name: paceZone.formatZone(zone: 3), time: zone3/allSecond * 100, color: Color(.zone3Color)),
+                BarData(name: paceZone.formatZone(zone: 2), time: zone2/allSecond * 100, color: Color(.zone2Color)),
+                BarData(name: paceZone.formatZone(zone: 1), time: zone1/allSecond * 100, color: Color(.zone1Color))
             ]
         }
         return []

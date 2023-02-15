@@ -11,6 +11,7 @@
 		383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AA29890970005344AC /* HeartZonePaceStats.swift */; };
 		383941AD299391E5005344AC /* ZonePace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AC299391E5005344AC /* ZonePace.swift */; };
 		383941AF2994EA33005344AC /* LuffyDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AE2994EA33005344AC /* LuffyDataTransformer.swift */; };
+		383941B2299CBC12005344AC /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941B1299CBC12005344AC /* ColorExt.swift */; };
 		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
 		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
@@ -86,6 +87,7 @@
 		383941AA29890970005344AC /* HeartZonePaceStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartZonePaceStats.swift; sourceTree = "<group>"; };
 		383941AC299391E5005344AC /* ZonePace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZonePace.swift; sourceTree = "<group>"; };
 		383941AE2994EA33005344AC /* LuffyDataTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuffyDataTransformer.swift; sourceTree = "<group>"; };
+		383941B1299CBC12005344AC /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
 		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
@@ -161,6 +163,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		383941B0299CBBFF005344AC /* Uilt */ = {
+			isa = PBXGroup;
+			children = (
+				383941B1299CBC12005344AC /* ColorExt.swift */,
+			);
+			path = Uilt;
+			sourceTree = "<group>";
+		};
 		383C38422976751F009EF315 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +219,7 @@
 		38AECFDF28DC5C5B00C2BF8A /* luffyRun */ = {
 			isa = PBXGroup;
 			children = (
+				383941B0299CBBFF005344AC /* Uilt */,
 				383C38422976751F009EF315 /* MapView */,
 				38E45AA629666DF300738F9B /* HealthKit */,
 				38E45AA5296590E900738F9B /* CoreData */,
@@ -476,6 +487,7 @@
 				383C38442976753A009EF315 /* MapView.swift in Sources */,
 				383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
+				383941B2299CBC12005344AC /* ColorExt.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */,
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,

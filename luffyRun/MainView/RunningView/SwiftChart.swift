@@ -104,14 +104,14 @@ struct SwiftChart: View {
                         
                         VStack(spacing:0) {
                             HStack(spacing:0) {
-                                ForEach(record?.paceChartData() ?? [], id:\.id) { data in
+                                ForEach(record?.paceChartData().reversed() ?? [], id:\.id) { data in
                                     data.color.frame(height: 8)
                                 }
                             }.cornerRadius(4)
                             GeometryReader { metrics in
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
-                                    ForEach(record?.paceChartData().dropLast() ?? [], id:\.id) { data in
+                                    ForEach(record?.paceChartData().reversed().dropLast() ?? [], id:\.id) { data in
                                         Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
@@ -173,14 +173,14 @@ struct SwiftChart: View {
                         .chartYAxis(.hidden)
                         VStack(spacing:0) {
                             HStack(spacing:0) {
-                                ForEach(record?.heartRateChartData() ?? [], id:\.id) { data in
+                                ForEach(record?.heartRateChartData().reversed() ?? [], id:\.id) { data in
                                     data.color.frame(height: 8)
                                 }
                             }.cornerRadius(4)
                             GeometryReader { metrics in
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
-                                    ForEach(record?.heartRateChartData().dropLast() ?? [], id:\.id) { data in
+                                    ForEach(record?.heartRateChartData().reversed().dropLast() ?? [], id:\.id) { data in
                                         Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
