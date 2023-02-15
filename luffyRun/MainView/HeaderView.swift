@@ -55,11 +55,8 @@ class HeaderView: UIView {
     @IBOutlet var distance:UILabel?
     @IBOutlet var duration:UILabel?
     @IBOutlet var pace:UILabel?
+    @IBOutlet var dataBackgroundView:UIView?
     
-    @IBOutlet var lastTimes:UILabel?
-    @IBOutlet var lastDistance:UILabel?
-    @IBOutlet var lastDuration:UILabel?
-    @IBOutlet var lastPace:UILabel?
     
     lazy var scrollView = UIScrollView(frame: CGRect.zero)
     lazy var runningView = RunningView(frame:CGRect.zero)
@@ -69,7 +66,7 @@ class HeaderView: UIView {
         super.awakeFromNib()
         backgroundColor = .white
         
-        self.addSubview(scrollView)
+        self.insertSubview(scrollView, belowSubview: dataBackgroundView!)
 //        scrollView.contentSize = CGSizeMake(self.frame.size.width * 2, self.frame.size.height)
         scrollView.isPagingEnabled = true
         scrollView.snp.makeConstraints { make in
@@ -97,7 +94,17 @@ class HeaderView: UIView {
             make.bottom.equalTo(0)
             make.right.equalTo(0)
         }
-
+        
+        if let dataBackgroundView = dataBackgroundView {
+            dataBackgroundView.backgroundColor = UIColor.clear
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [UIColor.white.withAlphaComponent(0.8).cgColor, UIColor.white.withAlphaComponent(0.0).cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+            gradientLayer.locations = [0, 1]
+            gradientLayer.frame = dataBackgroundView.bounds
+            dataBackgroundView.layer.insertSublayer(gradientLayer, at: 0)
+        }
     }
 
     
