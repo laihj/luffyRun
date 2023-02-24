@@ -41,6 +41,7 @@ class ActivityListVC: UIViewController {
                                              cacheName: nil)
         self.tableView?.delegate = self
         dataSource = TableViewDataSource(tableView: tableView!, cellIdentifier: "LRRunningCell", fetchedResultsController: frc, delegate: self)
+        self.fixedOldRecord()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +57,8 @@ class ActivityListVC: UIViewController {
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -126 * 60 * 24 * 60)
         if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
-//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
-            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
+            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+//            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
         }
         
         
@@ -125,6 +126,7 @@ class ActivityListVC: UIViewController {
     func reloadData() {
         self.tableView?.reloadData()
         self.refreshHeaderView()
+        self.fixedOldRecord()
     }
     
     func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
@@ -230,22 +232,28 @@ class ActivityListVC: UIViewController {
             self.headerView?.dayRunningDatas = dayRunningDatas
             self.headerView?.stats = headerViewData(records: currentData);
         }
-        
-//        let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
-//        request.predicate = predicate
-//        request.returnsObjectsAsFaults = false
-//        if let records = try? self.context!.fetch(request) {
-//
-//        }
-//        let requestLastRecords = Record.sortedFetchRequest
-//        requestLastRecords.returnsObjectsAsFaults = false
-//        requestLastRecords.fetchLimit = 20
-//        if let records = try? self.context!.fetch(request) {
-//            self.headerView?.lastRecords = records
-//        }
-
+    }
+    
+    func fixedOldRecord() {
+        if let records = dataSource.allRecords() {
+            records.forEach { record in
+                if record.routes?.count == 0 {
+                    loadWorkoutWith(udid: record.udid) { workout, error in
+                        if let workout = workout {
+                            workout.route { routes in
+                                record.routes = routes
+                                record.heartPace = nil
+                                try? record.managedObjectContext?.save()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+
 
 extension ActivityListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

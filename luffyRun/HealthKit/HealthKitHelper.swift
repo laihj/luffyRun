@@ -51,3 +51,20 @@ func loadPrancerciseWorkouts(startDate:Date,completion: @escaping ([HKWorkout]?,
     }
     HKHealthStore().execute(query)
 }
+
+func loadWorkoutWith(udid:UUID, completion: @escaping (HKWorkout?, Error?) -> Void) {
+    let workoutPredication = HKQuery.predicateForWorkouts(with: .running)
+
+    let predicate = HKQuery.predicateForObject(with: udid)
+    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+    
+    let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,predicate])
+    let query = HKSampleQuery(sampleType: .workoutType(), predicate: compond, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { query, samples, error in
+        if let samples = samples as? [HKWorkout] {
+            completion(samples.first,nil)
+        } else {
+            completion(nil, nil)
+        }
+    }
+    HKHealthStore().execute(query)
+}

@@ -55,30 +55,47 @@ extension HKWorkout {
                     if(locations?.count == 0) {
                         fatalError("The initial query failed.")
                     }
-                    print("sssss")
-                    print(locations?.count)
+
                     if let locas = locations {
                         for location in locas {
                             let route = RouteNode(location: location, date: location.timestamp)
                             routes.append(route)
-                            print("saaaaaa")
                         }
                     }
                     if(done) {
-                        print("down")
                         print(routes.count)
                         completion(routes)
                     }
                 }
                 HKHealthStore().execute(query)
-            } else {
-                print("not")
             }
         }
 
         routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
             guard error == nil else {
                 fatalError("The update failed.")
+            }
+            
+            var routes = Array<RouteNode>()
+
+            if let workoutroute = samples?.first {
+                let query = HKWorkoutRouteQuery(route: workoutroute as! HKWorkoutRoute) { query, locations, done, error in
+                    if(locations?.count == 0) {
+                        fatalError("The initial query failed.")
+                    }
+
+                    if let locas = locations {
+                        for location in locas {
+                            let route = RouteNode(location: location, date: location.timestamp)
+                            routes.append(route)
+                        }
+                    }
+                    if(done) {
+                        print(routes.count)
+                        completion(routes)
+                    }
+                }
+                HKHealthStore().execute(query)
             }
         }
         HKHealthStore().execute(routeQuery)
