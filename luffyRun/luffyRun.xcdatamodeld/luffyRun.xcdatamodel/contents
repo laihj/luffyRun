@@ -31,10 +31,12 @@
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="heartbeat" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[DiscreateHKQuanty]"/>
         <attribute name="heartPace" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[ZonePace]"/>
+        <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="kCal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maxHeart" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maxPace" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maxWatt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="mets" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="minHeart" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="minPace" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="minWatt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -44,6 +46,7 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="step" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="steps" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[CumulativeQuantity]"/>
+        <attribute name="temperature" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="udid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="heartRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRate" inverseName="record" inverseEntity="HeartRate"/>
         <relationship name="paceZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaceZone" inverseName="record" inverseEntity="PaceZone"/>

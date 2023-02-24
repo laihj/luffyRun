@@ -43,6 +43,10 @@ class TableViewDataSource<Delegate:TableViewDataSourceDelegate>:NSObject,UITable
         return fetchedResultsController.object(at: indexPath)
     }
     
+    func allRecords() -> [Object]? {
+        return fetchedResultsController.fetchedObjects
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = fetchedResultsController.sections?[section] else {return 0}
         return section.numberOfObjects

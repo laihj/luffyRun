@@ -111,7 +111,7 @@ struct SwiftChart: View {
                             GeometryReader { metrics in
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
-                                    ForEach(record?.paceChartData().reversed().dropLast() ?? [], id:\.id) { data in
+                                    ForEach(record?.paceChartData().reversed().dropFirst() ?? [], id:\.id) { data in
                                         Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
@@ -180,7 +180,7 @@ struct SwiftChart: View {
                             GeometryReader { metrics in
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
-                                    ForEach(record?.heartRateChartData().reversed().dropLast() ?? [], id:\.id) { data in
+                                    ForEach(record?.heartRateChartData().reversed().dropFirst() ?? [], id:\.id) { data in
                                         Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()

@@ -44,7 +44,6 @@ func loadPrancerciseWorkouts(startDate:Date,completion: @escaping ([HKWorkout]?,
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
     
     let compond = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredication,datePredication])
-//    HKObjectQueryNoLimit
     let query = HKSampleQuery(sampleType: .workoutType(), predicate: compond, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { query, samples, error in
         let samples = samples as? [HKWorkout]
         

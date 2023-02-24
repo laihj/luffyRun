@@ -47,6 +47,12 @@ final class Record:NSManagedObject {
     @NSManaged var maxHeart:NSNumber?
     @NSManaged var maxWatt:NSNumber?
     
+    //天气相关
+    @NSManaged var temperature:NSNumber?
+    @NSManaged var humidity:NSNumber?
+    
+    @NSManaged var mets:NSNumber?
+    
     static func insert(into context:NSManagedObjectContext) -> Record {
         let record:Record = context.insertObject()
         record.startDate = Date()
@@ -201,7 +207,9 @@ extension Record {
         for (current,next) in zip(routeNodes,routeNodes.dropFirst()) {
             if(current.date < from && next.date >= from) {
                 firstNode = current
-            } else if(current.date < to && next.date >= to) {
+            }
+            
+            if(current.date < to && next.date >= to) {
                 lastNode = next
             }
         }
@@ -221,27 +229,38 @@ extension Record {
         
         let slice = routeNodes[firstIndex...lastIndex]
         
-        guard slice.count > 2 else { return 0.0 }
+        guard slice.count >= 2 else { return 0.0 }
         
         var distance = 0.0
-
-        let firstTwo = slice.prefix(2)
-        let distanceSeg = firstTwo.last!.location.distance(from: firstTwo.first!.location)
-        let fullSecond = firstTwo.last!.date.timeIntervalSince(firstTwo.first!.date)
-        let startSecond = firstTwo.last!.date.timeIntervalSince(from)
-        let startSeg = distanceSeg * (startSecond/fullSecond)
-        distance += startSeg
-
-        for (current,next) in zip(slice.dropFirst().dropLast(2),slice.dropFirst(2)) {
-            distance += next.location.distance(from: current.location)
-        }
         
-        let lastTwo = slice.suffix(2)
-        let distanceSegLast = lastTwo.last!.location.distance(from: lastTwo.first!.location)
-        let fullSecondLast = lastTwo.last!.date.timeIntervalSince(lastTwo.first!.date)
-        let lastSecond = to.timeIntervalSince(lastTwo.first!.date)
-        let endSeg = distanceSegLast * (lastSecond/fullSecondLast)
-        distance += endSeg
+        if(slice.count > 2) {
+            let firstTwo = slice.prefix(2)
+            let distanceSeg = firstTwo.last!.location.distance(from: firstTwo.first!.location)
+            let fullSecond = firstTwo.last!.date.timeIntervalSince(firstTwo.first!.date)
+            let startSecond = firstTwo.last!.date.timeIntervalSince(from)
+            let startSeg = distanceSeg * (startSecond/fullSecond)
+            distance += startSeg
+
+            for (current,next) in zip(slice.dropFirst().dropLast(2),slice.dropFirst(2)) {
+                distance += next.location.distance(from: current.location)
+            }
+            
+            let lastTwo = slice.suffix(2)
+            let distanceSegLast = lastTwo.last!.location.distance(from: lastTwo.first!.location)
+            let fullSecondLast = lastTwo.last!.date.timeIntervalSince(lastTwo.first!.date)
+            let lastSecond = to.timeIntervalSince(lastTwo.first!.date)
+            let endSeg = distanceSegLast * (lastSecond/fullSecondLast)
+            distance += endSeg
+        } else { //区间点在两个之间
+            let firstTwo = slice.prefix(2)
+            let distanceSeg = firstTwo.last!.location.distance(from: firstTwo.first!.location)
+            let fullSecond = firstTwo.last!.date.timeIntervalSince(firstTwo.first!.date)
+            
+            let firstSecond = from.timeIntervalSince(firstTwo.first!.date)
+            let secondSecond = to.timeIntervalSince(firstTwo.first!.date)
+            
+            distance = distanceSeg * ((secondSecond - firstSecond)/fullSecond)
+        }
         
         return distance
     }
@@ -259,8 +278,12 @@ extension Record {
         ]
         guard let heartBeat = heartbeat else { return zoneDict }
         
-        var flag = heartBeat.first!
+//        routes?.forEach({ node in
+//            print(node.date)
+//        })
         
+        var flag = heartBeat.first!
+        print("===========+++++++")
         for (_,heart) in heartBeat.dropFirst().enumerated() {
             if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
                 let zoneSecond = heart.date.timeIntervalSince(flag.date)
@@ -279,9 +302,9 @@ extension Record {
             zoneDict[zone.rawValue].second += zoneSecond
             zoneDict[zone.rawValue].distance += distacne
         }
-        zoneDict.forEach { paceZone in
-            print("\(formatPace(minite: paceZone.paceMinite()))")
-        }
+//        zoneDict.forEach { paceZone in
+//            print("\(formatPace(minite: paceZone.paceMinite()))")
+//        }
         heartPace = zoneDict
         try? self.managedObjectContext?.save()
         return zoneDict

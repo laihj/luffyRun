@@ -55,13 +55,18 @@ extension HKWorkout {
                     if(locations?.count == 0) {
                         fatalError("The initial query failed.")
                     }
+                    print("sssss")
+                    print(locations?.count)
                     if let locas = locations {
                         for location in locas {
                             let route = RouteNode(location: location, date: location.timestamp)
                             routes.append(route)
+                            print("saaaaaa")
                         }
                     }
                     if(done) {
+                        print("down")
+                        print(routes.count)
                         completion(routes)
                     }
                 }

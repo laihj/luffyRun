@@ -56,14 +56,24 @@ class ActivityListVC: UIViewController {
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -126 * 60 * 24 * 60)
         if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
-            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
         }
+        
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             self.workouts = workouts
             let listgroup = DispatchGroup()
             for workout in self.workouts! {
                 listgroup.enter()
+                if let matadata = workout.metadata {
+                    if let indoor = matadata["HKIndoorWorkout"] as? Int {
+                        if indoor == 1 {
+                            continue
+                        }
+                    }
+                }
+                
                 let sourceName = workout.sourceRevision.source.name
                 if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
                     continue
@@ -113,8 +123,8 @@ class ActivityListVC: UIViewController {
     }
     
     func reloadData() {
-        self.refreshHeaderView()
         self.tableView?.reloadData()
+        self.refreshHeaderView()
     }
     
     func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
@@ -128,10 +138,6 @@ class ActivityListVC: UIViewController {
             record.startDate = workout.startDate
             record.endDate = workout.endDate
             record.udid = workout.uuid
-            let workoutEvent = workout.workoutEvents
-            for event in workoutEvent! {
-                print(event)
-            }
             if let distance = workout.sumQuantityFor(.distanceWalkingRunning, unit: HKUnit.meter()) {
                 record.distance = NSNumber(value:distance)
             }
@@ -178,6 +184,22 @@ class ActivityListVC: UIViewController {
             record.steps = steps
             let sourceName = workout.sourceRevision.source.name
             record.source = sourceName
+            
+            if let matadata = workout.metadata {
+                if let temperature = matadata["HKWeatherTemperature"] as? HKQuantity {
+                    let c = temperature.doubleValue(for: HKUnit.degreeCelsius())
+                    record.temperature = NSNumber(value: c)
+                }
+                if let humidity = matadata["HKWeatherHumidity"] as? HKQuantity {
+                    let h = humidity.doubleValue(for: .percent())
+                    record.humidity = NSNumber(value: h)
+                }
+                if let averageMETS = matadata["HKAverageMETs"] as? HKQuantity {
+                    let mets = averageMETS.doubleValue(for: .kilocalorie().unitDivided(by: (.hour().unitMultiplied(by: .gramUnit(with: .kilo)))))
+                    record.mets = NSNumber(value: mets)
+                }
+            }
+            
         }
     }
     
@@ -187,11 +209,8 @@ class ActivityListVC: UIViewController {
         
         let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
         let startDate = endDate.addingTimeInterval(-18 * 7 * 24 * 3600)
-        let request = Record.sortedFetchRequest
-        let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
-        request.predicate = predicate
-        request.returnsObjectsAsFaults = false
-        if let records = try? self.context!.fetch(request) {
+        
+        if let records = dataSource.allRecords() {
             let currentData = records.filter { record in
                 return record.startDate >= middleDate
             }
@@ -203,20 +222,27 @@ class ActivityListVC: UIViewController {
                 let dayData = records.filter { record in
                     return record.startDate > date && record.startDate <= dayEndDate
                 }
-                
+
                 let dayRunningData = DayRunningData(records: dayData, date: dayEndDate)
                 dayRunningDatas.append(dayRunningData)
             }
-            
+
             self.headerView?.dayRunningDatas = dayRunningDatas
             self.headerView?.stats = headerViewData(records: currentData);
         }
-        let requestLastRecords = Record.sortedFetchRequest
-        requestLastRecords.returnsObjectsAsFaults = false
-        requestLastRecords.fetchLimit = 20
-        if let records = try? self.context!.fetch(request) {
-            self.headerView?.lastRecords = records
-        }
+        
+//        let predicate = NSPredicate(format: "%K BETWEEN {%@,%@}", #keyPath(Record.startDate),startDate as NSDate,endDate as NSDate)
+//        request.predicate = predicate
+//        request.returnsObjectsAsFaults = false
+//        if let records = try? self.context!.fetch(request) {
+//
+//        }
+//        let requestLastRecords = Record.sortedFetchRequest
+//        requestLastRecords.returnsObjectsAsFaults = false
+//        requestLastRecords.fetchLimit = 20
+//        if let records = try? self.context!.fetch(request) {
+//            self.headerView?.lastRecords = records
+//        }
 
     }
 }
