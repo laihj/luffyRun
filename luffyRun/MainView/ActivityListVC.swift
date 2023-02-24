@@ -57,8 +57,8 @@ class ActivityListVC: UIViewController {
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -126 * 60 * 24 * 60)
         if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
-            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
-//            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
+//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
         }
         
         
@@ -92,7 +92,7 @@ class ActivityListVC: UIViewController {
                 
                 var retRoutes = Array<RouteNode>()
                 group.enter()
-                workout.route() { routes in
+                workout.route(view:self.view) { routes in
                     group.leave()
                     retRoutes = routes
                 }
@@ -240,7 +240,7 @@ class ActivityListVC: UIViewController {
                 if record.routes?.count == 0 {
                     loadWorkoutWith(udid: record.udid) { workout, error in
                         if let workout = workout {
-                            workout.route { routes in
+                            workout.route(view:self.view) { routes in
                                 record.routes = routes
                                 record.heartPace = nil
                                 try? record.managedObjectContext?.save()

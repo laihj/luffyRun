@@ -7,6 +7,7 @@
 
 import Foundation
 import HealthKit
+import UIKit
 
 
 extension HKWorkout {
@@ -38,14 +39,17 @@ extension HKWorkout {
         return (minValue ?? 0.0, avgValue ?? 0.0,maxValue ?? 0.0)
     }
     
-    func route(completion: @escaping ([RouteNode])->()) {
+    func route(view:UIView, completion: @escaping ([RouteNode])->()) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: self)
-
         let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
 
             guard error == nil else {
                 fatalError("The initial query failed.")
 
+            }
+            
+            DispatchQueue.main.async {
+                view.makeToast("HKAnchoredObjectQuery complete", duration: 1, position: .top)
             }
             
             var routes = Array<RouteNode>()
@@ -74,6 +78,10 @@ extension HKWorkout {
         routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
             guard error == nil else {
                 fatalError("The update failed.")
+            }
+            
+            DispatchQueue.main.async {
+                view.makeToast("HKAnchoredObjectQuery update", duration: 1, position: .top)
             }
             
             var routes = Array<RouteNode>()
