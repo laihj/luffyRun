@@ -209,7 +209,7 @@ class ActivityListVC: UIViewController {
         guard self.context != nil else { return }
         let endDate = Date().endOfWeek.addOneDay
         
-        let middleDate = endDate.addingTimeInterval(-30 * 24 * 3600)
+        let middleDate = Date().startOfDay.addOneDay.addingTimeInterval(-30 * 24 * 3600)
         let startDate = endDate.addingTimeInterval(-18 * 7 * 24 * 3600)
         
         if let records = dataSource.allRecords() {
@@ -271,7 +271,6 @@ extension ActivityListVC: UITableViewDelegate {
 }
 
 extension ActivityListVC: TableViewDataSourceDelegate {
-    
     func configure(_ cell: LRRunningRecordCell, for object: Record) {
         cell.configure(for: object)
     }

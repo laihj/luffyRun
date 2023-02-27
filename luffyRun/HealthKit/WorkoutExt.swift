@@ -99,7 +99,6 @@ extension HKWorkout {
                         }
                     }
                     if(done) {
-                        print(routes.count)
                         completion(routes)
                     }
                 }

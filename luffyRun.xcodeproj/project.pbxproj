@@ -14,6 +14,7 @@
 		383941B2299CBC12005344AC /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941B1299CBC12005344AC /* ColorExt.swift */; };
 		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
 		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
+		385EC89F29ACB04600B14272 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385EC89E29ACB04600B14272 /* DateExt.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
 		38A6508B2949D66000239603 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508A2949D66000239603 /* Record.swift */; };
 		38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508C294AC6D000239603 /* CoreDataStack.swift */; };
@@ -90,6 +91,7 @@
 		383941B1299CBC12005344AC /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
 		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		385EC89E29ACB04600B14272 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
 		38A6508A2949D66000239603 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		38A6508C294AC6D000239603 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				383941B1299CBC12005344AC /* ColorExt.swift */,
+				385EC89E29ACB04600B14272 /* DateExt.swift */,
 			);
 			path = Uilt;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				383941B2299CBC12005344AC /* ColorExt.swift in Sources */,
+				385EC89F29ACB04600B14272 /* DateExt.swift in Sources */,
 				38E45AA829666E0D00738F9B /* WorkoutExt.swift in Sources */,
 				38E45AB1296FF83800738F9B /* SwiftChart.swift in Sources */,
 				38E45AA2295D8C5100738F9B /* RouteNode.swift in Sources */,

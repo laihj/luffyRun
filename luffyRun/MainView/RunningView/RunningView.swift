@@ -25,6 +25,7 @@ struct DayRunningData {
 }
 
 class RunningView: UIView {
+    let dayBefore30 = Date().startOfDay.addOneDay.addingTimeInterval(-30 * 24 * 3600)
     
     var dayRunningDatas:[DayRunningData]? {
         willSet(newDatas) {
@@ -34,7 +35,15 @@ class RunningView: UIView {
                         view.backgroundColor = UIColor.mePurple.withAlphaComponent(0.5 + data.distance/20000.0)
                     }
                     
-                    view.layer.borderWidth = data.date.isSameDay(date: Date()) ? 1 : 0.0
+                    view.layer.borderWidth = (data.date.isSameDay(date: Date()) || data.date.isSameDay(date: dayBefore30)) ? 1.5 : 0.0
+                    
+                    if data.date.isSameDay(date: Date()) {
+                        view.layer.borderColor = UIColor.red.cgColor
+                    } else if data.date.isSameDay(date: dayBefore30) {
+                        view.layer.borderColor = UIColor.green.cgColor
+                    } else {
+                        view.layer.borderColor = UIColor.clear.cgColor
+                    }
                 }
             }
         }
