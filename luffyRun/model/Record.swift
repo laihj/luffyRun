@@ -53,6 +53,11 @@ final class Record:NSManagedObject {
     
     @NSManaged var mets:NSNumber?
     
+    //技术
+    @NSManaged var verticalOscillation:NSNumber? //垂直振幅
+    @NSManaged var runningGroundContactTime:NSNumber? //触地时间
+    @NSManaged var avarageCadence:NSNumber?
+    
     static func insert(into context:NSManagedObjectContext) -> Record {
         let record:Record = context.insertObject()
         record.startDate = Date()
@@ -72,51 +77,56 @@ extension Record: Managed {
 //for chart
 extension Record {
     
-    func cadence() -> (highest:Int, lowest:Int, average:Int) {
-        guard let steps = steps else {return (0,0,0)}
-        
-        let cadence:[Int] = steps.map { step in
-            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
-            let count = Int(step.value / ((second) / 60.0) )
-            return count
-        }
-        
-        var sumSteps = [CumulativeQuantity]()
-        for (index,_) in steps.enumerated() {
-            if index % 24 == 0 {
-                let slice = steps[index..<min((index+24),steps.count)]
-                if(slice.count < 10) {
-                    continue
-                }
-                let stepCount = slice.reduce(0.0) { result, step in
-                    return result + step.value
-                }
-
-                let step = CumulativeQuantity(value: stepCount, startDate: slice.first!.startDate, endDate: slice.last!.endDate)
-                sumSteps.append(step)
-            }
-        }
-        
-        let cadenceSum:[Int] = sumSteps.map { step in
-            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
-            print(second)
-            let count = Int(step.value / ((second) / 60.0) )
-            return count
-        }
-        print(cadenceSum)
+    func avgCadence() -> Int {
+        guard let steps = steps else {return 0}
         
         let allStep = steps.reduce(0.0) { result, step in
             return result + step.value
         }
         let second = endDate!.timeIntervalSince1970 - startDate.timeIntervalSince1970
-        let count = Int(allStep / ((second) / 60.0) )
-        var highestCan = 50
-        var lowestCan = 500
-        _ = cadence.map { can in
-            highestCan = can > highestCan ? can : highestCan
-            lowestCan = can < lowestCan ? can : lowestCan
-        }
-                return (highestCan,lowestCan,count)
+        let avgCan = Int(allStep / ((second) / 60.0) )
+        return avgCan
+        
+
+        
+//        let cadence:[Int] = steps.map { step in
+//            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
+//            let count = Int(step.value / ((second) / 60.0) )
+//            return count
+//        }
+//
+//        var sumSteps = [CumulativeQuantity]()
+//        for (index,_) in steps.enumerated() {
+//            if index % 24 == 0 {
+//                let slice = steps[index..<min((index+24),steps.count)]
+//                if(slice.count < 10) {
+//                    continue
+//                }
+//                let stepCount = slice.reduce(0.0) { result, step in
+//                    return result + step.value
+//                }
+//
+//                let step = CumulativeQuantity(value: stepCount, startDate: slice.first!.startDate, endDate: slice.last!.endDate)
+//                sumSteps.append(step)
+//            }
+//        }
+//
+//        let cadenceSum:[Int] = sumSteps.map { step in
+//            let second = step.endDate.timeIntervalSince1970 - step.startDate.timeIntervalSince1970
+//            let count = Int(step.value / ((second) / 60.0) )
+//            return count
+//        }
+//
+
+//        let second = endDate!.timeIntervalSince1970 - startDate.timeIntervalSince1970
+//        let avgCan = Int(allStep / ((second) / 60.0) )
+//        var highestCan = 50
+//        var lowestCan = 500
+//        _ = cadence.map { can in
+//            highestCan = can > highestCan ? can : highestCan
+//            lowestCan = can < lowestCan ? can : lowestCan
+//        }
+//        return (highestCan,lowestCan,avgCan)
         
     }
     

@@ -180,12 +180,25 @@ class ActivityListVC: UIViewController {
                 record.maxWatt = NSNumber(value: maxWatt)
             }
             
+            
+            
             record.heartbeat = heartbeat
             record.routes = routes
             record.power = power
             record.steps = steps
             let sourceName = workout.sourceRevision.source.name
             record.source = sourceName
+    
+            record.avarageCadence = NSNumber(value: record.avgCadence())
+            
+            if let (_,averageVerticalOscillation,_) = workout.quantityFor(.runningVerticalOscillation, unit: HKUnit.meter()) {
+                record.verticalOscillation = NSNumber(value: averageVerticalOscillation)
+            }
+            
+            if let (_,averageRunningGroundContactTime,_) = workout.quantityFor(.runningGroundContactTime, unit: HKUnit.second()) {
+                record.runningGroundContactTime = NSNumber(value: averageRunningGroundContactTime)
+            }
+
             
             if let matadata = workout.metadata {
                 if let temperature = matadata["HKWeatherTemperature"] as? HKQuantity {

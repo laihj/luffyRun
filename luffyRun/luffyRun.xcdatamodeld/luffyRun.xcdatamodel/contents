@@ -22,6 +22,7 @@
         <relationship name="record" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="paceZone" inverseEntity="Record"/>
     </entity>
     <entity name="Record" representedClassName=".Record" syncable="YES">
+        <attribute name="avarageCadence" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="avarageHeart" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="avaragePace" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="avarageWatt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -42,12 +43,14 @@
         <attribute name="minWatt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="power" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[DiscreateHKQuanty]"/>
         <attribute name="routes" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[RouteNode]"/>
+        <attribute name="runningGroundContactTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="source" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="step" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="steps" optional="YES" attributeType="Transformable" valueTransformerName="LuffyValueTransformer" customClassName=".[CumulativeQuantity]"/>
         <attribute name="temperature" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="udid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="verticalOscillation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="heartRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRate" inverseName="record" inverseEntity="HeartRate"/>
         <relationship name="paceZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaceZone" inverseName="record" inverseEntity="PaceZone"/>
     </entity>
