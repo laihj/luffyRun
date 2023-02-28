@@ -48,9 +48,6 @@ extension HKWorkout {
 
             }
             
-            DispatchQueue.main.async {
-                view.makeToast("HKAnchoredObjectQuery complete", duration: 1, position: .top)
-            }
             
             var routes = Array<RouteNode>()
 
@@ -78,10 +75,6 @@ extension HKWorkout {
         routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
             guard error == nil else {
                 fatalError("The update failed.")
-            }
-            
-            DispatchQueue.main.async {
-                view.makeToast("HKAnchoredObjectQuery update", duration: 1, position: .top)
             }
             
             var routes = Array<RouteNode>()
