@@ -15,6 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         LuffyValueTransformer.register()
+//        JZLocationConverter.start { (error) in
+//                    if error != nil {
+//                        print("失败")
+//                    }else {
+//                        print("成功")
+//                    }
+//                }
         // Override point for customization after application launch.
 //        createLuffyContainer { container in
 //            self.persistentContainer = container

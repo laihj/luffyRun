@@ -35,7 +35,7 @@ struct SwiftChart: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                    }
+                    }.padding(.top,UIScreen.main.bounds.size.width - 40)
                 }
                 Grid() {
                     GridRow {
@@ -345,7 +345,9 @@ struct SwiftChart: View {
                 )
                 Spacer(minLength: 10)
             }.padding()
+               
         }
+        .ignoresSafeArea()
     }
     
 }
