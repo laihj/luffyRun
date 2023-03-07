@@ -33,6 +33,8 @@ class RunningView: UIView {
                 for(data,view) in zip(datas, viewList) {
                     if(data.distance > 0) {
                         view.backgroundColor = UIColor.mePurple.withAlphaComponent(0.5 + data.distance/20000.0)
+                    } else {
+                        view.backgroundColor = .lightGray.withAlphaComponent(0.4)
                     }
                     
                     view.layer.borderWidth = (data.date.isSameDay(date: Date()) || data.date.isSameDay(date: dayBefore30)) ? 1.5 : 0.0

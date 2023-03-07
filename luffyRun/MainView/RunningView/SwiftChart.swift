@@ -37,8 +37,8 @@ struct SwiftChart: View {
                         }
                     }
                 }
-                VStack(alignment: .center) {
-                    HStack {
+                Grid() {
+                    GridRow {
                         let distanceKM = String(format: "%.2f", (record?.distance?.doubleValue ?? 0.00)/1000.0)
                         VStack(alignment: .center) {
                             Text("\(distanceKM)")
@@ -48,7 +48,6 @@ struct SwiftChart: View {
                                 .foregroundColor(.gray)
                         }
                         Spacer()
-
                         let kCal = String(format: "%.0f", record?.kCal?.doubleValue ?? 0)
                         VStack(alignment: .center) {
                             Text("\(kCal)")
@@ -68,7 +67,7 @@ struct SwiftChart: View {
                         }
                     }
                     Divider()
-                    HStack {
+                    GridRow {
                         let stpes = String(format: "%.0f", record?.avarageCadence?.doubleValue ?? 0)
                         VStack(alignment: .center) {
                             Text("\(stpes)")
@@ -78,7 +77,6 @@ struct SwiftChart: View {
                                 .foregroundColor(.gray)
                         }
                         Spacer()
-
                         let watt = String(format: "%.1f", (record?.verticalOscillation?.doubleValue ?? 0.00) * 100)
                         VStack(alignment: .center) {
                             Text("\(watt)")
@@ -96,9 +94,10 @@ struct SwiftChart: View {
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
                         }
+                        
                     }
                     Divider()
-                    HStack {
+                    GridRow {
                         let stpes = String(format: "%.0f", record?.step?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(stpes)")
@@ -108,7 +107,6 @@ struct SwiftChart: View {
                                 .foregroundColor(.gray)
                         }
                         Spacer()
-
                         let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(watt)")
@@ -126,9 +124,8 @@ struct SwiftChart: View {
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
                         }
+                        
                     }
-
-
                 }
                 .padding()
                 .background(

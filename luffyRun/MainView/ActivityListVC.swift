@@ -57,8 +57,8 @@ class ActivityListVC: UIViewController {
     func readWorkouts () {
         var startDate = Date(timeIntervalSinceNow: -126 * 60 * 24 * 60)
         if let lastedRecord:Record = dataSource.objectAtIndexPath(IndexPath(row: 0, section: 0)) {
-//            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
-            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
+            startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
+//            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
         }
         
         
@@ -92,7 +92,7 @@ class ActivityListVC: UIViewController {
                 
                 var retRoutes = Array<RouteNode>()
                 group.enter()
-                workout.route(view:self.view) { routes in
+                workout.route() { routes in
                     group.leave()
                     retRoutes = routes
                 }
@@ -130,11 +130,6 @@ class ActivityListVC: UIViewController {
     }
     
     func saveRecord(workout:HKWorkout, heartbeat:[DiscreateHKQuanty], routes:[RouteNode],power:[DiscreateHKQuanty],steps:[CumulativeQuantity]) {
-        guard routes.count > 0 else {
-            self.view.makeToast("retry a minute", duration: 1, position: .top)
-            return
-        }
-        
         self.context!.performChanges {
             let record = Record.insert(into: self.context!)
             record.startDate = workout.startDate
@@ -253,7 +248,7 @@ class ActivityListVC: UIViewController {
                 if record.routes?.count == 0 {
                     loadWorkoutWith(udid: record.udid) { workout, error in
                         if let workout = workout {
-                            workout.route(view:self.view) { routes in
+                            workout.route() { routes in
                                 record.routes = routes
                                 record.heartPace = nil
                                 try? record.managedObjectContext?.save()
@@ -271,13 +266,26 @@ class ActivityListVC: UIViewController {
 extension ActivityListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let record = dataSource.objectAtIndexPath(indexPath) else { fatalError("no record")}
+        
         let runningDetail = RunningDetailVC.init()
+        if record.routes?.count == 0 {
+            loadWorkoutWith(udid: record.udid) { workout, error in
+                if let workout = workout {
+                    workout.route() { routes in
+                        record.routes = routes
+                        record.heartPace = nil
+                        try? record.managedObjectContext?.save()
+                    }
+                }
+            }
+        }
+        
         runningDetail.record = record
+        
         let lastIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
         if let lastRecord = dataSource.objectAtIndexPath(lastIndexPath) {
             runningDetail.lastRecord = lastRecord
         }
-    
         self.navigationController?.pushViewController(runningDetail, animated: true)
     }
     

@@ -13,6 +13,7 @@ import SwiftUI
 
 class RunningDetailVC: UIViewController {
     fileprivate var observer: ManagedObjectObserver?
+    
     var barDatas:[BarData]?
     
     var record:Record! {
@@ -44,7 +45,6 @@ class RunningDetailVC: UIViewController {
         hostingContrller.view.snp.makeConstraints { make in
             make.edges.equalTo(0)
         }
-        
         self.updateViews()
     }
     

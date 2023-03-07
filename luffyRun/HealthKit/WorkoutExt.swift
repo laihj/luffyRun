@@ -39,7 +39,7 @@ extension HKWorkout {
         return (minValue ?? 0.0, avgValue ?? 0.0,maxValue ?? 0.0)
     }
     
-    func route(view:UIView, completion: @escaping ([RouteNode])->()) {
+    func route(completion: @escaping ([RouteNode])->()) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: self)
         let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
 
@@ -64,7 +64,6 @@ extension HKWorkout {
                         }
                     }
                     if(done) {
-                        print(routes.count)
                         completion(routes)
                     }
                 }

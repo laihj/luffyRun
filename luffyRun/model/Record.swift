@@ -80,11 +80,14 @@ extension Record {
     func avgCadence() -> Int {
         guard let steps = steps else {return 0}
         
-        let allStep = steps.reduce(0.0) { result, step in
-            return result + step.value
-        }
+//        let allStep = steps.reduce(0.0) { result, step in
+//            print("-----")
+//            print(step.startDate)
+//            print(step.endDate)
+//            return result + step.value
+//        }
         let second = endDate!.timeIntervalSince1970 - startDate.timeIntervalSince1970
-        let avgCan = Int(allStep / ((second) / 60.0) )
+        let avgCan = Int((step?.doubleValue ?? 0.0) / ((second) / 60.0) )
         return avgCan
         
 
@@ -288,12 +291,7 @@ extension Record {
         ]
         guard let heartBeat = heartbeat else { return zoneDict }
         
-//        routes?.forEach({ node in
-//            print(node.date)
-//        })
-        
         var flag = heartBeat.first!
-        print("===========+++++++")
         for (_,heart) in heartBeat.dropFirst().enumerated() {
             if heartBeatZone(beat: heart) != heartBeatZone(beat: flag) {
                 let zoneSecond = heart.date.timeIntervalSince(flag.date)

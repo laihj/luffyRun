@@ -40,6 +40,10 @@ class TableViewDataSource<Delegate:TableViewDataSourceDelegate>:NSObject,UITable
         if fetchedResultsController.fetchedObjects?.count == 0 {
             return nil
         }
+        
+        if fetchedResultsController.fetchedObjects?.count == indexPath.row {
+            return nil
+        }
         return fetchedResultsController.object(at: indexPath)
     }
     
