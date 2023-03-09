@@ -156,8 +156,17 @@ class ActivityListVC: UIViewController {
                 let minPace = 1.0/(minSpeed/1000.0)
                 record.minPace = NSNumber(value: minPace)
                 
-                let avaragePace = 1.0/(averageSpeed/1000.0)
-                record.avaragePace = NSNumber(value: avaragePace)
+                let secondMinite = workout.duration/60.0;
+                let distanceKm = (record.distance?.doubleValue ?? 0.0)/1000.0;
+                if distanceKm > 0 {
+                    let avaragePace = secondMinite/distanceKm
+                    record.avaragePace = NSNumber(value: avaragePace)
+                }
+                else {
+                    let avaragePace = 1.0/(averageSpeed/1000.0)
+                    record.avaragePace = NSNumber(value: avaragePace)
+                }
+                
                 
                 let maxPace = 1.0/(maxSpeed/1000.0)
                 record.maxPace = NSNumber(value: maxPace)

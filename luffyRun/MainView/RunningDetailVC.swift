@@ -62,9 +62,9 @@ class RunningDetailVC: UIViewController {
         
         DispatchQueue.main.async {
             self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
             let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 50, right: 50)
             self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customEdgePadding, animated: false)
+            self.mapView.addOverlay(self.routeOverlay!, level: .aboveLabels)
         }
     }
     
@@ -72,6 +72,9 @@ class RunningDetailVC: UIViewController {
         
         self.mapView = MKMapView()
         self.mapView.delegate = self
+        self.mapView.pointOfInterestFilter = .excludingAll
+        self.mapView.preferredConfiguration = MKStandardMapConfiguration(emphasisStyle: .muted)
+        self.mapView.isZoomEnabled = false
         self.view.addSubview(self.mapView)
         mapView.snp.makeConstraints { make in
             make.top.right.left.equalTo(0)
@@ -130,7 +133,7 @@ extension RunningDetailVC : MKMapViewDelegate {
             UIColor(red: 1.00, green: 0.00, blue: 0.00, alpha: 1.00)
         ], locations: [])
         renderer.lineCap = .round
-        renderer.lineWidth = 3.0
+        renderer.lineWidth = 2.5
         return renderer
     }
 }
