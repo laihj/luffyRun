@@ -66,17 +66,36 @@ class HeaderView: UIView {
         super.awakeFromNib()
         backgroundColor = .white
         
-        self.insertSubview(scrollView, belowSubview: dataBackgroundView!)
-//        scrollView.contentSize = CGSizeMake(self.frame.size.width * 2, self.frame.size.height)
+        let bgView = UIView()
+        bgView.backgroundColor = .white
+        bgView.layer.cornerRadius = 10;
+        self.insertSubview(bgView, belowSubview: dataBackgroundView!)
+        bgView.layer.shadowColor = UIColor(hexString: "#000000").cgColor
+        bgView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        bgView.layer.shadowOpacity = 0.1
+        bgView.layer.shadowRadius = 4
+        bgView.snp.makeConstraints { make in
+            make.top.equalTo(6)
+            make.left.equalTo(14)
+            make.right.equalTo(-14)
+            make.bottom.equalTo(-6)
+        }
+        
+        bgView.addSubview(scrollView)
+
         scrollView.isPagingEnabled = true
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
-            make.bottom.equalTo(-8)
+            make.top.equalTo(10)
+            make.left.equalTo(8)
+            make.right.equalTo(-8)
+            make.bottom.equalTo(-10)
         }
         
         scrollView.addSubview(runningView)
+        
+        runningView.layer.cornerRadius = 10;
+
+        
         runningView.snp.makeConstraints { make in
             make.top.equalTo(0)
             make.left.equalTo(0)

@@ -48,7 +48,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rIM-pj-QYP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rIM-pj-QYP">
                                 <rect key="frame" x="0.0" y="91" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="jkv-LS-Xrf" customClass="HeaderView" customModule="luffyRun" customModuleProvider="target">
@@ -156,45 +156,45 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LRRunningCell" id="yO4-Lr-Y2Y" customClass="LRRunningRecordCell" customModule="luffyRun" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="197" width="390" height="96"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LRRunningCell" id="yO4-Lr-Y2Y" customClass="LRRunningRecordCell" customModule="luffyRun" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="197" width="390" height="103.66666412353516"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yO4-Lr-Y2Y" id="p2c-Yr-xIw">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="96"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="103.66666412353516"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6Z-yT-Cbc">
-                                                    <rect key="frame" x="4" y="4" width="382" height="88"/>
+                                                    <rect key="frame" x="16" y="8" width="358" height="87.666666666666671"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cl-H3-PHI">
-                                                            <rect key="frame" x="20" y="12" width="179" height="64"/>
+                                                            <rect key="frame" x="20" y="11.999999999999996" width="179" height="63.666666666666657"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avq-z5-rYZ">
-                                                                    <rect key="frame" x="8.0000000000000036" y="8" width="48.333333333333343" height="28"/>
+                                                                    <rect key="frame" x="8.0000000000000036" y="8.0000000000000018" width="48.333333333333343" height="27.666666666666671"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公里" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFl-ws-BF6">
-                                                                    <rect key="frame" x="58.333333333333321" y="15.333333333333332" width="28.666666666666664" height="16.999999999999996"/>
+                                                                    <rect key="frame" x="58.333333333333321" y="15" width="28.666666666666664" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="201" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9h-K5-B9J">
-                                                                    <rect key="frame" x="97" y="7.6666666666666661" width="39.333333333333343" height="27.666666666666671"/>
+                                                                    <rect key="frame" x="97" y="7.3333333333333304" width="39.333333333333343" height="27.666666666666671"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dr-aE-lkb">
-                                                                    <rect key="frame" x="138.33333333333334" y="15.333333333333334" width="28.666666666666657" height="17.333333333333329"/>
+                                                                    <rect key="frame" x="138.33333333333334" y="14.999999999999998" width="28.666666666666657" height="17.333333333333329"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="263" verticalCompressionResistancePriority="755" text="2021-12-12 12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtP-Xt-PSN" userLabel="time">
-                                                                    <rect key="frame" x="8" y="36" width="99.333333333333329" height="20"/>
+                                                                    <rect key="frame" x="8" y="35.666666666666664" width="99.333333333333329" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="vMU-g0-7iu"/>
                                                                     </constraints>
@@ -222,7 +222,7 @@
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="AgG-aD-aiq">
-                                                            <rect key="frame" x="335.66666666666669" y="19.666666666666671" width="26.333333333333314" height="49"/>
+                                                            <rect key="frame" x="311.66666666666669" y="19.333333333333329" width="26.333333333333314" height="49"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="5:36" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-2j-a1F" userLabel="pace">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26.333333333333332" height="14.333333333333334"/>
@@ -245,7 +245,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="lO0-9e-Pml">
-                                                            <rect key="frame" x="309" y="19.666666666666671" width="24.666666666666686" height="49"/>
+                                                            <rect key="frame" x="285" y="19.333333333333329" width="24.666666666666686" height="49"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="配速" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kS6-gR-NYS" userLabel="pace">
                                                                     <rect key="frame" x="0.0" y="0.0" width="24.666666666666668" height="14.333333333333334"/>
@@ -282,13 +282,14 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="C6Z-yT-Cbc" firstAttribute="top" secondItem="p2c-Yr-xIw" secondAttribute="top" constant="4" id="0XC-Tm-5QF"/>
-                                                <constraint firstAttribute="trailing" secondItem="C6Z-yT-Cbc" secondAttribute="trailing" constant="4" id="r5Y-a4-E0X"/>
-                                                <constraint firstItem="C6Z-yT-Cbc" firstAttribute="leading" secondItem="p2c-Yr-xIw" secondAttribute="leading" constant="4" id="x70-sV-8Zv"/>
-                                                <constraint firstAttribute="bottom" secondItem="C6Z-yT-Cbc" secondAttribute="bottom" constant="4" id="zDl-CS-sGa"/>
+                                                <constraint firstItem="C6Z-yT-Cbc" firstAttribute="top" secondItem="p2c-Yr-xIw" secondAttribute="top" constant="8" id="0XC-Tm-5QF"/>
+                                                <constraint firstAttribute="trailing" secondItem="C6Z-yT-Cbc" secondAttribute="trailing" constant="16" id="r5Y-a4-E0X"/>
+                                                <constraint firstItem="C6Z-yT-Cbc" firstAttribute="leading" secondItem="p2c-Yr-xIw" secondAttribute="leading" constant="16" id="x70-sV-8Zv"/>
+                                                <constraint firstAttribute="bottom" secondItem="C6Z-yT-Cbc" secondAttribute="bottom" constant="8" id="zDl-CS-sGa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bgView" destination="C6Z-yT-Cbc" id="0zu-38-SFn"/>
                                             <outlet property="distance" destination="avq-z5-rYZ" id="dTR-ll-N9i"/>
                                             <outlet property="heart" destination="R8s-as-CYc" id="Btw-xd-4Yi"/>
                                             <outlet property="kcal" destination="X9h-K5-B9J" id="BYK-SY-q1D"/>

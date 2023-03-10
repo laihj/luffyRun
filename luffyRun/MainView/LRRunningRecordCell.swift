@@ -15,10 +15,20 @@ class LRRunningRecordCell: UITableViewCell {
     @IBOutlet var power:UILabel?
     @IBOutlet var kcal:UILabel?
     @IBOutlet var time:UILabel?
+    @IBOutlet var bgView:UIView?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        if let bgView = bgView {
+            bgView.backgroundColor = .white
+            bgView.layer.cornerRadius = 10;
+            bgView.layer.shadowOffset = CGSize(width: 2, height: 2)
+            bgView.layer.shadowColor = UIColor(hexString: "#000000").cgColor
+            bgView.layer.shadowOpacity = 0.1
+            bgView.layer.shadowRadius = 4
+        }
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

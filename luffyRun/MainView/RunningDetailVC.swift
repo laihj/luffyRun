@@ -62,7 +62,7 @@ class RunningDetailVC: UIViewController {
         
         DispatchQueue.main.async {
             self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 50, right: 50)
+            let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 60, left: 50, bottom: UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.width, right: 50)
             self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customEdgePadding, animated: false)
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveLabels)
         }
@@ -77,8 +77,8 @@ class RunningDetailVC: UIViewController {
         self.mapView.isZoomEnabled = false
         self.view.addSubview(self.mapView)
         mapView.snp.makeConstraints { make in
-            make.top.right.left.equalTo(0)
-            make.height.equalTo(self.mapView.snp.width)
+            make.top.right.left.bottom.equalTo(0)
+//            make.height.equalTo(self.mapView.snp.width)
         }
         
         let chart = SwiftChart(record: record, lastRecord: lastRecord)

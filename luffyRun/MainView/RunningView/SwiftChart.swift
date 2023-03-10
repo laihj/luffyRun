@@ -132,7 +132,7 @@ struct SwiftChart: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 //配速
                 VStack {
@@ -204,7 +204,7 @@ struct SwiftChart: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white)
                             .cornerRadius(10)
-                            .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                            .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
                     )
                 //心率
                 VStack {
@@ -305,7 +305,7 @@ struct SwiftChart: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 
                 //功率
@@ -341,7 +341,7 @@ struct SwiftChart: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.3), radius: 10, x: 4, y: 4)
+                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 Spacer(minLength: 10)
             }.padding()

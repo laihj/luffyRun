@@ -135,6 +135,7 @@ class ActivityListVC: UIViewController {
             record.startDate = workout.startDate
             record.endDate = workout.endDate
             record.udid = workout.uuid
+
             if let distance = workout.sumQuantityFor(.distanceWalkingRunning, unit: HKUnit.meter()) {
                 record.distance = NSNumber(value:distance)
             }
