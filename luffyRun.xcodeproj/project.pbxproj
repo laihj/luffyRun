@@ -24,6 +24,8 @@
 		38A65091294AFE3500239603 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65090294AFE3500239603 /* TableViewDataSource.swift */; };
 		38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */; };
 		38A65095294B1D9700239603 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65094294B1D9700239603 /* Util.swift */; };
+		38AD55CF29BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
+		38AD55D029BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -103,6 +105,7 @@
 		38A65090294AFE3500239603 /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectObserver.swift; sourceTree = "<group>"; };
 		38A65094294B1D9700239603 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wolf Sans Regular.ttf"; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 				38AECFF728DC5D4300C2BF8A /* MainView */,
 				38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */,
 				38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */,
+				38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */,
 				38AECFE628DC5C5B00C2BF8A /* Main.storyboard */,
 				38AECFEC28DC5C5C00C2BF8A /* Assets.xcassets */,
 				38AECFEE28DC5C5C00C2BF8A /* LaunchScreen.storyboard */,
@@ -411,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				382BCD6629B739A800493698 /* GCJ02.json in Resources */,
+				38AD55CF29BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */,
 				38AECFF028DC5C5C00C2BF8A /* LaunchScreen.storyboard in Resources */,
 				38AECFED28DC5C5C00C2BF8A /* Assets.xcassets in Resources */,
 				38AECFE828DC5C5B00C2BF8A /* Main.storyboard in Resources */,
@@ -423,6 +428,7 @@
 			files = (
 				38AED00828DC615F00C2BF8A /* Preview Assets.xcassets in Resources */,
 				38AED00528DC615F00C2BF8A /* Assets.xcassets in Resources */,
+				38AD55D029BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

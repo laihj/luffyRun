@@ -20,6 +20,7 @@ struct SwiftChart: View {
     var lastRecord:Record?
     var body: some View {
         ScrollView {
+            let numberFont:Font = .custom("Wolf Sans Regular",size:28)
             VStack (spacing: 10){
                 if let record = record {
                     HStack {
@@ -42,7 +43,7 @@ struct SwiftChart: View {
                         let distanceKM = String(format: "%.2f", (record?.distance?.doubleValue ?? 0.00)/1000.0)
                         VStack(alignment: .center) {
                             Text("\(distanceKM)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("距离/km")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -51,7 +52,7 @@ struct SwiftChart: View {
                         let kCal = String(format: "%.0f", record?.kCal?.doubleValue ?? 0)
                         VStack(alignment: .center) {
                             Text("\(kCal)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("大卡")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -60,7 +61,7 @@ struct SwiftChart: View {
                         let length = String(format: "%.1f", record?.averageSLength?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(length)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("平均步长")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -71,7 +72,7 @@ struct SwiftChart: View {
                         let stpes = String(format: "%.0f", record?.avarageCadence?.doubleValue ?? 0)
                         VStack(alignment: .center) {
                             Text("\(stpes)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("步频")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -80,7 +81,7 @@ struct SwiftChart: View {
                         let watt = String(format: "%.1f", (record?.verticalOscillation?.doubleValue ?? 0.00) * 100)
                         VStack(alignment: .center) {
                             Text("\(watt)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("重直振幅")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -89,7 +90,7 @@ struct SwiftChart: View {
                         let length = String(format: "%.0f", (record?.runningGroundContactTime?.doubleValue ?? 0.00) * 1000)
                         VStack(alignment: .center) {
                             Text("\(length)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("触地时间")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -101,7 +102,7 @@ struct SwiftChart: View {
                         let stpes = String(format: "%.0f", record?.step?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(stpes)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("步数")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -110,7 +111,7 @@ struct SwiftChart: View {
                         let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(watt)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("平均功率")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -119,7 +120,7 @@ struct SwiftChart: View {
                         let length = String(format: "%.1f", record?.mets?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(length)")
-                                .font(.system(size: 28,weight: .semibold))
+                                .font(numberFont)
                             Text("代谢当量")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -142,7 +143,7 @@ struct SwiftChart: View {
 //                        let minPace = formatPace(minite: (record?.minPace?.doubleValue ?? 0.00))
 //                        VStack(alignment: .center) {
 //                            Text("\(minPace)")
-//                                .font(.system(size: 25,weight: .semibold))
+//                                .font(numberFont)
 //                            Text("最低")
 //                                .font(.system(size:14))
 //                                .foregroundColor(.gray)
@@ -151,7 +152,7 @@ struct SwiftChart: View {
                         let pace = formatPace(minite: (record?.avaragePace?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(pace)")
-                                .font(.system(size: 25,weight: .semibold))
+                                .font(numberFont)
                             Text("平均")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -161,7 +162,7 @@ struct SwiftChart: View {
                         let maxPace = formatPace(minite: (record?.maxPace?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(maxPace)")
-                                .font(.system(size: 25,weight: .semibold))
+                                .font(numberFont)
                             Text("最高")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -210,21 +211,21 @@ struct SwiftChart: View {
                 VStack {
                     Text("心率")
                         .font(.system(size:16))
-                    HStack(spacing: 16) {
+                    HStack() {
                         let heart = String(format: "%.0f", (record?.avarageHeart?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(heart)")
-                                .font(.system(size: 25,weight: .semibold))
+                                .font(numberFont)
                             Text("平均")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
                         }
-                        Spacer()
+//                        Spacer()
                         
                         let maxHeart = String(format: "%.0f", (record?.maxHeart?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(maxHeart)")
-                                .font(.system(size: 25,weight: .semibold))
+                                .font(numberFont)
                             Text("最高")
                                 .font(.system(size:14))
                                 .foregroundColor(.gray)
@@ -317,7 +318,7 @@ struct SwiftChart: View {
                             let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
                             VStack(alignment: .center) {
                                 Text("\(watt)")
-                                    .font(.system(size: 25,weight: .semibold))
+                                    .font(numberFont)
                                 Text("平均")
                                     .font(.system(size:14))
                                     .foregroundColor(.gray)
@@ -327,7 +328,7 @@ struct SwiftChart: View {
                             let maxWatt = String(format: "%.0f", (record?.maxWatt?.doubleValue ?? 0.00))
                             VStack(alignment: .center) {
                                 Text("\(maxWatt)")
-                                    .font(.system(size: 25,weight: .semibold))
+                                    .font(numberFont)
                                 Text("最高")
                                     .font(.system(size:14))
                                     .foregroundColor(.gray)
