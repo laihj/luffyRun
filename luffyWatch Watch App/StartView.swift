@@ -24,7 +24,7 @@ struct StartView: View {
                 EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
         }
         .listStyle(.carousel)
-        .navigationBarTitle("Workouts")
+        .navigationBarTitle("18 周")
         .onAppear {
             workoutManager.requestAuthorization()
         }

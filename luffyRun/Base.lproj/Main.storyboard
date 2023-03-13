@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="866" y="-225"/>
         </scene>
-        <!--Workouts-->
+        <!--18 weeks-->
         <scene sceneID="5zx-LC-2qN">
             <objects>
                 <viewController id="xfa-SQ-BxG" customClass="ActivityListVC" customModule="luffyRun" customModuleProvider="target" sceneMemberID="viewController">
@@ -314,7 +314,7 @@
                             <constraint firstItem="rIM-pj-QYP" firstAttribute="top" secondItem="Cvc-Y9-0jc" secondAttribute="top" id="hsR-nE-kN1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Workouts" id="TAB-S4-Y2M">
+                    <navigationItem key="navigationItem" title="18 weeks" id="TAB-S4-Y2M">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="nMR-Jf-MQN">
                             <connections>
                                 <action selector="buttonclick" destination="xfa-SQ-BxG" id="oCt-JZ-gkQ"/>

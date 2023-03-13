@@ -139,39 +139,33 @@ struct SwiftChart: View {
                 VStack {
                     Text("配速")
                         .font(.system(size:16))
-                    HStack(spacing: 16) {
-//                        let minPace = formatPace(minite: (record?.minPace?.doubleValue ?? 0.00))
-//                        VStack(alignment: .center) {
-//                            Text("\(minPace)")
-//                                .font(numberFont)
-//                            Text("最低")
-//                                .font(.system(size:14))
-//                                .foregroundColor(.gray)
-//                        }
-//                        Spacer()
-                        let pace = formatPace(minite: (record?.avaragePace?.doubleValue ?? 0.00))
-                        VStack(alignment: .center) {
-                            Text("\(pace)")
-                                .font(numberFont)
-                            Text("平均")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
+                    
+                    Grid() {
+                        GridRow {
+                            let pace = formatPace(minite: (record?.avaragePace?.doubleValue ?? 0.00))
+                            VStack(alignment: .center) {
+                                Text("\(pace)")
+                                    .font(numberFont)
+                                Text("平均")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            let maxPace = formatPace(minite: (record?.maxPace?.doubleValue ?? 0.00))
+                            VStack(alignment: .center) {
+                                Text("\(maxPace)")
+                                    .font(numberFont)
+                                Text("最高")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            VStack(alignment: .center) {
+                                Text("           ")
+                            }
                         }
-                        Spacer()
-                        
-                        let maxPace = formatPace(minite: (record?.maxPace?.doubleValue ?? 0.00))
-                        VStack(alignment: .center) {
-                            Text("\(maxPace)")
-                                .font(numberFont)
-                            Text("最高")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                        VStack(alignment: .center) {
-                            Text("")
-                        }
-                    }
+                    }.padding()
+                    
                     Group{
                         Chart() {
                             ForEach(record?.paceChartData() ?? [], id:\.id) { data in
@@ -211,30 +205,33 @@ struct SwiftChart: View {
                 VStack {
                     Text("心率")
                         .font(.system(size:16))
-                    HStack() {
-                        let heart = String(format: "%.0f", (record?.avarageHeart?.doubleValue ?? 0.00))
-                        VStack(alignment: .center) {
-                            Text("\(heart)")
-                                .font(numberFont)
-                            Text("平均")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
+                    
+                    Grid() {
+                        GridRow {
+                            let heart = String(format: "%.0f", (record?.avarageHeart?.doubleValue ?? 0.00))
+                            VStack(alignment: .center) {
+                                Text("\(heart)")
+                                    .font(numberFont)
+                                Text("平均")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            let maxHeart = String(format: "%.0f", (record?.maxHeart?.doubleValue ?? 0.00))
+                            VStack(alignment: .center) {
+                                Text("\(maxHeart)")
+                                    .font(numberFont)
+                                Text("最高")
+                                    .font(.system(size:14))
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            VStack(alignment: .center) {
+                                Text("           ")
+                            }
                         }
-//                        Spacer()
-                        
-                        let maxHeart = String(format: "%.0f", (record?.maxHeart?.doubleValue ?? 0.00))
-                        VStack(alignment: .center) {
-                            Text("\(maxHeart)")
-                                .font(numberFont)
-                            Text("最高")
-                                .font(.system(size:14))
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                        VStack(alignment: .center) {
-                            Text("")
-                        }
-                    }
+                    }.padding()
+                    
                     Group {
                         Chart() {
                             ForEach(record?.heartRateChartData() ?? [], id:\.id) { data in
