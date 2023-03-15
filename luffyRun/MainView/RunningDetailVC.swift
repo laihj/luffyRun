@@ -41,6 +41,10 @@ class RunningDetailVC: UIViewController {
 //            mapView.centerToLocation(firstNode.location)
         }
         
+        record.events?.forEach({ event in
+            print(event.startDate)
+        })
+        
     }
     
     func drawRoute(routes: [RouteNode]) {

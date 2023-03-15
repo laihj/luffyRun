@@ -27,6 +27,7 @@ final class Record:NSManagedObject {
     @NSManaged var power:[DiscreateHKQuanty]?
     @NSManaged var steps:[CumulativeQuantity]?
     @NSManaged var routes:[RouteNode]?
+    @NSManaged var events:[RunEvent]?
     @NSManaged var source: String
     @NSManaged var distance:NSNumber?
     @NSManaged var step:NSNumber?

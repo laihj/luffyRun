@@ -26,6 +26,7 @@
 		38A65095294B1D9700239603 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A65094294B1D9700239603 /* Util.swift */; };
 		38AD55CF29BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
 		38AD55D029BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
+		38AD55D229C1BE15001F8256 /* RunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D129C1BE15001F8256 /* RunEvent.swift */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -106,6 +107,7 @@
 		38A65092294B1C1A00239603 /* ManagedObjectObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectObserver.swift; sourceTree = "<group>"; };
 		38A65094294B1D9700239603 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wolf Sans Regular.ttf"; sourceTree = "<group>"; };
+		38AD55D129C1BE15001F8256 /* RunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEvent.swift; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				383C38452976902F009EF315 /* Card.swift */,
 				383941AC299391E5005344AC /* ZonePace.swift */,
 				383941AE2994EA33005344AC /* LuffyDataTransformer.swift */,
+				38AD55D129C1BE15001F8256 /* RunEvent.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */,
 				38A65093294B1C1A00239603 /* ManagedObjectObserver.swift in Sources */,
 				38D7CD672959795B00D11B09 /* HeartRate.swift in Sources */,
+				38AD55D229C1BE15001F8256 /* RunEvent.swift in Sources */,
 				38A6508B2949D66000239603 /* Record.swift in Sources */,
 				383941AF2994EA33005344AC /* LuffyDataTransformer.swift in Sources */,
 				38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */,

@@ -13,37 +13,21 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Main-->
+        <!--Me-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="luffyRun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-f9-jOr">
-                                <rect key="frame" x="127" y="184" width="136" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add HeartRate"/>
-                                <connections>
-                                    <action selector="addHeartRate" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fta-bL-y5s"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Y4u-f9-jOr" secondAttribute="bottom" constant="543" id="FbL-hj-vaL"/>
-                            <constraint firstItem="Y4u-f9-jOr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="128" id="jGN-0S-xvr"/>
-                            <constraint firstItem="Y4u-f9-jOr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="136" id="uQx-Pr-KAK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Y4u-f9-jOr" secondAttribute="trailing" constant="126" id="whD-us-Njs"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Main" id="geC-f7-ERB"/>
+                    <navigationItem key="navigationItem" title="Me" id="agh-HN-2YJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="-225"/>
+            <point key="canvasLocation" x="1793.8461538461538" y="-225.35545023696682"/>
         </scene>
         <!--18 weeks-->
         <scene sceneID="5zx-LC-2qN">
@@ -342,7 +326,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="4yH-jl-zhB" kind="relationship" relationship="viewControllers" id="IjY-mj-q8h"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="pOD-59-cnZ"/>
+                        <segue destination="Z6x-6X-5P9" kind="relationship" relationship="viewControllers" id="pOD-59-cnZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISd-nv-poC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -367,6 +351,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AnE-ge-OvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="844.61538461538464" y="454.9763033175355"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="g7w-LE-DMU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z6x-6X-5P9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Main" id="geC-f7-ERB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4lC-zF-xBt">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ASZ-2E-li5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i6c-ge-jaj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864.61538461538464" y="-225.35545023696682"/>
         </scene>
     </scenes>
     <resources>

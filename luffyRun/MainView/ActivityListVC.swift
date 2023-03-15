@@ -203,6 +203,13 @@ class ActivityListVC: UIViewController {
             if let (_,averageRunningGroundContactTime,_) = workout.quantityFor(.runningGroundContactTime, unit: HKUnit.second()) {
                 record.runningGroundContactTime = NSNumber(value: averageRunningGroundContactTime)
             }
+            
+            var events = Array<RunEvent>()
+            workout.workoutEvents?.forEach({ event in
+                let event = RunEvent(event: event)
+                events.append(event)
+            })
+            record.events = events
 
             
             if let matadata = workout.metadata {
