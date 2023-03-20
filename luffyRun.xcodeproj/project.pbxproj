@@ -28,6 +28,7 @@
 		38AD55D029BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
 		38AD55D229C1BE15001F8256 /* RunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D129C1BE15001F8256 /* RunEvent.swift */; };
 		38AD55D429C41847001F8256 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D329C41847001F8256 /* ShadowView.swift */; };
+		38AD55D729C84E22001F8256 /* PaceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D629C84E22001F8256 /* PaceEditor.swift */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -110,6 +111,7 @@
 		38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wolf Sans Regular.ttf"; sourceTree = "<group>"; };
 		38AD55D129C1BE15001F8256 /* RunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEvent.swift; sourceTree = "<group>"; };
 		38AD55D329C41847001F8256 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		38AD55D629C84E22001F8256 /* PaceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceEditor.swift; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +216,14 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		38AD55D529C84E0E001F8256 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				38AD55D629C84E22001F8256 /* PaceEditor.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		38AECFD428DC5C5B00C2BF8A = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +270,7 @@
 		38AECFF728DC5D4300C2BF8A /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				38AD55D529C84E0E001F8256 /* Editor */,
 				38E45AAD296D65E100738F9B /* RunningView */,
 				38AECFF828DC5D8800C2BF8A /* ActivityListVC.swift */,
 				38AECFE428DC5C5B00C2BF8A /* ViewController.swift */,
@@ -510,6 +521,7 @@
 				38E45AAF296D65FF00738F9B /* RunningView.swift in Sources */,
 				383C38442976753A009EF315 /* MapView.swift in Sources */,
 				383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */,
+				38AD55D729C84E22001F8256 /* PaceEditor.swift in Sources */,
 				38E45AAC2967C37C00738F9B /* CumulativeQuantity.swift in Sources */,
 				383941B2299CBC12005344AC /* ColorExt.swift in Sources */,
 				385EC89F29ACB04600B14272 /* DateExt.swift in Sources */,

@@ -20,7 +20,8 @@ class ViewController: UIViewController {
         view.alignment = .center
         return view
     }()
-    lazy var paceZoneView = ShadowView(frame: CGRect.zero)
+    
+
     lazy var heartZoneView = ShadowView(frame: CGRect.zero)
 
     override func viewDidLoad() {
@@ -51,5 +52,36 @@ class ViewController: UIViewController {
             make.height.equalTo(100)
         };
     }
+    
+    @objc func toPaceEditor(tap:UITapGestureRecognizer) {
+        let paceEditor = PaceEditor()
+        paceEditor.context = context
+        self.navigationController?.pushViewController(paceEditor, animated: true)
+        
+    }
+    
+    
+    lazy var paceZoneView:ShadowView = {
+        let shadowView = ShadowView(frame: CGRect.zero)
+        let stackView = UIStackView(frame: CGRect.zero)
+        stackView.spacing = 8
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        shadowView.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(12)
+        };
+        
+        let name = UILabel()
+        stackView .addArrangedSubview(name)
+        name.text = "配速区间"
+        name.font = UIFont.systemFont(ofSize: 12)
+        name.textColor = .gray
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toPaceEditor(tap:)))
+        shadowView.addGestureRecognizer(tap)
+        return shadowView
+    }()
+    
 }
 

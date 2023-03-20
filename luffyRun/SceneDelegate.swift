@@ -27,10 +27,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     if let listVC = listVCNav.viewControllers.first as? ActivityListVC {
                         listVC.context = self.persistentContainer.viewContext
                     }
-                    
+                }
+                
+                if let meNav = tabbarController.viewControllers?.last as? UINavigationController {
+                    if let meVC = meNav.viewControllers.first as? ViewController {
+                        meVC.context = self.persistentContainer.viewContext
+                    }
                 }
             }
-            
         }
     }
 
