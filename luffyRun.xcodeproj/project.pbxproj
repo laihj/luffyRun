@@ -27,6 +27,7 @@
 		38AD55CF29BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
 		38AD55D029BF00F7001F8256 /* Wolf Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */; };
 		38AD55D229C1BE15001F8256 /* RunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D129C1BE15001F8256 /* RunEvent.swift */; };
+		38AD55D429C41847001F8256 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AD55D329C41847001F8256 /* ShadowView.swift */; };
 		38AECFE128DC5C5B00C2BF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */; };
 		38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */; };
 		38AECFE528DC5C5B00C2BF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AECFE428DC5C5B00C2BF8A /* ViewController.swift */; };
@@ -108,6 +109,7 @@
 		38A65094294B1D9700239603 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		38AD55CE29BF006F001F8256 /* Wolf Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wolf Sans Regular.ttf"; sourceTree = "<group>"; };
 		38AD55D129C1BE15001F8256 /* RunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEvent.swift; sourceTree = "<group>"; };
+		38AD55D329C41847001F8256 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		38AECFDD28DC5C5B00C2BF8A /* luffyRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luffyRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AECFE028DC5C5B00C2BF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38AECFE228DC5C5B00C2BF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				382BCD6529B739A800493698 /* JZAreaManager.swift */,
 				383941B1299CBC12005344AC /* ColorExt.swift */,
 				385EC89E29ACB04600B14272 /* DateExt.swift */,
+				38AD55D329C41847001F8256 /* ShadowView.swift */,
 			);
 			path = Uilt;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
 				38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */,
 				38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */,
+				38AD55D429C41847001F8256 /* ShadowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,14 +704,16 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "18周";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,14 +740,16 @@
 				DEVELOPMENT_TEAM = 545KNG585P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = luffyRun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "18周";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Health record";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Health share for every one";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Health update";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

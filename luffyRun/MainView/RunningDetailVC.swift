@@ -42,7 +42,10 @@ class RunningDetailVC: UIViewController {
         }
         
         record.events?.forEach({ event in
-            print(event.startDate)
+            if event.type == .segment {
+                print("\(event.startDate) - \(event.endDate) = \(event.endDate.timeIntervalSince(event.startDate))")
+            }
+            
         })
         
     }

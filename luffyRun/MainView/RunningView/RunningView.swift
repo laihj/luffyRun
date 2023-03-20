@@ -25,11 +25,12 @@ struct DayRunningData {
 }
 
 class RunningView: UIView {
-    let dayBefore30 = Date().startOfDay.addOneDay.addingTimeInterval(-30 * 24 * 3600)
+    
     
     var dayRunningDatas:[DayRunningData]? {
         willSet(newDatas) {
             if let datas = newDatas {
+                let dayBefore30 = Date().startOfDay.addOneDay.addingTimeInterval(-30 * 24 * 3600)
                 for(data,view) in zip(datas, viewList) {
                     if(data.distance > 0) {
                         view.backgroundColor = UIColor.mePurple.withAlphaComponent(0.5 + data.distance/20000.0)
@@ -100,9 +101,6 @@ class RunningView: UIView {
             
             outterStack.addArrangedSubview(columnStack)
         }
-        
     }
-    
-
 }
 
