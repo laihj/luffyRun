@@ -84,8 +84,8 @@ class RunningDetailVC: UIViewController {
         self.mapView.isZoomEnabled = false
         self.view.addSubview(self.mapView)
         mapView.snp.makeConstraints { make in
-            make.top.right.left.bottom.equalTo(0)
-//            make.height.equalTo(self.mapView.snp.width)
+            make.top.right.left.equalTo(0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         let chart = SwiftChart(record: record, lastRecord: lastRecord)
@@ -94,7 +94,8 @@ class RunningDetailVC: UIViewController {
         self.addChild(hostingContrller)
         self.view.addSubview(hostingContrller.view)
         hostingContrller.view.snp.makeConstraints { make in
-            make.edges.equalTo(0)
+            make.top.right.left.equalTo(0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         self.updateViews()
 

@@ -1,20 +1,24 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.7.1)
   - SnapKit (5.6.0)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - SnapKit
   - Toast-Swift
 
 SPEC REPOS:
   trunk:
+    - ActionSheetPicker-3.0
     - SnapKit
     - Toast-Swift
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 945e3c5715310f27be3d2334c6c4fa14c7a55cb4
+PODFILE CHECKSUM: c1035acbf5fe70857dc92adef0e8b81515cb3c9c
 
 COCOAPODS: 1.11.3

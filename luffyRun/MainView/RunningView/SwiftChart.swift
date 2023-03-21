@@ -36,7 +36,7 @@ struct SwiftChart: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                    }.padding(.top,UIScreen.main.bounds.size.width - 40)
+                    }.padding(.top,UIScreen.main.bounds.size.width - 100)
                 }
                 Grid() {
                     GridRow {
