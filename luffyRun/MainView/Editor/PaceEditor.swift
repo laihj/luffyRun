@@ -13,6 +13,34 @@ class PaceEditor: UIViewController {
     var context:NSManagedObjectContext?
     lazy var paceLabel:[UILabel] = [UILabel]()
     
+    lazy var pickerContainer = {
+        let stackView = UIStackView()
+        stackView.backgroundColor = .white
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        let toolView = UIView()
+        stackView.addArrangedSubview(toolView)
+        toolView.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.height.equalTo(44)
+        }
+        return stackView
+    }()
+    
+    lazy var pickerView = {
+        let pickerView = UIPickerView()
+        pickerView.backgroundColor = .white
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerContainer.addArrangedSubview(pickerView)
+        return pickerView
+    }()
+    
     var minPickerPace:String?
     var curPickerPace:String?
     var maxPickerPace:String?
@@ -47,20 +75,19 @@ class PaceEditor: UIViewController {
         } else {
             maxPickerPace = "9'59''"
         }
-        print(minPickerPace ?? "")
-        print(curPickerPace ?? "")
-        print(maxPickerPace ?? "")
+        
         self.recalPickerData()
-        let pickerView = UIPickerView()
-        pickerView.backgroundColor = .white
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        self.view.addSubview(pickerView)
-        pickerView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.left.right.equalTo(0)
-        };
+        self.pickerView.reloadAllComponents()
         self.pickerInitSelected(picker: pickerView)
+        
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.pickerContainer.snp.remakeConstraints {
+                $0.left.right.equalTo(0)
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            }
+            self.view.layoutIfNeeded()
+        })
         
     }
     
@@ -142,6 +169,7 @@ class PaceEditor: UIViewController {
             }
             lineView.addArrangedSubview(line)
         }
+        _ = self.pickerContainer
     }
     
 
@@ -165,10 +193,12 @@ extension PaceEditor:UIPickerViewDelegate,UIPickerViewDataSource {
                 secondDict.append(second)
                 secondPickerData![minite] = secondDict
             } else {
-                var secondDict = [second]
+                let secondDict = [second]
                 secondPickerData![minite] = secondDict
             }
         }
+        pickerView.selectRow(0, inComponent: 0, animated: false)
+        pickerView.selectRow(0, inComponent: 1, animated: false)
     }
     
     func pickerInitSelected(picker:UIPickerView) {
