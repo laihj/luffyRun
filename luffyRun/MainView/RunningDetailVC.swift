@@ -109,8 +109,6 @@ class RunningDetailVC: UIViewController {
         record.managedObjectContext?.performChanges(block: {
             self.record.managedObjectContext?.delete(self.record)
         })
-        print("delete mode")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

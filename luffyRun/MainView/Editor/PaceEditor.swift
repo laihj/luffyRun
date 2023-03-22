@@ -13,6 +13,11 @@ class PaceEditor: UIViewController {
     var context:NSManagedObjectContext?
     lazy var paceLabel:[UILabel] = [UILabel]()
     
+    
+    var pickerMinte:String?
+    var pickerSecond:String?
+    var pickerLabel:UILabel?
+    
     lazy var pickerContainer = {
         let stackView = UIStackView()
         stackView.backgroundColor = .white
@@ -21,7 +26,7 @@ class PaceEditor: UIViewController {
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
         let toolView = UIView()
         stackView.addArrangedSubview(toolView)
@@ -58,12 +63,36 @@ class PaceEditor: UIViewController {
         for (index,label) in paceLabel.enumerated() {
             label.text = paceRate?.formatZone(zone:5 - index)
         }
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action:#selector(save(sender:)))
+    }
+    
+    @objc func save(sender:UIBarButtonItem) {
+        self.context!.performChanges {
+            let paceRate = PaceZone.insert(into: self.context!)
+            for (index,label) in self.paceLabel.enumerated() {
+                if(index == 0) {
+                    paceRate.zone4 = Int16(self.secondFormString(min: label.text!))
+                } else if (index == 1) {
+                    paceRate.zone3 = Int16(self.secondFormString(min: label.text!))
+                } else if (index == 2) {
+                    paceRate.zone2 = Int16(self.secondFormString(min: label.text!))
+                } else if (index == 3) {
+                    paceRate.zone1 = Int16(self.secondFormString(min: label.text!))
+                }
+            }
+        }
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @objc func paceClicked(tap:UITapGestureRecognizer) {
         let label = tap.view as! UILabel
+        for allLabel in self.paceLabel {
+            allLabel.textColor = .gray
+        }
+        label.textColor = .purple
         curPickerPace = label.text
-        
+        pickerLabel = label
         if let preLabel = self.paceLabel.before(label) {
             minPickerPace = preLabel.text
         } else {
@@ -102,7 +131,7 @@ class PaceEditor: UIViewController {
         colorPaceView.snp.makeConstraints { make in
             make.width.equalTo(80);
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(pickerContainer.snp.top)
         }
         
         let zoneColor:[UIColor] = [.zone5Color,.zone4Color,.zone3Color,.zone2Color,.zone1Color];
@@ -141,7 +170,6 @@ class PaceEditor: UIViewController {
             title.textColor = .gray
             title.font = UIFont.boldSystemFont(ofSize: 24)
             title.textAlignment = .left
-            title.text = "5:40"
             title.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(paceClicked(tap:)))
             title.addGestureRecognizer(tap)
@@ -170,13 +198,15 @@ class PaceEditor: UIViewController {
             lineView.addArrangedSubview(line)
         }
         _ = self.pickerContainer
+        
+
     }
     
 
 }
 
 extension PaceEditor:UIPickerViewDelegate,UIPickerViewDataSource {
-    
+
     func recalPickerData () {
         minitePickerData = [String]()
         secondPickerData = [String:[String]]()
@@ -205,7 +235,9 @@ extension PaceEditor:UIPickerViewDelegate,UIPickerViewDataSource {
         let stringArray = curPickerPace!.split(separator: "'")
         guard stringArray.count == 2 else { return}
         let minite = stringArray.first
+        pickerMinte = String(minite!)
         let second = stringArray.last
+        pickerSecond = String(second!)
         let miniteIndex = minitePickerData?.firstIndex(of: String(minite!))
         let seconds = secondPickerData![String(minite!)]
         let secondIndex = seconds?.firstIndex(of: String(second!))
@@ -246,8 +278,20 @@ extension PaceEditor:UIPickerViewDelegate,UIPickerViewDataSource {
                    inComponent component: Int) {
         if component == 0 {
             pickerView.reloadComponent(1)
+            pickerMinte = self.pickerView(pickerView, titleForRow: row, forComponent: 0)
+            let index = pickerView.selectedRow(inComponent: 1)
+            pickerSecond = self.pickerView(pickerView, titleForRow: index, forComponent: 1)
+        } else {
+            pickerSecond = self.pickerView(pickerView, titleForRow: row, forComponent: component)
         }
-        
+        self.updateString()
+    }
+    
+    func updateString (){
+        if let label = pickerLabel {
+            label.text = "\(pickerMinte!)'\(pickerSecond!)''"
+        }
+        print("\(pickerMinte!)'\(pickerSecond!)''")
     }
     
     func secondFormString(min:String) -> Int {
