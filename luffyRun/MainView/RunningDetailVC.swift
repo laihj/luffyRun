@@ -38,16 +38,12 @@ class RunningDetailVC: UIViewController {
         // Do any additional setup after loading the view.
         if let routes = record.routes, let _ = routes.first  {
             self.drawRoute(routes: routes)
-//            mapView.centerToLocation(firstNode.location)
         }
         
-        record.events?.forEach({ event in
-            if event.type == .segment {
-                print("\(event.startDate) - \(event.endDate) = \(event.endDate.timeIntervalSince(event.startDate))")
-            }
-            
-        })
-        
+        let events = record.kmNode()
+        for event in events {
+            print(event.metadata ?? ["pace":0])
+        }
     }
     
     func drawRoute(routes: [RouteNode]) {
@@ -76,7 +72,6 @@ class RunningDetailVC: UIViewController {
     }
     
     func setupViews() {
-        
         self.mapView = MKMapView()
         self.mapView.delegate = self
         self.mapView.pointOfInterestFilter = .excludingAll

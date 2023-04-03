@@ -333,5 +333,47 @@ extension Record {
             return .zone1
         }
     }
+    
+    func kmNode() -> [RunEvent] {
+        var segArrays:[[RunEvent]] = []
+        events?.forEach({ event in
+            if event.type == .segment {
+                var needCreate = true
+                for (index,events) in segArrays.enumerated() {
+                    if let lastEvent = events.last {
+                        if lastEvent.endDate == event.startDate {
+                            var eventArray = events
+                            eventArray.append(event)
+                            segArrays[index] = eventArray;
+                            needCreate = false
+                        }
+                    }
+                }
+                
+                if needCreate {
+                    let eventArray = [event]
+                    segArrays.append(eventArray)
+                }
+            }
+        })
+        for events in segArrays {
+            let kmCount = (distance?.intValue ?? 0)/1000
+            if events.count == kmCount || events.count == kmCount + 1 {
+                for (index,event) in events.enumerated() {
+                    if index < kmCount {
+                        event.metadata = ["pace":event.endDate.timeIntervalSince(event.startDate)]
+                    } else {
+                        let allDistance = distance?.doubleValue ?? 0.0
+                        let lastDistance = (allDistance - Double(index * 1000))/1000
+                        let second = event.endDate.timeIntervalSince(event.startDate)
+                        let pace = second/lastDistance
+                        event.metadata = ["pace":pace]
+                    }
+                }
+                return events
+            }
+        }
+        return []
+    }
 }
 
