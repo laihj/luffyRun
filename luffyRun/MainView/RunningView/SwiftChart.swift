@@ -306,41 +306,100 @@ struct SwiftChart: View {
                         .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 
-                //功率
-                Group {
-                    VStack {
-                        Text("功率")
-                        Spacer(minLength: 8)
-                        HStack(spacing: 16) {
-                            let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
-                            VStack(alignment: .center) {
-                                Text("\(watt)")
-                                    .font(numberFont)
-                                Text("平均")
-                                    .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                if let kmPaceData = record?.kmPaceChartData(), kmPaceData.count > 0 {
+                    Group {
+                        HStack {
+                            VStack (spacing:4) {
+                                ForEach(kmPaceData, id:\.id) { data in
+                                    Text(data.name)
+                                        .font(.system(size:14)).foregroundColor(.gray)
+                                        .frame(width: 20)
+                                }
                             }
-                            Spacer()
                             
-                            let maxWatt = String(format: "%.0f", (record?.maxWatt?.doubleValue ?? 0.00))
-                            VStack(alignment: .center) {
-                                Text("\(maxWatt)")
-                                    .font(numberFont)
-                                Text("最高")
-                                    .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                            VStack {
+                                Chart() {
+                                    if kmPaceData.count == 1 {
+                                        ForEach(kmPaceData, id:\.id) { data in
+                                            BarMark(x: .value("time", data.time),
+                                                    y: .value("name", data.name))
+                                            .foregroundStyle(data.color)
+                                        }
+                                    } else {
+                                        let pace = kmPaceData.map { data in
+                                            data.time
+                                        }
+                                        let fast:Double = pace.min()!
+                                        let slow:Double = pace.max()!
+                                        //0.7是最慢速的占比
+                                        let flagPace:Double = (slow - 0.6 * fast)/(1-0.6)
+                                        ForEach(kmPaceData, id:\.id) { data in
+                                            BarMark(x: .value("time", (flagPace - data.time)),
+                                                    y: .value("name", data.name))
+                                            .foregroundStyle(data.color)
+                                        }
+                                    }
+                                }
                             }
-                            Spacer()
+                            
+                            VStack (spacing:4) {
+                                ForEach(kmPaceData, id:\.id) { data in
+                                    Text(formatPace(minite: data.time/60.0))
+                                        .font(.system(size:14)).foregroundColor(.gray)
+                                        .frame(width: 44)
+                                }
+                            }
                         }
+                        .chartYAxis(.hidden)
+                        .chartXAxis(.hidden)
                     }
+                    .padding()
+                    .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .cornerRadius(10)
+                                .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+                    )
+                    
                 }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.white)
-                        .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
-                )
+                
+
+                
+                //功率
+//                Group {
+//                    VStack {
+//                        Text("功率")
+//                        Spacer(minLength: 8)
+//                        HStack(spacing: 16) {
+//                            let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
+//                            VStack(alignment: .center) {
+//                                Text("\(watt)")
+//                                    .font(numberFont)
+//                                Text("平均")
+//                                    .font(.system(size:14))
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//
+//                            let maxWatt = String(format: "%.0f", (record?.maxWatt?.doubleValue ?? 0.00))
+//                            VStack(alignment: .center) {
+//                                Text("\(maxWatt)")
+//                                    .font(numberFont)
+//                                Text("最高")
+//                                    .font(.system(size:14))
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//                        }
+//                    }
+//                }
+//                .padding()
+//                .background(
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .fill(Color.white)
+//                        .cornerRadius(10)
+//                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+//                )
                 Spacer(minLength: 10)
             }.padding()
                

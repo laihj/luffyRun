@@ -50,5 +50,20 @@ extension UIColor {
     class var zone5Color: UIColor {
         return UIColor(hexString: "#9145B6")
     }
+    
+    class func zoneColor(zone:Zone) -> UIColor {
+        switch(zone) {
+        case .zone1:
+            return zone1Color
+        case .zone2:
+            return zone2Color
+        case .zone3:
+            return zone3Color
+        case .zone4:
+            return zone4Color
+        case .zone5:
+            return zone5Color
+        }
+    }
 }
 

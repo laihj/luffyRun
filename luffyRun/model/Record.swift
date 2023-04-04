@@ -334,6 +334,41 @@ extension Record {
         }
     }
     
+    func paceZone(pace:Double) -> Zone {
+        let pace = Int16(pace)
+        if pace > paceZone.zone1 {
+            return .zone1
+        } else if pace > paceZone.zone2 {
+            return .zone2
+        } else if pace > paceZone.zone3 {
+            return .zone3
+        } else if pace > paceZone.zone4 {
+            return .zone4
+        } else {
+            return .zone5
+        }
+    }
+    
+    
+    func kmPaceChartData() -> [BarData] {
+        let kmNode = self.kmNode()
+        if kmNode.count == 0 {
+            return []
+        }
+        
+        var barDatas:[BarData] = []
+        
+        for event in kmNode {
+            if let meta = event.metadata {
+                let paceZone = paceZone(pace:meta["pace"] as! Double)
+                barDatas.append(BarData(name:meta["name"] as! String,time:meta["pace"] as! Double,color: Color( UIColor.zoneColor(zone: paceZone))))
+            }
+            
+        }
+        
+        return barDatas
+    }
+    
     func kmNode() -> [RunEvent] {
         var segArrays:[[RunEvent]] = []
         events?.forEach({ event in
@@ -361,13 +396,13 @@ extension Record {
             if events.count == kmCount || events.count == kmCount + 1 {
                 for (index,event) in events.enumerated() {
                     if index < kmCount {
-                        event.metadata = ["pace":event.endDate.timeIntervalSince(event.startDate)]
+                        event.metadata = ["pace":event.endDate.timeIntervalSince(event.startDate),"name":"\(index + 1)"]
                     } else {
                         let allDistance = distance?.doubleValue ?? 0.0
                         let lastDistance = (allDistance - Double(index * 1000))/1000
                         let second = event.endDate.timeIntervalSince(event.startDate)
                         let pace = second/lastDistance
-                        event.metadata = ["pace":pace]
+                        event.metadata = ["pace":pace,"name":"\(index + 1)"]
                     }
                 }
                 return events
