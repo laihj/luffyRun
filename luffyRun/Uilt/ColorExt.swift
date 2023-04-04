@@ -32,23 +32,23 @@ extension UIColor {
     }
     
     class var zone1Color: UIColor {
-        return UIColor(hexString: "#03C988")
+        return UIColor(hexString: "#e0d8fc")
     }
     
     class var zone2Color: UIColor {
-        return UIColor(hexString: "#FFD124")
+        return UIColor(hexString: "#b090f5")
     }
     
     class var zone3Color: UIColor {
-        return UIColor(hexString: "#2155CB")
+        return UIColor(hexString: "#8843e4")
     }
     
     class var zone4Color: UIColor {
-        return UIColor(hexString: "#FF5677")
+        return UIColor(hexString: "#6528af")
     }
     
     class var zone5Color: UIColor {
-        return UIColor(hexString: "#9145B6")
+        return UIColor(hexString: "#341461")
     }
     
     class func zoneColor(zone:Zone) -> UIColor {
