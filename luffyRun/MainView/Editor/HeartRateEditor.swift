@@ -28,6 +28,10 @@ class HeartRateEditor: UIViewController {
         return label
     }()
     
+    var curHeartRate:HeartRate?
+    
+    var pickerLabel:UILabel?
+    
     lazy var pickerContainer = {
         let stackView = UIStackView()
         stackView.backgroundColor = .white
@@ -56,42 +60,52 @@ class HeartRateEditor: UIViewController {
         return pickerView
     }()
     
-    var minPickerPace:String?
+    var minPickerHeart:String?
     var curPickerHeart:String?
-    var maxPickerPace:String?
+    var maxPickerHeart:String?
     var heartRatePickerData:[String]?
+    var pickerHeart:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.title = "心率区间"
-        
-        let heartRate = HeartRate.lastedHeadRate(in: context!)
-        
         self.setupViews()
-        for (index,label) in paceLabel.enumerated() {
-            label.text = heartRate?.formatZone(zone:5 - index)
+        
+        if let heartRate = HeartRate.lastedHeadRate(in: context!) {
+            curHeartRate = heartRate
+            self.updateWithHeartRate()
         }
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action:#selector(save(sender:)))
     }
     
-    @objc func save(sender:UIBarButtonItem) {
-        self.context!.performChanges {
-            let paceRate = PaceZone.insert(into: self.context!)
-            for (index,label) in self.paceLabel.enumerated() {
-//                if(index == 0) {
-//                    paceRate.zone4 = Int16(self.secondFormString(min: label.text!))
-//                } else if (index == 1) {
-//                    paceRate.zone3 = Int16(self.secondFormString(min: label.text!))
-//                } else if (index == 2) {
-//                    paceRate.zone2 = Int16(self.secondFormString(min: label.text!))
-//                } else if (index == 3) {
-//                    paceRate.zone1 = Int16(self.secondFormString(min: label.text!))
-//                }
+    func updateAfterSelected() {
+        let rest:Int16? = Int16(restLabel.text ?? "") ?? 0
+        let max:Int16? = Int16(maxLabel.text ?? "") ?? 0
+        
+        let heartRate = HeartRate.insert(into: context!)
+        heartRate.rest = rest!
+        heartRate.max = max!
+        heartRate.calWithReserveMethod()
+        curHeartRate = heartRate
+        self.updateWithHeartRate()
+    }
+    
+    func updateWithHeartRate() {
+        if let curHeartRate = curHeartRate {
+            for (index,label) in paceLabel.enumerated() {
+                label.text = curHeartRate.formatZone(zone:5 - index)
             }
+            restLabel.text = ("\(curHeartRate.rest)")
+            maxLabel.text = ("\(curHeartRate.max)")
         }
-        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func save(sender:UIBarButtonItem) {
+        if context!.saveOrRollback() {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func paceClicked(tap:UITapGestureRecognizer) {
@@ -100,14 +114,15 @@ class HeartRateEditor: UIViewController {
         maxLabel.textColor = .textSecondaryColor
         label.textColor = .purple
         curPickerHeart = label.text
+        pickerLabel = label
         if label == restLabel {
-            minPickerPace = "30"
-            maxPickerPace = maxLabel.text
+            minPickerHeart = "30"
+            maxPickerHeart = maxLabel.text
         }
         
         if label == maxLabel {
-            minPickerPace = restLabel.text
-            maxPickerPace = "220"
+            minPickerHeart = restLabel.text
+            maxPickerHeart = "220"
         }
         
         self.recalPickerData()
@@ -274,20 +289,17 @@ extension HeartRateEditor:UIPickerViewDelegate,UIPickerViewDataSource {
 
     func recalPickerData () {
         heartRatePickerData = [String]()
-//        let minSecond = secondFormString(min: minPickerPace!)
-//        let maxSecond = secondFormString(min: maxPickerPace!)
-//        for second in (minSecond+1)..<maxSecond {
-//            let minite = "\(second/60)"
-//            if !minitePickerData!.contains(minite) {
-//                minitePickerData?.append(minite)
-//            }
-//        }
+        let minHeart:Int = Int(minPickerHeart ?? "0")!
+        let maxHeart:Int = Int(maxPickerHeart ?? "0")!
+        for heart in minHeart...maxHeart {
+            heartRatePickerData?.append("\(heart)")
+        }
         pickerView.selectRow(0, inComponent: 0, animated: false)
     }
     
     func pickerInitSelected(picker:UIPickerView) {
-
-//        picker.selectRow(miniteIndex ?? 0, inComponent: 0, animated: true)
+        let heartIndex = heartRatePickerData?.firstIndex(of: String(curPickerHeart!))
+        picker.selectRow(heartIndex ?? 0, inComponent: 0, animated: true)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -306,13 +318,14 @@ extension HeartRateEditor:UIPickerViewDelegate,UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView,
                   didSelectRow row: Int,
                    inComponent component: Int) {
-//        pickerMinte = self.pickerView(pickerView, titleForRow: row, forComponent: 0)
+        pickerHeart = self.pickerView(pickerView, titleForRow: row, forComponent: 0)
         self.updateString()
     }
     
     func updateString (){
-//        if let label = pickerLabel {
-//            label.text = "\(pickerMinte!)"
-//        }
+        if let label = pickerLabel {
+            label.text = "\(pickerHeart!)"
+        }
+        updateAfterSelected()
     }
 }

@@ -40,6 +40,14 @@ final class HeartRate:NSManagedObject {
         return heartRate
     }
     
+    func calWithReserveMethod() {
+        zone1 = rest + Int16((Double(max - rest) * 0.59))
+        zone2 = rest + Int16((Double(max - rest) * 0.74))
+        zone3 = rest + Int16((Double(max - rest) * 0.84))
+        zone4 = rest + Int16((Double(max - rest) * 0.88))
+        zone5 = rest + Int16((Double(max - rest) * 0.95))
+    }
+    
     func formatZone(zone:Int) -> String {
         switch(zone) {
         case 5:
