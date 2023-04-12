@@ -26,14 +26,14 @@ struct SwiftChart: View {
                     HStack {
                         Text("\(record.startDate.string(format: "yyyy-MM-dd HH:mm"))")
                             .font(.system(size:14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(UIColor.textSecondary)
                         Spacer()
                         if let temp = record.temperature,let hud = record.humidity {
                             if hud.doubleValue > 0 {
                                 let weather = String(format: "%.0f°c  %.0f%%", temp.doubleValue,hud.doubleValue)
                                 Text("\(weather)")
                                     .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(UIColor.textSecondary)
                             }
                         }
                     }.padding(.top,UIScreen.main.bounds.size.width - 100)
@@ -44,27 +44,30 @@ struct SwiftChart: View {
                         VStack(alignment: .center) {
                             Text("\(distanceKM)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("距离/km")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let kCal = String(format: "%.0f", record?.kCal?.doubleValue ?? 0)
                         VStack(alignment: .center) {
                             Text("\(kCal)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("大卡")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let length = String(format: "%.1f", record?.averageSLength?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(length)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("平均步长")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                     }
                     Divider()
@@ -73,27 +76,30 @@ struct SwiftChart: View {
                         VStack(alignment: .center) {
                             Text("\(stpes)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("步频")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let watt = String(format: "%.1f", (record?.verticalOscillation?.doubleValue ?? 0.00) * 100)
                         VStack(alignment: .center) {
                             Text("\(watt)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("重直振幅")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let length = String(format: "%.0f", (record?.runningGroundContactTime?.doubleValue ?? 0.00) * 1000)
                         VStack(alignment: .center) {
                             Text("\(length)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("触地时间")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         
                     }
@@ -103,27 +109,30 @@ struct SwiftChart: View {
                         VStack(alignment: .center) {
                             Text("\(stpes)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("步数")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let watt = String(format: "%.0f", (record?.avarageWatt?.doubleValue ?? 0.00))
                         VStack(alignment: .center) {
                             Text("\(watt)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("平均功率")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         Spacer()
                         let length = String(format: "%.1f", record?.mets?.doubleValue ?? 0.00)
                         VStack(alignment: .center) {
                             Text("\(length)")
                                 .font(numberFont)
+                                .foregroundColor(UIColor.textPrimary)
                             Text("代谢当量")
                                 .font(.system(size:14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(UIColor.textSecondary)
                         }
                         
                     }
@@ -133,12 +142,13 @@ struct SwiftChart: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+                        .shadow(color: UIColor.textPrimary.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 //配速
                 VStack {
                     Text("配速")
                         .font(.system(size:16))
+                        .foregroundColor(UIColor.textPrimary)
                     
                     Grid() {
                         GridRow {
@@ -146,18 +156,20 @@ struct SwiftChart: View {
                             VStack(alignment: .center) {
                                 Text("\(pace)")
                                     .font(numberFont)
+                                    .foregroundColor(UIColor.textPrimary)
                                 Text("平均")
                                     .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(UIColor.textSecondary)
                             }
                             Spacer()
                             let maxPace = formatPace(minite: (record?.maxPace?.doubleValue ?? 0.00))
                             VStack(alignment: .center) {
                                 Text("\(maxPace)")
                                     .font(numberFont)
+                                    .foregroundColor(UIColor.textPrimary)
                                 Text("最高")
                                     .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(UIColor.textSecondary)
                             }
                             Spacer()
                             VStack(alignment: .center) {
@@ -186,7 +198,7 @@ struct SwiftChart: View {
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
                                     ForEach(record?.paceChartData().reversed().dropFirst() ?? [], id:\.id) { data in
-                                        Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
+                                        Text("\(data.name)").font(.system(size:12)).foregroundColor(UIColor.textSecondary).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
                                 }
@@ -199,31 +211,33 @@ struct SwiftChart: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white)
                             .cornerRadius(10)
-                            .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+                            .shadow(color: UIColor.textPrimary.opacity(0.1), radius: 10, x: 2, y: 2)
                     )
                 //心率
                 VStack {
                     Text("心率")
                         .font(.system(size:16))
-                    
+                        .foregroundColor(UIColor.textPrimary)
                     Grid() {
                         GridRow {
                             let heart = String(format: "%.0f", (record?.avarageHeart?.doubleValue ?? 0.00))
                             VStack(alignment: .center) {
                                 Text("\(heart)")
                                     .font(numberFont)
+                                    .foregroundColor(UIColor.textPrimary)
                                 Text("平均")
                                     .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(UIColor.textSecondary)
                             }
                             Spacer()
                             let maxHeart = String(format: "%.0f", (record?.maxHeart?.doubleValue ?? 0.00))
                             VStack(alignment: .center) {
                                 Text("\(maxHeart)")
                                     .font(numberFont)
+                                    .foregroundColor(UIColor.textPrimary)
                                 Text("最高")
                                     .font(.system(size:14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(UIColor.textSecondary)
                             }
                             Spacer()
                             VStack(alignment: .center) {
@@ -252,7 +266,7 @@ struct SwiftChart: View {
                                 HStack(spacing:0) {
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
                                     ForEach(record?.heartRateChartData().reversed().dropFirst() ?? [], id:\.id) { data in
-                                        Text("\(data.name)").font(.system(size:12)).foregroundColor(.gray).frame(width:metrics.size.width/5.0)
+                                        Text("\(data.name)").font(.system(size:12)).foregroundColor(UIColor.textSecondary).frame(width:metrics.size.width/5.0)
                                     }
                                     Spacer().frame(width:metrics.size.width/10.0).fixedSize()
                                 }
@@ -262,32 +276,34 @@ struct SwiftChart: View {
                     Divider()
                     HStack {
                         Text("心率区间对应配速").font(.system(size:14))
+                            .foregroundColor(UIColor.textPrimary)
                         Spacer()
                     }
                     HStack(spacing:10) {
                         VStack(alignment: .center) {
-                            Text("<\(record!.heartRate.zone2) :").font(.system(size:14)).foregroundColor(.gray)
-                            Text("\(record!.heartRate.zone2)-\(record!.heartRate.zone3) :").font(.system(size:14)).foregroundColor(.gray)
-                            Text("\(record!.heartRate.zone3)-\(record!.heartRate.zone4) :").font(.system(size:14)).foregroundColor(.gray)
-                            Text("\(record!.heartRate.zone4)-\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(.gray)
-                            Text(">\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(.gray)
+                            Text("<\(record!.heartRate.zone2) :").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
+                            Text("\(record!.heartRate.zone2)-\(record!.heartRate.zone3) :").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
+                            Text("\(record!.heartRate.zone3)-\(record!.heartRate.zone4) :").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
+                            Text("\(record!.heartRate.zone4)-\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
+                            Text(">\(record!.heartRate.zone5) :").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
                         }
                         VStack(alignment: .leading) {
                             if let zonePace = record?.zonePace() {
                                 ForEach(zonePace, id:\.id) { pace in
                                     let paceMinite =  pace.paceMinite()
-                                    Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(.black)
+                                    Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(UIColor.textPrimary)
                                 }
                             }
                         }
                         
-                        if let last = lastRecord,
-                            let lastZonePace = last.zonePace() {
+                        if let last = lastRecord
+                             {
+                            let lastZonePace = last.zonePace()
                             if lastZonePace.count > 0 {
                                 VStack(alignment: .leading) {
                                     ForEach(lastZonePace, id:\.id) { pace in
                                         let paceMinite =  pace.paceMinite()
-                                        Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(.gray)
+                                        Text("\(formatPace(minite:paceMinite))").font(.system(size:14)).foregroundColor(UIColor.textSecondary)
                                     }
                                 }
                             }
@@ -303,64 +319,67 @@ struct SwiftChart: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white)
                         .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+                        .shadow(color: UIColor.textPrimary.opacity(0.1), radius: 10, x: 2, y: 2)
                 )
                 
                 if let kmPaceData = record?.kmPaceChartData(), kmPaceData.count > 0 {
+
                     Group {
-                        HStack {
+                        
+                        HStack(alignment: .top) {
                             VStack (spacing:4) {
                                 ForEach(kmPaceData, id:\.id) { data in
                                     Text(data.name)
-                                        .font(.system(size:14)).foregroundColor(.gray)
+                                        .font(.custom("Wolf Sans Regular",size:14)).foregroundColor(UIColor.textSecondary)
                                         .frame(width: 20)
                                 }
                             }
                             
-                            VStack {
-                                Chart() {
-                                    if kmPaceData.count == 1 {
-                                        ForEach(kmPaceData, id:\.id) { data in
-                                            BarMark(x: .value("time", data.time),
-                                                    y: .value("name", data.name))
-                                            .foregroundStyle(data.color)
-                                        }
-                                    } else {
-                                        let pace = kmPaceData.map { data in
-                                            data.time
-                                        }
-                                        let fast:Double = pace.min()!
-                                        let slow:Double = pace.max()!
-                                        //0.7是最慢速的占比
-                                        let flagPace:Double = (slow - 0.6 * fast)/(1-0.6)
-                                        ForEach(kmPaceData, id:\.id) { data in
-                                            BarMark(x: .value("time", (flagPace - data.time)),
-                                                    y: .value("name", data.name))
-                                            .foregroundStyle(data.color)
-                                        }
+                            Chart() {
+                                if kmPaceData.count == 1 {
+                                    ForEach(kmPaceData, id:\.id) { data in
+                                        BarMark(x: .value("time", data.time),
+                                                y: .value("name", data.name))
+                                        .foregroundStyle(data.color)
+                                    }
+                                } else {
+                                    let pace = kmPaceData.map { data in
+                                        data.time
+                                    }
+                                    let fast:Double = pace.min()!
+                                    let slow:Double = pace.max()!
+                                    //0.7是最慢速的占比
+                                    let flagPace:Double = (slow - 0.6 * fast)/(1-0.6)
+                                    ForEach(kmPaceData, id:\.id) { data in
+                                        BarMark(x: .value("time", (flagPace - data.time)),
+                                                y: .value("name", data.name))
+                                        .foregroundStyle(data.color)
                                     }
                                 }
-                            }
+                            }.chartYAxis(.hidden)
+                            .chartXAxis(.hidden)
+                            
+                            
                             
                             VStack (spacing:4) {
                                 ForEach(kmPaceData, id:\.id) { data in
                                     Text(formatPace(minite: data.time/60.0))
-                                        .font(.system(size:14)).foregroundColor(.gray)
+                                        .font(.custom("Wolf Sans Regular",size:14)).foregroundColor(UIColor.textSecondary)
                                         .frame(width: 44)
                                 }
                             }
-                        }
-                        .chartYAxis(.hidden)
-                        .chartXAxis(.hidden)
+                            
+                        }.fixedSize(horizontal: false, vertical: true)
+                        
                     }
                     .padding()
                     .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .cornerRadius(10)
-                                .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: UIColor.textPrimary.opacity(0.1), radius: 10, x: 2, y: 2)
                     )
-                    
+
                 }
                 
 
@@ -377,7 +396,7 @@ struct SwiftChart: View {
 //                                    .font(numberFont)
 //                                Text("平均")
 //                                    .font(.system(size:14))
-//                                    .foregroundColor(.gray)
+//                                    .foregroundColor(UIColor.textSecondary)
 //                            }
 //                            Spacer()
 //
@@ -387,7 +406,7 @@ struct SwiftChart: View {
 //                                    .font(numberFont)
 //                                Text("最高")
 //                                    .font(.system(size:14))
-//                                    .foregroundColor(.gray)
+//                                    .foregroundColor(UIColor.textSecondary)
 //                            }
 //                            Spacer()
 //                        }
@@ -398,7 +417,7 @@ struct SwiftChart: View {
 //                    RoundedRectangle(cornerRadius: 10)
 //                        .fill(Color.white)
 //                        .cornerRadius(10)
-//                        .shadow(color: .black.opacity(0.1), radius: 10, x: 2, y: 2)
+//                        .shadow(color: UIColor.textPrimary.opacity(0.1), radius: 10, x: 2, y: 2)
 //                )
                 Spacer(minLength: 10)
             }.padding()

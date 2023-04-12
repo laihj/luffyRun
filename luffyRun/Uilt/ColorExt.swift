@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension UIColor {
     convenience init(hexString: String) {
@@ -49,6 +50,22 @@ extension UIColor {
     
     class var zone5Color: UIColor {
         return UIColor(hexString: "#341461")
+    }
+    
+    class var textPrimaryColor: UIColor {
+        return UIColor(hexString: "#4A4A4A")
+    }
+    
+    class var textSecondaryColor: UIColor {
+        return UIColor(hexString: "#878787")
+    }
+    
+    class var textPrimary: Color {
+        Color(UIColor.textPrimaryColor)
+    }
+    
+    class var textSecondary: Color {
+        Color(UIColor.textSecondaryColor)
     }
     
     class func zoneColor(zone:Zone) -> UIColor {

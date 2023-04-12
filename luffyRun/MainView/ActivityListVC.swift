@@ -8,7 +8,7 @@
 import UIKit
 import HealthKit
 import CoreData
-import Toast_Swift
+//import Toast_Swift
 
 class ActivityListVC: UIViewController {
     var context:NSManagedObjectContext? {
@@ -33,8 +33,12 @@ class ActivityListVC: UIViewController {
     
     func refreshTable() {
         let request = Record.sortedFetchRequest
+        let endDate = Date().endOfWeek.addOneDay
+        let startDate = endDate.addingTimeInterval(-18 * 7 * 24 * 3600)
+//        request.predicate = NSPredicate(format: "%K == %@", #keyPath(Record.startDate), startDate as NSDate)
+        
         request.fetchBatchSize = 20
-        request.returnsObjectsAsFaults = false
+        request.returnsObjectsAsFaults = true
         let frc = NSFetchedResultsController(fetchRequest: request,
                                              managedObjectContext: context!,
                                              sectionNameKeyPath: nil,
@@ -42,6 +46,11 @@ class ActivityListVC: UIViewController {
         self.tableView?.delegate = self
         dataSource = TableViewDataSource(tableView: tableView!, cellIdentifier: "LRRunningCell", fetchedResultsController: frc, delegate: self)
         self.fixedOldRecord()
+        if frc.fetchedObjects?.count ?? 0 > 0 {
+            authorizeHealthKit { (success, error) in
+                self.readWorkouts()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +72,7 @@ class ActivityListVC: UIViewController {
         
         
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
+            guard workouts?.count ?? 0 > 0 else { return }
             self.workouts = workouts
             let listgroup = DispatchGroup()
             for workout in self.workouts! {

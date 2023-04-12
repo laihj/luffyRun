@@ -31,9 +31,13 @@ class TableViewDataSource<Delegate:TableViewDataSourceDelegate>:NSObject,UITable
         self.delegate = delegate
         super.init()
         fetchedResultsController.delegate = self
+        let start = CFAbsoluteTimeGetCurrent()
+        
         try! fetchedResultsController.performFetch()
         tableView.dataSource = self
         tableView.reloadData()
+        let end = CFAbsoluteTimeGetCurrent()
+        print("time = \(end - start)")
     }
     
     func objectAtIndexPath(_ indexPath: IndexPath) -> Object? {
