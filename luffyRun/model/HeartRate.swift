@@ -40,6 +40,23 @@ final class HeartRate:NSManagedObject {
         return heartRate
     }
     
+    func formatZone(zone:Int) -> String {
+        switch(zone) {
+        case 5:
+            return "\(zone5)"
+        case 4:
+            return "\(zone4)"
+        case 3:
+            return "\(zone3)"
+        case 2:
+            return "\(zone2)"
+        case 1:
+            return "\(zone1)"
+        default:
+            return ""
+        }
+    }
+    
     static func fetch(in context:NSManagedObjectContext) -> HeartRate? {
         let request = HeartRate.sortedFetchRequest
         request.fetchBatchSize = 1

@@ -21,9 +21,6 @@ class ViewController: UIViewController {
         return view
     }()
     
-
-    lazy var heartZoneView = ShadowView(frame: CGRect.zero)
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -57,7 +54,12 @@ class ViewController: UIViewController {
         let paceEditor = PaceEditor()
         paceEditor.context = context
         self.navigationController?.pushViewController(paceEditor, animated: true)
-        
+    }
+    
+    @objc func toHeartRateEditor(tap:UITapGestureRecognizer) {
+        let heartRateEditor = HeartRateEditor()
+        heartRateEditor.context = context
+        self.navigationController?.pushViewController(heartRateEditor, animated: true)
     }
     
     
@@ -79,6 +81,29 @@ class ViewController: UIViewController {
         name.textColor = .gray
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(toPaceEditor(tap:)))
+        shadowView.addGestureRecognizer(tap)
+        return shadowView
+    }()
+    
+    
+    lazy var heartZoneView = {
+        let shadowView = ShadowView(frame: CGRect.zero)
+        let stackView = UIStackView(frame: CGRect.zero)
+        stackView.spacing = 8
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        shadowView.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(12)
+        };
+        
+        let name = UILabel()
+        stackView .addArrangedSubview(name)
+        name.text = "心速区间"
+        name.font = UIFont.systemFont(ofSize: 12)
+        name.textColor = .gray
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toHeartRateEditor(tap:)))
         shadowView.addGestureRecognizer(tap)
         return shadowView
     }()

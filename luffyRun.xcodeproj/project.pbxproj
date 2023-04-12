@@ -17,6 +17,7 @@
 		383C38442976753A009EF315 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38432976753A009EF315 /* MapView.swift */; };
 		383C38462976902F009EF315 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C38452976902F009EF315 /* Card.swift */; };
 		385EC89F29ACB04600B14272 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385EC89E29ACB04600B14272 /* DateExt.swift */; };
+		3893430229E69F6A008313C9 /* HeartRateEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3893430129E69F6A008313C9 /* HeartRateEditor.swift */; };
 		38A650892949D53400239603 /* NSManagedObjectContextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A650882949D53400239603 /* NSManagedObjectContextExt.swift */; };
 		38A6508B2949D66000239603 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508A2949D66000239603 /* Record.swift */; };
 		38A6508D294AC6D000239603 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6508C294AC6D000239603 /* CoreDataStack.swift */; };
@@ -101,6 +102,7 @@
 		383C38432976753A009EF315 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		383C38452976902F009EF315 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		385EC89E29ACB04600B14272 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
+		3893430129E69F6A008313C9 /* HeartRateEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateEditor.swift; sourceTree = "<group>"; };
 		38A650882949D53400239603 /* NSManagedObjectContextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExt.swift; sourceTree = "<group>"; };
 		38A6508A2949D66000239603 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		38A6508C294AC6D000239603 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				38AD55D629C84E22001F8256 /* PaceEditor.swift */,
+				3893430129E69F6A008313C9 /* HeartRateEditor.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				38AD55D229C1BE15001F8256 /* RunEvent.swift in Sources */,
 				38A6508B2949D66000239603 /* Record.swift in Sources */,
 				383941AF2994EA33005344AC /* LuffyDataTransformer.swift in Sources */,
+				3893430229E69F6A008313C9 /* HeartRateEditor.swift in Sources */,
 				38BC3E21295B0243008A5DFE /* PAirSandbox.swift in Sources */,
 				38E45AAA2966C2AE00738F9B /* HeaderView.swift in Sources */,
 				38AECFEB28DC5C5B00C2BF8A /* luffyRun.xcdatamodeld in Sources */,
