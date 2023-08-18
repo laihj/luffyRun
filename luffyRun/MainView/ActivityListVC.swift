@@ -35,10 +35,12 @@ class ActivityListVC: UIViewController {
         let request = Record.sortedFetchRequest
         let endDate = Date().endOfWeek.addOneDay
         let startDate = endDate.addingTimeInterval(-18 * 7 * 24 * 3600)
-//        request.predicate = NSPredicate(format: "%K == %@", #keyPath(Record.startDate), startDate as NSDate)
+        request.predicate = NSPredicate(format: "%K > %@", #keyPath(Record.startDate), startDate as NSDate)
         
         request.fetchBatchSize = 20
         request.returnsObjectsAsFaults = true
+//        request.resultType = .dictionaryResultType
+        request.propertiesToFetch = ["udid"]
         let frc = NSFetchedResultsController(fetchRequest: request,
                                              managedObjectContext: context!,
                                              sectionNameKeyPath: nil,
@@ -69,8 +71,8 @@ class ActivityListVC: UIViewController {
             startDate = Date(timeIntervalSince1970:lastedRecord.endDate!.timeIntervalSince1970 + 1)
 //            startDate = Date(timeIntervalSince1970:lastedRecord.startDate.timeIntervalSince1970 + 1)
         }
-        
-        
+
+
         loadPrancerciseWorkouts(startDate:startDate) { workouts, error in
             guard workouts?.count ?? 0 > 0 else { return }
             self.workouts = workouts
@@ -84,14 +86,14 @@ class ActivityListVC: UIViewController {
                         }
                     }
                 }
-                
+
                 let sourceName = workout.sourceRevision.source.name
                 if !sourceName.contains("luffyRun") && !sourceName.contains("Apple Watch") {
                     continue
                 }
-                
+
                 let group = DispatchGroup()
-                
+
                 var retHeartbeat = Array<DiscreateHKQuanty>()
                 group.enter()
                 let heartUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
@@ -99,14 +101,14 @@ class ActivityListVC: UIViewController {
                     group.leave()
                     retHeartbeat = heartbeat
                 }
-                
+
                 var retRoutes = Array<RouteNode>()
                 group.enter()
                 workout.route() { routes in
                     group.leave()
                     retRoutes = routes
                 }
-                
+
                 var retSteps = Array<CumulativeQuantity>()
                 group.enter()
                 workout.cumulativeQuantity(identifier: .stepCount, unit: HKUnit.count()) { steps in
@@ -120,13 +122,13 @@ class ActivityListVC: UIViewController {
                     group.leave()
                     retPower = power
                 }
-                
+
                 group.notify(queue: .main) {
                     self.saveRecord(workout: workout, heartbeat: retHeartbeat,routes: retRoutes,power: retPower, steps: retSteps)
                     listgroup.leave()
                 }
             }
-            
+
             listgroup.notify(queue: .main) {
                 self.refreshHeaderView()
             }

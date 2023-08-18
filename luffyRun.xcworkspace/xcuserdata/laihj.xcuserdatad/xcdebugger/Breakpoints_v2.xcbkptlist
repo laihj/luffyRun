@@ -3,4 +3,54 @@
    uuid = "FD9968BC-CB7B-48E7-A728-7E15C7DA9EBF"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79DA2749-C3F0-4FDF-AA03-133F4F12331C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "luffyRun/MainView/ActivityListVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "reloadData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "79DA2749-C3F0-4FDF-AA03-133F4F12331C - 6914c783463f8f34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "luffyRun.ActivityListVC.reloadData() -&gt; ()"
+                  moduleName = "luffyRun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laihj/workspace/luffyRun/luffyRun/MainView/ActivityListVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "79DA2749-C3F0-4FDF-AA03-133F4F12331C - 6914c783463f8f34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "luffyRun.ActivityListVC.reloadData() -&gt; ()"
+                  moduleName = "luffyRun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laihj/workspace/luffyRun/luffyRun/MainView/ActivityListVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3827D46F28F7AE4D00249419 /* RunningDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */; };
+		3829E9FB2A80E03B00CF7C5F /* SegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829E9FA2A80E03B00CF7C5F /* SegView.swift */; };
 		382BCD6629B739A800493698 /* GCJ02.json in Resources */ = {isa = PBXBuildFile; fileRef = 382BCD6429B739A800493698 /* GCJ02.json */; };
 		382BCD6729B739A800493698 /* JZAreaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382BCD6529B739A800493698 /* JZAreaManager.swift */; };
 		383941AB29890970005344AC /* HeartZonePaceStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383941AA29890970005344AC /* HeartZonePaceStats.swift */; };
@@ -93,6 +94,7 @@
 		01E46D8C7248442B1D56B73A /* Pods_luffyRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luffyRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBA97ECA8EFA25BDDE98D52 /* Pods-luffyRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luffyRun.debug.xcconfig"; path = "Target Support Files/Pods-luffyRun/Pods-luffyRun.debug.xcconfig"; sourceTree = "<group>"; };
 		3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningDetailVC.swift; sourceTree = "<group>"; };
+		3829E9FA2A80E03B00CF7C5F /* SegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegView.swift; sourceTree = "<group>"; };
 		382BCD6429B739A800493698 /* GCJ02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GCJ02.json; sourceTree = "<group>"; };
 		382BCD6529B739A800493698 /* JZAreaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JZAreaManager.swift; sourceTree = "<group>"; };
 		383941AA29890970005344AC /* HeartZonePaceStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartZonePaceStats.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				3827D46E28F7AE4D00249419 /* RunningDetailVC.swift */,
 				38A65090294AFE3500239603 /* TableViewDataSource.swift */,
 				38E45AA92966C2AE00738F9B /* HeaderView.swift */,
+				3829E9FA2A80E03B00CF7C5F /* SegView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				38A65095294B1D9700239603 /* Util.swift in Sources */,
 				383941AD299391E5005344AC /* ZonePace.swift in Sources */,
 				38AED02628DDA97D00C2BF8A /* LRRunningRecordCell.swift in Sources */,
+				3829E9FB2A80E03B00CF7C5F /* SegView.swift in Sources */,
 				38D7CD6929598E0200D11B09 /* PaceZone.swift in Sources */,
 				38AECFE328DC5C5B00C2BF8A /* SceneDelegate.swift in Sources */,
 				38AD55D429C41847001F8256 /* ShadowView.swift in Sources */,

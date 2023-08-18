@@ -31,7 +31,7 @@ func pace(second:Double, distance:Double) -> Double {
 
 func formatTime(seconds:Double) -> String {
     let (h, m, s) = secondsToHoursMinutesSeconds(Int(seconds))
-    return "\(String(format: "%02d", h)):\(String(format: "%02d", m)) :\(String(format: "%02d", s))"
+    return "\(String(format: "%02d", h)):\(String(format: "%02d", m)):\(String(format: "%02d", s))"
 }
 
 func secondsToHoursMinutesSeconds(_ seconds: Int) -> (Int, Int, Int) {

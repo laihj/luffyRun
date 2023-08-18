@@ -74,11 +74,21 @@ class ViewController: UIViewController {
             make.edges.equalTo(12)
         };
         
+        let paceRate = PaceZone.lastedPaceZone(in: context!)
+        var paceString = [String]()
+        for index in 0..<4 {
+            paceString.append(paceRate?.formatZone(zone:5 - index) ?? "")
+        }
+        
+        
         let name = UILabel()
-        stackView .addArrangedSubview(name)
+        stackView.addArrangedSubview(name)
         name.text = "配速区间"
         name.font = UIFont.systemFont(ofSize: 12)
         name.textColor = .gray
+        
+        let segView = SegView(frame: CGRect.zero)
+        stackView.addArrangedSubview(segView)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(toPaceEditor(tap:)))
         shadowView.addGestureRecognizer(tap)
@@ -107,6 +117,5 @@ class ViewController: UIViewController {
         shadowView.addGestureRecognizer(tap)
         return shadowView
     }()
-    
 }
 
